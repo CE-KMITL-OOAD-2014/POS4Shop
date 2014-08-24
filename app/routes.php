@@ -10,7 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+//TEST feature/class
 Route::get('/', function()
 {
 	return View::make('index');
