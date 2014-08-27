@@ -12,7 +12,7 @@ class CreateTopSell extends Migration {
 	 */
     public function up()
     {
-        Schema::create('top_sell', function ($table) {
+        Schema::create('topsells', function ($table) {
             $table->increments('id');
             $table->string('product_id', 45);
             $table->integer('rank');
@@ -27,7 +27,7 @@ class CreateTopSell extends Migration {
      */
     public function down()
     {
-        Schema::drop('top_sell');
+        Schema::drop('topsells');
     }
 
 }
