@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mybase',
+	'default' => 'myDB',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return array(
 			'prefix'   => '',
 		),
 
-        'mybase' => array(
+        'myDB' => array(
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'database'  => 'ooad',
