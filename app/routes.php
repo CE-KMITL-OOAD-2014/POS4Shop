@@ -15,3 +15,12 @@ Route::get('/', function()
 {
 	return View::make('index');
 });
+
+Route::get('/index', function()
+{
+    return View::make('index');
+});
+
+Route::match(array('GET', 'POST'),'/add',array('as' => 'add', function () {
+    return View::make('add');
+}));

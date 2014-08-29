@@ -4,33 +4,7 @@
     @include('header')
 </head>
 <body>
-<div class="header">
-    <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Your Site</a>
-
-        <ul>
-            <li class="pure-menu-selected"><a href="#">Home</a></li>
-            <li><a href="#">Tour</a></li>
-            <li><a href="#">Sign Up</a></li>
-        </ul>
-    </div>
-</div>
-
-
-
-
-<div class="header">
-    <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Your Site</a>
-
-        <ul>
-            <li class="pure-menu-selected"><a href="#">Home</a></li>
-            <li><a href="#">Tour</a></li>
-            <li><a href="#">Sign Up</a></li>
-        </ul>
-    </div>
-</div>
-
+@include('topmenu')
 <div class="splash-container">
     <div class="splash">
         <h1 class="splash-head">Big Bold Text</h1>
@@ -42,7 +16,6 @@
         </p>
     </div>
 </div>
-
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head is-center">Excepteur sint occaecat cupidatat.</h2>
@@ -153,4 +126,7 @@
 
 </div>
 </body>
+<footer>
+    @include('footer')
+</footer>
 </html>

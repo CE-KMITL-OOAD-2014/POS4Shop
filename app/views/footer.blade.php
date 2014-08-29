@@ -1,0 +1,1 @@
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui.js"></script>
