@@ -49,6 +49,10 @@ if (isset($_POST["product_name"]) && isset($_POST["product_barcode"]) && isset($
                             <label>Detail</label>
                             <input name="product_detail" placeholder="detail" type="text">
                         </div>
+                        <div class="pure-control-group">
+                            <label>File</label>
+                            <input type="file" name="file">
+                        </div>
                         <button class="pure-button pure-button-primary">Submit</button>
                     </fieldset>
                 </form>
