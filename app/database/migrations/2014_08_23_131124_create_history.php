@@ -12,7 +12,7 @@ class CreateHistory extends Migration {
      */
     public function up()
     {
-        Schema::create('history', function ($table) {
+        Schema::create('historys', function ($table) {
             $table->increments('id');
             $table->string('hid', 10);
             $table->string('product_name', 250);
@@ -29,7 +29,7 @@ class CreateHistory extends Migration {
      */
     public function down()
     {
-        Schema::drop('history');
+        Schema::drop('historys');
     }
 
 }
