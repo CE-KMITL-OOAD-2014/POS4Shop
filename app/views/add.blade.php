@@ -6,7 +6,7 @@
 <body>
 @include('topmenu')
 <?php
-if (isset($_POST["product_name"]) && isset($_POST["product_barcode"]) && isset($_POST["product_price"]) && isset($_POST["product_detail"])) {
+if (isset($_POST['submit'])) {
     $query = DB::table('products')->where('barcode', $_POST["product_barcode"])->pluck('barcode');
     if (!empty($query)) {
         echo "Already have this product barcode in store.";
@@ -14,6 +14,26 @@ if (isset($_POST["product_name"]) && isset($_POST["product_barcode"]) && isset($
     <?php
     } else {
         $product = new Product;
+        if (isset($_FILES['product_file'])){
+          //  $name       = $_FILES['product_file']['name'];
+         //   $temp_name  = $_FILES['product_file']['tmp_name'];
+
+            if ($_FILES["product_file"]["error"] > 0) {
+                echo "Error: " . $_FILES["file"]["error"] . "<br>";
+            }else{
+                if (file_exists("upload/" . $_FILES["product_file"]["name"])) {
+                    echo $_FILES["product_file"]["name"] . " already exists. ";
+                } else {
+                   move_uploaded_file($_FILES["product_file"]["tmp_name"],
+                        storage_path()."/upload/" . $_FILES["product_file"]["name"]);
+                    echo "Stored in: " .storage_path(). "/upload/" . $_FILES["product_file"]["name"];
+
+                    $product->img_filename = $_FILES['product_file']['name'];
+                }
+            }
+        }else{
+            $product->img_filename = "no image";
+        }
         $product->name = $_POST["product_name"];
         $product->barcode = $_POST["product_barcode"];
         $product->price = $_POST["product_price"];
@@ -31,7 +51,7 @@ if (isset($_POST["product_name"]) && isset($_POST["product_barcode"]) && isset($
         </div>
         <div class="content pure-u-3-5">
             <div class="content">
-                <form onsubmit="return submitAddForm();" class="pure-form pure-form-aligned" name="addProductForm" method="post" action="">
+                <form onsubmit="return submitAddForm();" class="pure-form pure-form-aligned" name="addProductForm" method="post" action="" enctype="multipart/form-data">
                     <fieldset>
                         <div class="pure-control-group">
                             <label>Name</label>
@@ -51,9 +71,9 @@ if (isset($_POST["product_name"]) && isset($_POST["product_barcode"]) && isset($
                         </div>
                         <div class="pure-control-group">
                             <label>File</label>
-                            <input type="file" name="file">
+                            <input type="file" name="product_file" id="product_file">
                         </div>
-                        <button class="pure-button pure-button-primary">Submit</button>
+                        <button type="Submit" value="Submit" name='submit' class="pure-button pure-button-primary">Submit</button>
                     </fieldset>
                 </form>
             </div>

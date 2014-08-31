@@ -24,3 +24,8 @@ Route::get('/index', function()
 Route::match(array('GET', 'POST'),'/add',array('as' => 'add', function () {
     return View::make('add');
 }));
+
+Route::match(array('GET', 'POST'), '/history', function()
+{
+    return View::make('history');
+});
