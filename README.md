@@ -1,4 +1,4 @@
-Point-of-service-for-shop
+Point of sale for shop
 =========================
 
 ### Abstract ###
