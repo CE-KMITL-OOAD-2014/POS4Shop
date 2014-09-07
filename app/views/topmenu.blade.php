@@ -2,6 +2,11 @@
     <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="">Your Site</a>
         <ul>
+            <li>
+                <form  onsubmit="return submitSearchForm();" name="searchForm" method="post" action="product" class="pure-form">
+                    <input type="text" name="product_search" class="pure-input-rounded">
+                    <button type="Submit" value="Submit" name='submit'  class="pure-button">Search</button>
+                </form></li>
             <li><a href="index">Home</a></li>
             <li><a href="product">All Product</a></li>
             <li>

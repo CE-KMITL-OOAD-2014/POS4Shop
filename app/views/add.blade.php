@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     <?php
     } else {
         $product = new Product;
-        if (isset($_FILES['product_file'])){
+        if (isset($_POST['product_file'])){
           //  $name       = $_FILES['product_file']['name'];
          //   $temp_name  = $_FILES['product_file']['tmp_name'];
 
@@ -25,8 +25,8 @@ if (isset($_POST['submit'])) {
                     echo $_FILES["product_file"]["name"] . " already exists. ";
                 } else {
                    move_uploaded_file($_FILES["product_file"]["tmp_name"],
-                        storage_path()."/upload/" . $_FILES["product_file"]["name"]);
-                    echo "Stored in: " .storage_path(). "/upload/" . $_FILES["product_file"]["name"];
+                       public_path()."/upload/" . $_FILES["product_file"]["name"]);
+                    echo "Stored in: ".public_path(). "/upload/" . $_FILES["product_file"]["name"];
 
                     $product->img_filename = $_FILES['product_file']['name'];
                 }
@@ -97,9 +97,13 @@ if (isset($_POST['submit'])) {
             } else if (barcodeId.value.length == 0) {
                 alert("กรุณาระบุหมายเลข barcode");
                 barcodeId.focus();
+            } else if (isNaN(barcodeId.value)){
+                alert("กรุณาระบุราคาเลขบาร์โค้ดให้ถูกต้อง");
             } else if (priceId.value.length == 0) {
                 alert("โปรดระบุราคาสินค้า");
                 priceId.focus();
+            } else if (isNaN(priceId.value)){
+                alert("กรุณาระบุราคาสินค้าให้ถูกต้อง");
             } else if (detailId.value.length == 0) {
                 alert("โปรดระบุรายละเอียดสินค้า");
                 detailId.focus();

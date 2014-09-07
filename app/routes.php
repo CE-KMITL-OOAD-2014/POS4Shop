@@ -11,15 +11,9 @@
 |
 */
 //TEST feature/class
-Route::get('/', function()
-{
-	return View::make('index');
-});
+Route::get('/', 'HomeController@showIndex');
 
-Route::get('/index', function()
-{
-    return View::make('index');
-});
+Route::get('index', 'HomeController@showIndex');
 
 Route::match(array('GET', 'POST'),'/add',array('as' => 'add', function () {
     return View::make('add');
@@ -28,4 +22,19 @@ Route::match(array('GET', 'POST'),'/add',array('as' => 'add', function () {
 Route::match(array('GET', 'POST'), '/history', function()
 {
     return View::make('history');
+});
+
+Route::match(array('GET', 'POST'), '/product', function()
+{
+    return View::make('product');
+});
+
+Route::get('/calculate', function()
+{
+    return View::make('calculate');
+});
+
+Route::match(array('GET', 'POST'), '/edit', function()
+{
+    return View::make('edit');
 });
