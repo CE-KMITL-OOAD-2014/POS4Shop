@@ -20,6 +20,7 @@
 
 ## Use case diagram ##
 ![alt text](http://ziko.kmi.tl/ooad/usecase.png)
+
 ## Use case specifications ##
 ####1.**Use case name:** ระบบคำนวณมูลค่าสินค้า  ####
 
