@@ -60,5 +60,7 @@
    D. ระบบจะแสดงสรุปผลการขายในช่วงเวลานั้น  
 
 ## Activity diagrams ##
-1. เพิ่มข้อมูลลูกค้าคนใหม่
+1. เพิ่มข้อมูลลูกค้าคนใหม่  
+![alt text](http://ziko.kmi.tl/ooad/add.jpg)
 2. เพิ่มสินค้าชนิดใหม่
+![alt text](http://ziko.kmi.tl/ooad/regis.jpg)
