@@ -17,11 +17,11 @@
 5. มีการรักษาความปลอดภัยของข้อมูลสำคัญที่ถูกจัดเก็บหรือถูกใช้ในการสื่อสาร โดยใช้โปรโตคอลที่มีการเข้ารหัส  
 
 ## Use case diagram ##
-![alt text](http://ziko.kmi.tl/ooad/usecase.jpg)
+![alt text](http://ziko.kmi.tl/ooad/usecase.png)
 ## Use case specifications ##
 1.  
 2.  
 
 ## Activity diagrams ##
-1.
-2.
+1.  
+2.  
