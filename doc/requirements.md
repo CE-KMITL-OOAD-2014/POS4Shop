@@ -19,7 +19,7 @@
 6. รองรับผู้ใช้เข้าบริการพร้อมกัน 10 คนโดยประสิทธิภาพการทำงานไม่ลดลง
 
 ## Use case diagram ##
-![alt text](http://ziko.kmi.tl/ooad/usecase.png)
+![alt text](http://ziko.kmi.tl/ooad/usecase2.png)
 
 ## Use case specifications ##
 ####1.**Use case name:** ระบบคำนวณมูลค่าสินค้า  ####
