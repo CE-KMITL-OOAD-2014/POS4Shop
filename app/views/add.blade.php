@@ -7,17 +7,14 @@
 @include('topmenu')
 <?php
 if (isset($_POST['submit'])) {
-    $query = DB::table('products')->where('barcode', $_POST["product_barcode"])->pluck('barcode');
+    $query = Product::where('barcode', $_POST["product_barcode"])->pluck('barcode');
     if (!empty($query)) {
         echo "Already have this product barcode in store.";
         ?>
     <?php
     } else {
         $product = new Product;
-        if (isset($_POST['product_file'])){
-          //  $name       = $_FILES['product_file']['name'];
-         //   $temp_name  = $_FILES['product_file']['tmp_name'];
-
+        if (isset($_FILES['product_file'])){
             if ($_FILES["product_file"]["error"] > 0) {
                 echo "Error: " . $_FILES["file"]["error"] . "<br>";
             }else{
@@ -25,10 +22,10 @@ if (isset($_POST['submit'])) {
                     echo $_FILES["product_file"]["name"] . " already exists. ";
                 } else {
                    move_uploaded_file($_FILES["product_file"]["tmp_name"],
-                       public_path()."/upload/" . $_FILES["product_file"]["name"]);
-                    echo "Stored in: ".public_path(). "/upload/" . $_FILES["product_file"]["name"];
+                       public_path()."/upload/product-".$_POST["product_barcode"].".jpg");
+                    echo "Stored in: ".public_path(). "/upload/product-".$_POST["product_barcode"].".jpg";
 
-                    $product->img_filename = $_FILES['product_file']['name'];
+                    $product->img_filename = "product-".$_POST["product_barcode"].".jpg";
                 }
             }
         }else{
@@ -51,7 +48,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="content pure-u-3-5">
             <div class="content">
-                <form onsubmit="return submitAddForm();" class="pure-form pure-form-aligned" name="addProductForm" method="post" action="" enctype="multipart/form-data">
+                <form onsubmit="return submitAddForm();" class="pure-form pure-form-aligned" name="addProductForm" method="post" action="<?php echo action('ProductController@add');?>" enctype="multipart/form-data">
                     <fieldset>
                         <div class="pure-control-group">
                             <label>Name</label>

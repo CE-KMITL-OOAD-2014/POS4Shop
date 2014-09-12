@@ -9,11 +9,10 @@
 $count = 0;
 if (isset($_POST['submit'])) {
     if (isset($_POST['product_search'])) {
-        $products = Product::where('name', 'LIKE', '%' . $_POST['product_search'] . '%')->paginate(15);
-
+        $products = Product::where('name', 'LIKE', '%' . $_POST['product_search'] . '%')->paginate(12);
     }
 } else {
-    $products = Product::paginate(15);
+    $products = Product::paginate(12);
 }
 ?>
 <div class="pure-g">
@@ -29,20 +28,20 @@ if (isset($_POST['submit'])) {
         $count++;
         ?>
         <div class="photo-box u-1 u-med-1-2 u-lrg-1-3">
-            <img src="<?php echo "http://ooad.ioniz.tk/upload/" . $product->img_filename; ?>">
+            <img src="<?php echo "http://ooad.ioniz.tk/upload/".$product->img_filename;?>">
 
 
             <aside class="photo-box-caption">
                 <span>
-                    <?php echo "http://ooad.ioniz.tk/upload/" . $product->img_filename; ?>
+                    <?php echo "http://ooad.ioniz.tk/upload/".$product->img_filename;?>
                     <?php echo $product->name; ?>
                 </span>
             </aside>
         </div>
     <?php
     }
-    if ($count == 0) {
-        echo "No product name " . $_GET['product_search'] . ".";
+    if ($count == 0 && isset($_POST['product_search'])) {
+        echo "No product name " . $_POST['product_search'] . ".";
     }
     ?>
 

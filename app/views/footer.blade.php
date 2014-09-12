@@ -1,6 +1,5 @@
 <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui.js"></script>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script src="css/masonry.pkgd.min.js"></script>
 <script>
     function submitSearchForm() {
         var searchId = document.searchForm.product_search;
@@ -12,4 +11,11 @@
         }
         return false;
     }
+
+    var container = document.querySelector('#container');
+    var msnry = new Masonry( container, {
+        // options
+        columnWidth: 200,
+        itemSelector: '.item'
+    });
 </script>

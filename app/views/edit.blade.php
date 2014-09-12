@@ -58,7 +58,7 @@ $products = Product::paginate(15);
                             ?>
                         </td>
                         <td>
-                            <form class="pure-form pure-form-aligned" method="post" action="edit">
+                            <form class="pure-form pure-form-aligned" method="post" action="<?php echo action('ProductController@edit');?>">
                                 <fieldset>
                                     <button type="Submit" value="<?php echo $product->barcode;?>" name='submitEdit' class="pure-button pure-button-primary">Edit</button>
                                 </fieldset>
@@ -78,7 +78,7 @@ $products = Product::paginate(15);
     ?>
     <div class="content pure-u-2-5">
         <div class="content">
-            <form onsubmit="return submitEditForm();" class="pure-form pure-form-aligned" name="editProductForm" method="post" action="edit" enctype="multipart/form-data">
+            <form onsubmit="return submitEditForm();" class="pure-form pure-form-aligned" name="editProductForm" method="post" action="<?php echo action('ProductController@edit');?>" enctype="multipart/form-data">
                 <fieldset>
                     <div class="pure-control-group">
                         <label>Name</label>

@@ -15,6 +15,7 @@ class CreateCustomer extends Migration {
         Schema::create('customers', function ($table) {
             $table->increments('id');
             $table->string('name', 250);
+            $table->string('cid', 5);
             $table->timestamps();
         });
     }

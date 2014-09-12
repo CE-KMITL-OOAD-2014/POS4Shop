@@ -24,8 +24,17 @@
 <!--[if gt IE 8]><!-->
 <link rel="stylesheet" href="css/layouts/gallery-grid.css">
 <!--<![endif]-->
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/layouts/gallery-old-ie.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="css/layouts/gallery.css">
+<!--<![endif]-->
 <style>
     body {
         padding-top: 60px;
     }
+    .item { width: 25%; }
+    .item.w2 { width: 50%; }
 </style>

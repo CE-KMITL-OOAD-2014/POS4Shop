@@ -15,26 +15,20 @@ Route::get('/', 'HomeController@showIndex');
 
 Route::get('index', 'HomeController@showIndex');
 
-Route::match(array('GET', 'POST'),'/add',array('as' => 'add', function () {
-    return View::make('add');
-}));
+Route::match(array('GET', 'POST'),'/add','ProductController@add');
 
 Route::match(array('GET', 'POST'), '/history', function()
 {
     return View::make('history');
 });
 
-Route::match(array('GET', 'POST'), '/product', function()
-{
-    return View::make('product');
-});
+Route::match(array('GET', 'POST'), '/addcustomer', 'CustomerController@add');
+
+Route::match(array('GET', 'POST'), '/product', 'ProductController@showIndex');
 
 Route::get('/calculate', function()
 {
     return View::make('calculate');
 });
 
-Route::match(array('GET', 'POST'), '/edit', function()
-{
-    return View::make('edit');
-});
+Route::match(array('GET', 'POST'), '/edit', 'ProductController@edit');
