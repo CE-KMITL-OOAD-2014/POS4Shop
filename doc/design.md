@@ -1,6 +1,31 @@
-Problem Analysis  
-Application Architecture  
-Subsystems / Components  
-Domain classes  
-Deployment  
-Implementation Plan  
+##Design  
+####Problem Analysis
+ - Component
+     -   ส่วนหน้าร้าน
+     -   ส่วนจัดการสินค้า
+     -   ส่วนคิดมูลค่าสินค้า
+     -   ส่วนบันทึกข้อมูลประวัติ
+     -   ส่วนจัดการลูกค้า
+     -   ส่วนสรุปผล
+ - Abstraction
+     -   หน้าร้าน เป็นส่วนที่ให้ผู้ใช้ได้เลือกดูข้อมูลของสินค้า 
+     -   สินค้า ซึ่งประกอบด้วยชื่อสินค้า บาร์โค้ด ราคาสินค้าและรายละเอียดอื่นๆเกี่ยวกับสินค้า
+     -   การคิดมูลค่า
+     -   ข้อมูลประวัติ ประกอบด้วยบันทึกการขายสินค้าของร้านค้า และข้อมูลการซื้อสินค้าของลูกค้า
+     -   ลูกค้า ซึ่งประกอบด้วยชื่อลูกค้า และประวัติการซื้อสินค้า
+     -   สรุปผล วิเคราะห์ กำไรจากประวัติการขายของร้านค้า
+
+####Application Architecture  
+####Subsystems / Components  
+####Domain classes  
+####Deployment  
+ - Software และ Technology ที่ใช้ ได้แก่  
+     -   Ubuntu 14.04
+     -   Apache 2
+     -   PHP 5.5
+     -   MySQL
+     -   Laravel - PHP framework
+     -   Composer - PHP Dependency manager  
+ - โดย Software และระบบทั้งหมด จะติดตั้งลงใน VM 1 เครื่อง (IP:23.101.28.122)  
+
+##Implementation Plan  
