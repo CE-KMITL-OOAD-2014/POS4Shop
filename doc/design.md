@@ -96,7 +96,7 @@
 
 ####Domain classes  
 ![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-class.png)  
-
+(เม็ธทอดที่ขีดเส้นใต้คือ static method)
  - **User**
      -   เป็นคลาสที่มีข้อมูลพื้นฐานของผู้ใช้ ทั้งผู้จัดการ และลูกค้า
  - **Manager**
