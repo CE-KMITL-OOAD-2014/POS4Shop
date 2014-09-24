@@ -90,9 +90,9 @@
 
  - Sequnce diagram
      1.    เพิ่มสินค้าชนิดใหม่  
-![alt text](http://ziko.kmi.tl/ooad/ooadm2-1.jpg)  
+![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-1.jpg)  
      2.    คิดมูลค่าสินค้าที่ลูกค้าซื้อ  
-![alt text](http://ziko.kmi.tl/ooad/ooadm2-2.jpg)  
+![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-2.jpg)  
 
 ####Domain classes  
 ####Deployment  
