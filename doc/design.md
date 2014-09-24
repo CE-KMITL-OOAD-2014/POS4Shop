@@ -106,3 +106,4 @@
  - โดย Software และระบบทั้งหมด จะติดตั้งลงใน VM 1 เครื่อง (IP:23.101.28.122)  
 
 ##Implementation Plan  
+![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-gantt.PNG)  
