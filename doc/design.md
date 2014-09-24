@@ -88,13 +88,14 @@
  - **ฐานข้อมูลผู้จัดการร้านค้า** - ภายในจะเก็บข้อมูล username, password, ชื่อผู้จัดการคนนี้ และเวลาที่เพิ่ม/แก้ไขข้อมูลผู้จัดการ
  - **ฐานข้อมูลประวัติการขายสินค้า** - ภายในจะเก็บข้อมูล รายการสินค้าที่ขาย จำนวนที่ซื้อ ราคา และเวลาที่เพิ่ม/แก้ไขข้อมูลประวัติการขายสินค้า
 
- - Sequnce diagram
+ - Sequence diagram
      1.    เพิ่มสินค้าชนิดใหม่  
 ![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-1.jpg)  
      2.    คิดมูลค่าสินค้าที่ลูกค้าซื้อ  
 ![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-2.jpg)  
 
 ####Domain classes  
+![alt text](https://github.com/CE-KMITL-OOAD-2014/POS4Shop/raw/master/doc/img/ooadm2-class.png)  
 ####Deployment  
  - Software และ Technology ที่ใช้ ได้แก่  
      -   Ubuntu 14.04
