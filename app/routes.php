@@ -11,7 +11,11 @@
 |
 */
 //TEST feature/class
-Route::get('/', 'HomeController@showIndex');
+Route::get('/', function(){
+	$var = new MyTestClass();	
+	return $var->add(4,5);
+});
+//Route::get('/', 'HomeController@showIndex');
 
 Route::get('index', 'HomeController@showIndex');
 
