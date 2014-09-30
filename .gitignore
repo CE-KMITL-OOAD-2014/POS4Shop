@@ -8,5 +8,5 @@ composer.lock
 Thumbs.db
 .idea/
 /*.iml
-
+node_modules/
 

@@ -11,7 +11,7 @@
 |
 */
 //TEST feature/class
-Route::get('/', function(){
+Route::get('/', function(){ //TODO (ziko) : how to use namespace
 	$var = new MyTestClass();	
 	return $var->add(4,5);
 });

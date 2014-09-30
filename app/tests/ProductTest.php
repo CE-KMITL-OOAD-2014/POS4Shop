@@ -15,7 +15,7 @@ class ProductTest extends TestCase {
 
 		$var = new MyTestClass();	
 		$result = $var->add(5,5); //10
-		$this->assertTrue($result==11);
+		$this->assertTrue($result==10);
 	}
 
 }
