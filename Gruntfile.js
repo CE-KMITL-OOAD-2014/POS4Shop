@@ -1,4 +1,5 @@
 // Gruntfile.js
+// grunt watch:test
 module.exports = function(grunt) {
 	grunt.initConfig({
 		phpunit: {

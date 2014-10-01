@@ -12,6 +12,7 @@
 */
 //TEST feature/class
 Route::get('/', function(){ //TODO (ziko) : how to use namespace
+	$obj = new Shop();
 	$var = new MyTestClass();	
 	return $var->add(4,5);
 });

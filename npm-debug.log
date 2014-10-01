@@ -1,24 +1,21 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/node',
-1 verbose cli   '/usr/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   'grunt-contrib-watch' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose node symlink /usr/bin/node
+4 error install Couldn't read dependencies
 5 error Failed to parse json
 5 error Unexpected token }
-6 error File: /var/www/html/laravel/package.json
+6 error File: /home/ionization/OOAD/POS4Shop/package.json
 7 error Failed to parse package.json data.
 7 error package.json must be actual JSON, not just JavaScript.
 7 error
 7 error This is not a bug in npm.
 7 error Tell the package author to fix their package.json file. JSON.parse
-8 error System Linux 3.13.0-32-generic
-9 error command "/usr/bin/node" "/usr/bin/npm" "install" "grunt-contrib-watch"
-10 error cwd /var/www/html/laravel
+8 error System Linux 3.13.0-24-generic
+9 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+10 error cwd /home/ionization/OOAD/POS4Shop
 11 error node -v v0.10.32
 12 error npm -v 1.4.28
-13 error file /var/www/html/laravel/package.json
+13 error file /home/ionization/OOAD/POS4Shop/package.json
 14 error code EJSONPARSE
 15 verbose exit [ 1, true ]
