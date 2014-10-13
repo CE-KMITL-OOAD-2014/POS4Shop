@@ -23,7 +23,7 @@ module.exports = function(grunt) {
             test: {
                 files: ['app/**/*.*'],
                 tasks: ['phpunit'],
-                tasks: ['phpmd'],
+                //tasks: ['phpmd'],
             }
         }
     });

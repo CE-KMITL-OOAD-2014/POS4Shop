@@ -8,9 +8,11 @@
 			$this->self['price']=NULL;
 		}
 		
+		
 		function get($name){
 			return $this->self[$name];
 		}
+
 
 		function set($name, $value){
 			$this->self[$name]=$value;

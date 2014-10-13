@@ -13,8 +13,8 @@ class SoldItemTest extends TestCase {
 		$item="ItemName";
 		$quantity=5;
 		$price=99.50;
-
 		$solditem= new SoldItem();
+		
 		// E
 		$solditem->set("item",$item);
 		$solditem->set("quantity",$quantity);
