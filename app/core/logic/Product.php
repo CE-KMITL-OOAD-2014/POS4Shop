@@ -1,4 +1,5 @@
 <?php 
+    namespace ceddd;
     class Product {
         private $self;
 

@@ -1,5 +1,5 @@
 <?php
-	//namespace cedd;
+	namespace ceddd;
 	class Shop {
 		private $self;
 
@@ -8,6 +8,10 @@
 			//echo $this->self['name'];
 		}
 		
+		function dump(){
+			return "dump fn";
+		}
+
 		function cal($item,Customer $customer,Manager $manager){
 			$result=0;
 

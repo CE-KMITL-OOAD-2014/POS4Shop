@@ -1,4 +1,5 @@
 <?php
+    namespace ceddd;
 	class User{
         protected $self;
 
@@ -17,3 +18,4 @@
             $this->self[$key]=$value;            
         }		
 	}
+    

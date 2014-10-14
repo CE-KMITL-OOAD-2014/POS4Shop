@@ -1,4 +1,5 @@
 <?php 
+    namespace ceddd;
     class History{
         private $self;
 

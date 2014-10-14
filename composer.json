@@ -13,7 +13,8 @@
         "classmap": [
             "app/commands",
             "app/controllers",
-            "app/core",
+            "app/core/logic",
+            "app/core/repository",
             "app/models",
             "app/database/migrations",
             "app/database/seeds",
