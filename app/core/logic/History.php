@@ -3,7 +3,8 @@
     class History{
         private $self;
 
-        function __construct($sth = null){
+        function __construct($sth = null,HistoryRepository $historyRepo){
+            $this->self['historyRepository']=$historyRepo;
             $this->self['id']=NULL;
             $this->self['item']=NULL;
             $this->self['customerId']=NULL;
@@ -19,15 +20,15 @@
             $this->self[$key]=$value;            
         }
 
-        public function save(HistoryRepository $historyRepo){
-            $historyRepo->save($this);
+        public function save(){
+            $this->self['historyRepository']->save($this);
         }
 
-        public function getAll(HistoryRepository $historyRepo){
-            return $historyRepo->getAll();
+        public function getAll(){
+            return $this->self['historyRepository']->getAll();
         }
 
-        public function find(HistoryRepository $historyRepo,$name){
-            return $historyRepo->find($name);
+        public function find($name){
+            return $this->self['historyRepository']->find($name);
         }
     }

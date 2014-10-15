@@ -2,15 +2,20 @@
     namespace ceddd;
     class Customer extends User{
 
-        public function getById(CustomerRepository $customerRepo,$id){
-            return $customerRepo->getById($id);
+        function __construct(CustomerRepository $customerRepo){
+            $this->self['historyRepository']=$customerRepo;
+
         }
 
-        public function getAll(CustomerRepository $customerRepo){
-            return $customerRepo->getAll();
+        public function getById($id){
+            return $this->self['historyRepository']->getById($id);
         }
 
-        public function find(CustomerRepository $customerRepo,$name){
-            return $customerRepo->find($name);
+        public function getAll(){
+            return $this->self['historyRepository']->getAll();
+        }
+
+        public function find($name){
+            return $this->self['historyRepository']->find($name);
         }
     }

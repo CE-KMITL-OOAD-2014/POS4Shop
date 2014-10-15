@@ -3,7 +3,8 @@
     class Product {
         private $self;
 
-        function __construct($sth = null){
+        function __construct($sth = null,ProductRepository $productRepo){
+            $this->self['productRepository']=$productRepo;
             $this->self['id']=NULL;
             $this->self['barcode']=NULL;
             $this->self['name']=NULL;
@@ -22,19 +23,19 @@
             $this->self[$key]=$value;
         }
 
-        public function save(ProductRepository $productRepo){
-            $productRepo->save($this);
+        public function save(){
+            $this->self['productRepository']->save($this);
         }
 
-        public function getById(ProductRepository $productRepo,$id){
-            return $productRepo->getById($id);
+        public function getById($id){
+            return $this->self['productRepository']->getById($id);
         }
 
-        public function getAll(ProductRepository $productRepo){
-            return $productRepo->getAll();
+        public function getAll(){
+            return $this->self['productRepository']->getAll();
         }
 
-        public function findByName(ProductRepository $productRepo,$name){
-            return $productRepo->findByName($name);
+        public function findByName(){
+            return $this->self['productRepository']->findByName($name);
         }
     }

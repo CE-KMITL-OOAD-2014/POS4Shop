@@ -20,7 +20,7 @@ class ShopTest extends TestCase {
         }
 
         // Act
-        $customer=$this->getMock('ceddd\Customer');
+        $customer=$this->getMock('ceddd\Customer',array('__construct'),array($this->getMock('ceddd\CustomerRepository')));
         $manager=$this->getMock('ceddd\Manager');
         $shop = new ceddd\Shop;
         $result=$shop->cal($arrItem,$customer,$manager);
