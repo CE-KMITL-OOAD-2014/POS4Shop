@@ -1,7 +1,8 @@
 <?php 
+    namespace ceddd;
     interface Repository{
-        public function save($value);
-        public function edit($value);
+        public function save($obj);
+        public function edit($obj);
         public function getAll();
-        public function find($value);
+        public function find($obj);
     }

@@ -1,9 +1,9 @@
 <?php 
-    class ProductIntTest extends TestCase {
+    class CustomerIntTest extends TestCase {
         // ProductRepository Class+ Product Class
         function testRepository(){
 
-            $obj=new ceddd\ProductRepository;
+            $obj=new ceddd\CustomerRepository;
         }
     }
     

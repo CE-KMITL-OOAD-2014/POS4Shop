@@ -2,10 +2,6 @@
     namespace ceddd;
     class Customer extends User{
 
-        function __construct($sth = null){
-
-        }
-
         public function getById(CustomerRepository $customerRepo,$id){
             return $customerRepo->getById($id);
         }
