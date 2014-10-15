@@ -12,14 +12,13 @@ class CreateProduct extends Migration {
      */
     public function up()
     {
-        Schema::create('products, function ($table) {
+        Schema::create('Products', function ($table) {
             $table->increments('id');
             $table->string('barcode', 45)->unique();
             $table->string('name', 250);
             $table->string('detail');
             $table->float('price');
             $table->string('img_filename', 200);
-            $table->integer('item_sold')->default(0);
             $table->timestamps();
         });
     }
@@ -31,7 +30,7 @@ class CreateProduct extends Migration {
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('Products');
     }
 
 }

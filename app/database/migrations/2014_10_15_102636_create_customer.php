@@ -3,19 +3,18 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopSell extends Migration {
+class CreateCustomer extends Migration {
 
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-    public function up()
-    {
-        Schema::create('topsells', function ($table) {
+	public function up()
+	{
+        Schema::create('Customers', function ($table) {
             $table->increments('id');
-            $table->string('product_id', 45);
-            $table->integer('rank');
+            $table->string('name', 200);
             $table->timestamps();
         });
     }
@@ -27,7 +26,7 @@ class CreateTopSell extends Migration {
      */
     public function down()
     {
-        Schema::drop('topsells');
+        Schema::drop('Customers');
     }
 
 }

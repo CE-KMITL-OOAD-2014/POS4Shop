@@ -19,6 +19,22 @@
         }
 
         public function set($key,$value){
-            $this->self[$key]=$value;            
+            $this->self[$key]=$value;
+        }
+
+        public function save(ProductRepository $productRepo){
+            $productRepo->save($this);
+        }
+
+        public function getById(ProductRepository $productRepo,$id){
+            return $productRepo->getById($id);
+        }
+
+        public function getAll(ProductRepository $productRepo){
+            return $productRepo->getAll();
+        }
+
+        public function findByName(ProductRepository $productRepo,$name){
+            return $productRepo->findByName($name);
         }
     }

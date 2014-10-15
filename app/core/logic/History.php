@@ -18,4 +18,16 @@
         public function set($key,$value){
             $this->self[$key]=$value;            
         }
+
+        public function save(HistoryRepository $historyRepo){
+            $historyRepo->save($this);
+        }
+
+        public function getAll(HistoryRepository $historyRepo){
+            return $historyRepo->getAll();
+        }
+
+        public function find(HistoryRepository $historyRepo,$name){
+            return $historyRepo->find($name);
+        }
     }

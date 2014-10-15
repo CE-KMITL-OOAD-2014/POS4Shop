@@ -1,7 +1,7 @@
 <?php 
     interface Repository{
-        public function save();
-        public function edit();
+        public function save($value);
+        public function edit($value);
         public function getAll();
-        public function find();
+        public function find($value);
     }
