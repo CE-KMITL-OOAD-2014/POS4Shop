@@ -12,12 +12,13 @@ class CreateHistory extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('Historys', function ($table) {
+        Schema::create('histories', function ($table) {
             $table->increments('id');
-            $table->integer('productId');
-            $table->float('price');
-            $table->float('double');
-            $table->integer('customerId');
+            $table->integer('hid');
+            $table->integer('product_id');
+            $table->float('quantity',8,4);
+            $table->float('price',8,4);
+            $table->integer('customer_id');
             $table->timestamps();
         });
     }
@@ -29,7 +30,7 @@ class CreateHistory extends Migration {
      */
     public function down()
     {
-        Schema::drop('Historys');
+        Schema::drop('histories');
     }
 
 }

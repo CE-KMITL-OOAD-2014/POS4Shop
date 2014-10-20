@@ -1,5 +1,4 @@
 <?php
-class ManagerEloquent extends Eloquent
+class ManagerEloquent extends User
 {
-    protected $table = 'Managers';
 }

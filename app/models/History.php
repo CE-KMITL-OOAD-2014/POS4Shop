@@ -1,5 +1,5 @@
 <?php
 class HistoryEloquent extends Eloquent
 {
-    protected $table = 'History';
+    protected $table = 'histories';
 }

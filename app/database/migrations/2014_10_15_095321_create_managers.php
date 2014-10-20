@@ -12,11 +12,12 @@ class CreateManagers extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('Managers', function ($table) {
+        Schema::create('users', function ($table) {
             $table->increments('id');
             $table->string('name', 250);
-            $table->string('username', 100);
-            $table->string('password', 100)->unique();
+            $table->string('username', 100)->unique();
+            $table->string('password', 100);
+            $table->string('remember_token', 100);
             $table->timestamps();
         });
     }
@@ -28,7 +29,7 @@ class CreateManagers extends Migration {
      */
     public function down()
     {
-        Schema::drop('Managers');
+        Schema::drop('users');
     }
 
 }
