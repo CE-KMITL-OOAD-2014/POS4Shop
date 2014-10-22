@@ -1,5 +1,5 @@
 <?php 
-    App::bind('HistoryRepository', 'HistoryRepository');
-    App::bind('CustomerRepository', 'CustomerRepository');
-    App::bind('ManagerRepository', 'ManagerRepository');
-    App::bind('ProductRepository', 'ProductRepository');
+    App::bind('ceddd\HistoryRepository', 'ceddd\HistoryRepositoryEloquent');
+    App::bind('ceddd\CustomerRepository', 'ceddd\CustomerRepositoryEloquent');
+    App::bind('ceddd\ManagerRepository', 'ceddd\ManagerRepositoryEloquent');
+    App::bind('ceddd\ProductRepository', 'ceddd\ProductRepositoryEloquent');

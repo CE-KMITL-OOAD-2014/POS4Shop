@@ -13,7 +13,7 @@ class CreateCustomer extends Migration {
 	public function up()
 	{
         Schema::create('customers', function ($table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             $table->string('name', 200);
             $table->timestamps();
         });

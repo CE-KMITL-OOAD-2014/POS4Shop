@@ -1,6 +1,6 @@
 <?php 
     namespace ceddd;
-    class ProductRepository implements Repository{
+    class ProductRepositoryEloquent implements Repository{
         public function save($product){
             $p = new ProductEloquent;
             $p->id = $product->get('id');
@@ -15,6 +15,8 @@
         public function edit($product){
             if($product->get('id')){ //TODO if not found -> how to handler?
                 $p = ProductEloquent::find($product->get('id'));
+                if($p=NULL)
+                    return false;
                 $p->id = $product->get('id');
                 $p->barcode = $product->get('barcode');
                 $p->name = $product->get('name');
@@ -22,6 +24,7 @@
                 $p->cost = $product->get('cost');
                 $p->price = $product->get('price');
                 $p->save();
+                
             }
         }
         
@@ -38,5 +41,9 @@
         public function find($name){
             $p = ProductEloquent::where('name', 'like', '%'.$name.'%');
             return $p;
+        }
+        
+        public function where($key,$value){
+
         }
     }

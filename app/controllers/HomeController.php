@@ -17,7 +17,22 @@ class HomeController extends BaseController {
 
 	public function showIndex()
 	{
-		return View::make('index');
+		return View::make('home.index');
+	}
+
+	public function showAdd()
+	{
+		return View::make('home.index');
+	}
+	
+	public function actionAdd()
+	{
+		return View::make('home.index');
+	}
+
+	public function showTopSell()
+	{
+		return View::make('home.index');
 	}
 
 }

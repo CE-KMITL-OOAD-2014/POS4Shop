@@ -28,4 +28,12 @@
             $h = HistoryEloquent::where('id', 'like', '%'.$id.'%');
             return $h;
         }
+
+        public function getById($id){
+
+        }
+        
+        public function where($key,$value){
+
+        }
     }

@@ -1,6 +1,6 @@
 <?php 
     namespace ceddd;
-    class ManagerRepository implements \Repository{
+    class ManagerRepositoryEloquent implements \Repository{
         public function save($manager){
             $m = new ManagerEloquent;
             $m->id = $manager->get('id');
@@ -29,5 +29,13 @@
         public function find($name){
             $m = ManagerEloquent::where('name', 'like', '%'.$name.'%');
             return $m;
+        }
+
+        public function getById($id){
+
+        }
+        
+        public function where($key,$value){
+
         }
     }

@@ -85,7 +85,7 @@ return array(
 
         'myDB' => array(
             'driver'    => 'mysql',
-            'host'      => 'localhost',
+            'host'      => 'ioniz.tk',
             'database'  => 'ooad',
             'username'  => 'ooad',
             'password'  => 'ooad',

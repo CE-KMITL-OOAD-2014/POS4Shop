@@ -1,11 +1,60 @@
 <?php
 
-//TEST feature/class
-Route::get('/', function(){ //TODO (ziko) : how to use namespace
-	$var = new ceddd\MyTestClass();
-    return $var->add(4,5);
-});
+// Home
+    // Index
+Route::get('/',array('uses'=>'HomeController@showIndex'));
+Route::get('home',array('uses'=>'HomeController@showIndex'));
+    // Top
+Route::get('home/top',array('uses'=>'HomeController@showTopSell'));
+    // Search
+Route::get('home/add',array('uses'=>'HomeController@showAdd'));
+Route::post('home/add',array('uses'=>'HomeController@actionAdd'));
 
+//--Manager
+    // Add manager
+Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
+Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
+    // Del manager
+Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
+Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
+    // Shop cal
+Route::get('manager/shop',array('uses'=>'ManagerController@showShopCal'));
+Route::post('manager/shop',array('uses'=>'ManagerController@actionShopCal'));
+    // Shop setting
+Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
+Route::post('manager/setting',array('uses'=>'ManagerController@actionshowShopSetting'));
+    // Shop history
+Route::get('manager/history',array('uses'=>'ManagerController@showHistory'));
+
+//--Customer
+    // Add customer
+Route::get('customer/add',array('uses'=>'CustomerController@showAdd'));
+Route::post('customer/add',array('uses'=>'CustomerController@actionAdd'));
+    // del
+Route::get('customer/del',array('uses'=>'CustomerController@showDel'));
+Route::post('customer/del',array('uses'=>'CustomerController@actionDel'));
+    // history
+Route::get('customer/history',array('uses'=>'CustomerController@showHistory'));
+
+//--Product
+    // Add
+Route::get('product/add',array('uses'=>'ProductController@showAdd'));
+Route::post('product/add',array('uses'=>'ProductController@actionAdd'));
+    // Del
+Route::get('product/del',array('uses'=>'ProductController@showDel'));
+Route::post('product/del',array('uses'=>'ProductController@actionDel'));
+    // Edit
+Route::get('product/edit',array('uses'=>'ProductController@showEdit'));
+Route::post('product/edit',array('uses'=>'ProductController@actionEdit'));
+    // View
+Route::get('product/view',array('uses'=>'ProductController@showView'));
+Route::post('product/view',array('uses'=>'ProductController@actionView'));
+    // TopSell
+Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
+
+
+//----------REAL-END--------------
+/*
 //Route::get('/', 'HomeController@showIndex');
 
 Route::get('index', 'HomeController@showIndex');
@@ -27,3 +76,4 @@ Route::get('/calculate', function()
 });
 
 Route::match(array('GET', 'POST'), '/edit', 'ProductController@edit');
+*/
