@@ -1,6 +1,11 @@
 <?php 
     namespace ceddd;
     class HistoryRepository implements Repository{
+
+        public static function getRules(){
+            return array('name' => 'required|min:3|unique:customers');
+        }
+        
         public function save($history){
             $h = new HistoryEloquent;
             $h->id = $history->get('id');

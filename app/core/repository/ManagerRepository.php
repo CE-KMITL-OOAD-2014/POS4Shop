@@ -1,6 +1,11 @@
 <?php 
     namespace ceddd;
-    class ManagerRepositoryEloquent implements \Repository{
+    class ManagerRepository implements \Repository{
+        
+        public static function getRules(){
+            return array('name' => 'required|min:3|unique:customers');
+        }
+
         public function save($manager){
             $m = new ManagerEloquent;
             $m->id = $manager->get('id');

@@ -1,6 +1,6 @@
 <?php 
     namespace ceddd;
-    class  CustomerRepository implements Repository{
+    class CustomerRepository implements Repository{
 
         public static function getRules(){
             return array('name' => 'required|min:3|unique:customers');
@@ -16,6 +16,8 @@
         public function edit($customer){
             if($customer->get('id')){                  
                 $c = \CustomerEloquent::find($customer->get('id'));
+                if($c=NULL)
+                    return false;
                 $c->id = $customer->get('id');
                 $c->name = $customer->get('name');
                 return $c->save();

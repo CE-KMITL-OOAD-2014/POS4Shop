@@ -14,7 +14,7 @@ class ExampleTest extends TestCase {
 
 		// Home
 		    // Index
-		$crawler = $this->client->request('GET', 'home');
+		/*$crawler = $this->client->request('GET', 'home');
 		$this->assertTrue($this->client->getResponse()->isOk());
 		    // Top
 		$crawler = $this->client->request('GET', 'home/top');
@@ -22,7 +22,24 @@ class ExampleTest extends TestCase {
 		    // Search
 		$crawler = $this->client->request('GET', 'home/add');
 		$this->assertTrue($this->client->getResponse()->isOk());
-
+		
+		//--Product
+		    // Add
+		$crawler = $this->client->request('GET', 'product/add');
+		$this->assertTrue($this->client->getResponse()->isOk());
+		    // Edit
+		/*$crawler = $this->client->request('GET', 'product/edit');
+		$this->assertTrue($this->client->getResponse()->isOk());
+		    // View
+		$crawler = $this->client->request('GET', 'product/view');
+		$this->assertTrue($this->client->getResponse()->isOk());
+		    // Del
+		$crawler = $this->client->request('GET', 'product/del');
+		$this->assertTrue($this->client->getResponse()->isOk());
+		    // TopSell
+		$crawler = $this->client->request('GET', 'product/top');
+		$this->assertTrue($this->client->getResponse()->isOk());
+		
 		//--Manager
 		    // Add manager
 		$crawler = $this->client->request('GET', 'manager/add');
@@ -49,24 +66,8 @@ class ExampleTest extends TestCase {
 		$this->assertTrue($this->client->getResponse()->isOk());
 		    // history
 		$crawler = $this->client->request('GET', 'customer/history');
-		$this->assertTrue($this->client->getResponse()->isOk());
+		$this->assertTrue($this->client->getResponse()->isOk());*/
 
-		//--Product
-		    // Add
-		$crawler = $this->client->request('GET', 'product/add');
-		$this->assertTrue($this->client->getResponse()->isOk());
-		    // Del
-		$crawler = $this->client->request('GET', 'product/del');
-		$this->assertTrue($this->client->getResponse()->isOk());
-		    // Edit
-		$crawler = $this->client->request('GET', 'product/edit');
-		$this->assertTrue($this->client->getResponse()->isOk());
-		    // View
-		$crawler = $this->client->request('GET', 'product/view');
-		$this->assertTrue($this->client->getResponse()->isOk());
-		    // TopSell
-		$crawler = $this->client->request('GET', 'product/top');
-		$this->assertTrue($this->client->getResponse()->isOk());
 	}
 
 }

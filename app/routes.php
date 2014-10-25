@@ -10,6 +10,21 @@ Route::get('home/top',array('uses'=>'HomeController@showTopSell'));
 Route::get('home/add',array('uses'=>'HomeController@showAdd'));
 Route::post('home/add',array('uses'=>'HomeController@actionAdd'));
 
+//--Product
+    // Add
+Route::get('product/add',array('uses'=>'ProductController@showAdd'));
+Route::post('product/add',array('uses'=>'ProductController@actionAdd'));
+    // Edit
+Route::get('product/edit',array('uses'=>'ProductController@showEdit'));
+Route::post('product/edit',array('uses'=>'ProductController@actionEdit'));
+    // View
+Route::get('product/view',array('uses'=>'ProductController@showView'));
+    // Del
+Route::get('product/del',array('uses'=>'ProductController@showDel'));
+Route::post('product/del',array('uses'=>'ProductController@actionDel'));
+    // TopSell
+Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
+
 //--Manager
     // Add manager
 Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
@@ -36,21 +51,6 @@ Route::post('customer/del',array('uses'=>'CustomerController@actionDel'));
     // history
 Route::get('customer/history',array('uses'=>'CustomerController@showHistory'));
 
-//--Product
-    // Add
-Route::get('product/add',array('uses'=>'ProductController@showAdd'));
-Route::post('product/add',array('uses'=>'ProductController@actionAdd'));
-    // Del
-Route::get('product/del',array('uses'=>'ProductController@showDel'));
-Route::post('product/del',array('uses'=>'ProductController@actionDel'));
-    // Edit
-Route::get('product/edit',array('uses'=>'ProductController@showEdit'));
-Route::post('product/edit',array('uses'=>'ProductController@actionEdit'));
-    // View
-Route::get('product/view',array('uses'=>'ProductController@showView'));
-Route::post('product/view',array('uses'=>'ProductController@actionView'));
-    // TopSell
-Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
 
 
 //----------REAL-END--------------

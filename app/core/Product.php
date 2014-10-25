@@ -3,11 +3,12 @@
     class Product {
         private $self;
 
-        function __construct($sth = null,ProductRepository $productRepo){
+        function __construct(ProductRepository $productRepo){
             $this->self['productRepository']=$productRepo;
             $this->self['id']=NULL;
             $this->self['barcode']=NULL;
             $this->self['name']=NULL;
+            $this->self['file']=NULL;
             $this->self['detail']=NULL;
             $this->self['cost']=NULL;
             $this->self['price']=NULL;
