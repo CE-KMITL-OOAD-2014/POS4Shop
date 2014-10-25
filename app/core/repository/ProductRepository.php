@@ -13,7 +13,7 @@
         public function save($product){
             $p = new \ProductEloquent;
             if($p->id!=null)
-                $p->id = $product->get('id');
+                return false; // old product should edit
             $p->barcode = $product->get('barcode');
             $p->name = $product->get('name');
             $p->file = $product->get('file');
@@ -26,18 +26,17 @@
         public function edit($product){
             if($product->get('id')){ //TODO if not found -> how to handler?
                 $p = \ProductEloquent::find($product->get('id'));
-                if($p=NULL)
+                if($p==NULL)
                     return false;
-                $p->id = $product->get('id');
                 $p->barcode = $product->get('barcode');
                 $p->name = $product->get('name');
-                $p->name = $product->get('file');
+                $p->file = $product->get('file');
                 $p->detail = $product->get('detail');
                 $p->cost = $product->get('cost');
                 $p->price = $product->get('price');
-                return $p->save();                
+                return $p->save();
             }
-            return false;
+            //return false;
         }
         
         public static function getAll(){
@@ -46,7 +45,7 @@
                 return NULL;
             foreach($all as $key => $val){
                 //$result[$key]=$val;
-                $p = new Product();
+                $p = new Product(new ProductRepository);
                 $p->set('id',$val->id);
                 $p->set('barcode',$val->barcode);
                 $p->set('name',$val->name);
@@ -65,7 +64,7 @@
             $product = \ProductEloquent::find($id);
             if($product==NULL)
                 return NULL;
-            $p = new Product();
+            $p = new Product(new ProductRepository);
             $p->set('id',$product->id);
             $p->set('barcode',$product->barcode);
             $p->set('name',$product->name);

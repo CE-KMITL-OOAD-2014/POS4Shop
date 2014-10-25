@@ -28,6 +28,10 @@
             $this->self['productRepository']->save($this);
         }
 
+        public function edit(){
+            $this->self['productRepository']->edit($this);
+        }
+
         public function getById($id){
             return $this->self['productRepository']->getById($id);
         }

@@ -39,14 +39,59 @@ class ProductController extends BaseController {
         return Redirect::to('/product/add')->withErrors($validator);
     }
 
-    public function showEdit()
+    public function showEdit($id)
     {
-        return View::make('product.add');
+        $product = App::make('ceddd\Product');
+        $product = $product->getById($id);
+        if($product==NULL)
+            return App::abort(404);
+
+        $pd['id'] = $product->get('id');
+        $pd['barcode'] = $product->get('barcode');
+        $pd['name'] = $product->get('name');
+        $pd['file'] = $product->get('file');
+        $pd['detail'] = $product->get('detail');
+        $pd['cost'] = $product->get('cost');
+        $pd['price'] = $product->get('price');
+        $pd['created_at'] = $product->get('created_at');
+        $pd['updated_at'] = $product->get('updated_at');
+        //var_dump($pd);
+        return View::make('product.edit',$pd);
+        //return View::make('product.edit')->with('product',$pd);
     }
 
-    public function actionEdit()
+    public function actionEdit($id)
     {
-        return View::make('product.add');
+        $data = Input::only(array('barcode','name','detail','cost','price'));
+
+        $rules = ceddd\ProductRepository::getRules();
+        $rules['id']='exists:products';
+
+        $file = Input::file('img');
+        $data['file']=$file;
+        if($data['file']!=NULL)
+            $newFileName = $data['barcode'].".".$file->guessExtension();
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->passes()) {
+            $pd = App::make('ceddd\Product');
+            $product = $pd->getById($id);
+            $product->set('id',$id);
+            $product->set('barcode',$data['barcode']);
+            $product->set('name',$data['name']);
+            if($data['file']!=NULL)
+                $product->set('file',$newFileName);
+            $product->set('detail',$data['detail']);
+            $product->set('cost',$data['cost']);
+            $product->set('price',$data['price']);
+            
+            if($data['file']!=NULL)
+                $file->move(app_path().'/../public/upload/product/', $newFileName);
+            $product->edit();
+            return Redirect::to('/product/'.$id);
+        }
+
+        return Redirect::to('/product/'.$id.'/edit')->withErrors($validator);
     }
 
     public function showView($id)
