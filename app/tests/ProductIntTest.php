@@ -3,7 +3,7 @@
         // ProductRepository Class+ Product Class
         function testRepository(){
 
-            //$obj=new ceddd\ProductRepository;
+            $obj=new ceddd\ProductRepository;
         }
     }
     

@@ -16,7 +16,7 @@
                 $p->id = $product->get('id');
             $p->barcode = $product->get('barcode');
             $p->name = $product->get('name');
-            $p->name = $product->get('file');
+            $p->file = $product->get('file');
             $p->detail = $product->get('detail');
             $p->cost = $product->get('cost');
             $p->price = $product->get('price');
@@ -41,13 +41,31 @@
         }
         
         public static function getAll(){
-            $p = \ProductEloquent::all();
-            return $p;
+            $all = \ProductEloquent::all();
+            if($all==NULL)
+                return NULL;
+            foreach($all as $key => $val){
+                //$result[$key]=$val;
+                $p = new Product();
+                $p->set('id',$val->id);
+                $p->set('barcode',$val->barcode);
+                $p->set('name',$val->name);
+                $p->set('file',$val->file);
+                $p->set('detail',$val->detail);
+                $p->set('cost',$val->cost);
+                $p->set('price',$val->price);
+                $p->set('created_at',$val->created_at);
+                $p->set('updated_at',$val->updated_at);
+                $result[$key]=$p;
+            }
+            return $result;
         }
 
         public static function getById($id){
-            $p = \ProductEloquent::where('id', 'like', '%'.$id.'%');
-            return $p;
+            $product = \ProductEloquent::find($id);
+            if($product==NULL)
+                return NULL;
+            return $product;
         }
 
         public static function find($name){
@@ -56,6 +74,12 @@
         }
         
         public static function where($key,$value){
-
+            $product = \ProductEloquent::where($key, 'like', '%'.$name.'%');
+            if($all==NULL)
+                return NULL;
+            foreach($all as $key => $val){
+                $result[$key]=$val;
+            }
+            return $result;
         }
     }

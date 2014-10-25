@@ -3,7 +3,7 @@
     class Product {
         private $self;
 
-        function __construct(ProductRepository $productRepo){
+        function __construct(ProductRepository $productRepo=null){
             $this->self['productRepository']=$productRepo;
             $this->self['id']=NULL;
             $this->self['barcode']=NULL;
@@ -12,8 +12,8 @@
             $this->self['detail']=NULL;
             $this->self['cost']=NULL;
             $this->self['price']=NULL;
-            $this->self['created']=NULL;
-            $this->self['updated']=NULL;
+            $this->self['created_at']=NULL;
+            $this->self['updated_at']=NULL;
         }
 
         public function get($key){
