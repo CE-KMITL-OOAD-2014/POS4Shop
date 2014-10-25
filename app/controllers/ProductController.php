@@ -2,6 +2,11 @@
 
 class ProductController extends BaseController {
 
+    public function showIndex()
+    {
+        return "Product manager";
+    }
+
     public function showAdd()
     {
         return View::make('product.add');
@@ -44,9 +49,13 @@ class ProductController extends BaseController {
         return View::make('product.add');
     }
 
-    public function showView()
+    public function showView($id)
     {
-        return View::make('product.add');
+        $product = App::make('ceddd\Product');
+        $product = $product->getById($id);
+        if($product==NULL)
+            return App::abort(404);
+        return View::make('product.view')->with('product',$product);
     }
 
     public function showDel()

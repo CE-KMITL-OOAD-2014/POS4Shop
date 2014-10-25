@@ -83,3 +83,10 @@ require app_path().'/filters.php';
 
 // Regis my IOC : ziko
 //require app_path().'/ioc.php';
+
+
+// ZIKO
+App::missing(function($exception)
+{
+    return Response::view('error404', array(), 404);
+});

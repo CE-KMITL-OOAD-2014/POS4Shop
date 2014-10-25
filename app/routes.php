@@ -1,5 +1,7 @@
 <?php
 
+Route::pattern('id', '[0-9]+');
+
 // Home
     // Index
 Route::get('/',array('uses'=>'HomeController@showIndex'));
@@ -11,17 +13,19 @@ Route::get('home/add',array('uses'=>'HomeController@showAdd'));
 Route::post('home/add',array('uses'=>'HomeController@actionAdd'));
 
 //--Product
+    // Index
+Route::get('product',array('uses'=>'ProductController@showIndex'));
     // Add
 Route::get('product/add',array('uses'=>'ProductController@showAdd'));
 Route::post('product/add',array('uses'=>'ProductController@actionAdd'));
     // Edit
-Route::get('product/edit',array('uses'=>'ProductController@showEdit'));
-Route::post('product/edit',array('uses'=>'ProductController@actionEdit'));
+Route::get('product/{id}/edit',array('uses'=>'ProductController@showEdit'));
+Route::post('product/{id}/edit',array('uses'=>'ProductController@actionEdit'));
     // View
-Route::get('product/view',array('uses'=>'ProductController@showView'));
+Route::get('product/{id}',array('uses'=>'ProductController@showView'));
     // Del
-Route::get('product/del',array('uses'=>'ProductController@showDel'));
-Route::post('product/del',array('uses'=>'ProductController@actionDel'));
+//Route::get('product/{id}/del',array('uses'=>'ProductController@showDel')); // TODO (ziko) : make an product manager page
+Route::post('product/{id}/del',array('uses'=>'ProductController@actionDel'));
     // TopSell
 Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
 

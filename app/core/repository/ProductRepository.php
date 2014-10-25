@@ -65,7 +65,17 @@
             $product = \ProductEloquent::find($id);
             if($product==NULL)
                 return NULL;
-            return $product;
+            $p = new Product();
+            $p->set('id',$product->id);
+            $p->set('barcode',$product->barcode);
+            $p->set('name',$product->name);
+            $p->set('file',$product->file);
+            $p->set('detail',$product->detail);
+            $p->set('cost',$product->cost);
+            $p->set('price',$product->price);
+            $p->set('created_at',$product->created_at);
+            $p->set('updated_at',$product->updated_at);
+            return $p;
         }
 
         public static function find($name){
