@@ -12,7 +12,7 @@ class CreateAdmin extends Migration {
      */
     public function up()
     {
-        Schema::create('admin', function ($table) {
+        Schema::create('admins', function ($table) {
             $table->increments('id');
             $table->string('username', 45);
             $table->string('password');
@@ -27,7 +27,7 @@ class CreateAdmin extends Migration {
      */
     public function down()
     {
-        Schema::drop('admin');
+        Schema::drop('admins');
     }
 
 }

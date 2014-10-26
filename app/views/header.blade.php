@@ -18,7 +18,23 @@
 <link rel="stylesheet" href="css/layouts/marketing.css">
 <!--<![endif]-->
 
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/layouts/gallery-grid-old-ie.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="css/layouts/gallery-grid.css">
+<!--<![endif]-->
 
-
-
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/layouts/gallery-old-ie.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="css/layouts/gallery.css">
+<!--<![endif]-->
+<style>
+    body {
+        padding-top: 60px;
+    }
+    .item { width: 25%; }
+    .item.w2 { width: 50%; }
+</style>
