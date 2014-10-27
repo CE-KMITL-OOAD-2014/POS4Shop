@@ -2,22 +2,9 @@
 
 class CustomerController extends BaseController {
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Home Controller
-    |--------------------------------------------------------------------------
-    |
-    | You may wish to use controllers instead of, or in addition to, Closure
-    | based routes. That's great! Here is an example controller method to
-    | get you started. To route to this controller, just add the route:
-    |
-    |   Route::get('/', 'HomeController@showWelcome');
-    |
-    */
-
     public function showIndex()
     {
-        return View::make('index');
+        return "Customer";
     }
 
     public function showAdd()
@@ -31,11 +18,19 @@ class CustomerController extends BaseController {
         $rules = ceddd\CustomerRepository::getRules();
         $validator = Validator::make($data, $rules);
         if ($validator->passes()) {
-            // Normally we would do something with the data.
-            return 'Data was saved.';
+            $c = App::make('ceddd\\Customer');
+            $c->set('name',$data['name']);
+            if($c->save())
+                Redirect::to('/customer/add')->with('msg',"Add ".$data['name']." successfull.");
         }
-
-        return Redirect::to('/customer/add');
+        return Redirect::to('/customer/add')->withErrors($validator);
     }
 
+    public function showView($id){
+
+    }
+
+    public function actionDel($id){
+
+    }
 }

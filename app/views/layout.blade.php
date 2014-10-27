@@ -53,7 +53,22 @@
     </div>
 
     <div class='container'>
-    @yield('body')
+
+        @if (Session::get('msg')!=null)
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{Session::get('msg')}}
+            </div>
+        @endif 
+        
+        @foreach($errors->all() as $message)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <li>{{ $message }}</li>
+            </div>
+        @endforeach
+
+        @yield('body')
     </div>
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>

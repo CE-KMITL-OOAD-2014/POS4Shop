@@ -6,7 +6,7 @@ class ProductController extends BaseController {
     {
         return "Product manager";
     }
-
+    //--- Add
     public function showAdd()
     {
         return View::make('product.add');
@@ -24,7 +24,7 @@ class ProductController extends BaseController {
 
         $validator = Validator::make($data, $rules);
         if ($validator->passes()) {
-            $product = App::make('ceddd\Product');
+            $product = App::make('ceddd\\Product');
             $product->set('barcode',$data['barcode']);
             $product->set('name',$data['name']);
             $product->set('file',$newFileName);
@@ -32,16 +32,16 @@ class ProductController extends BaseController {
             $product->set('cost',$data['cost']);
             $product->set('price',$data['price']);
             $file->move(app_path().'/../public/upload/product/', $newFileName);
-            $product->save();
-            Redirect::to('/product/add')->with('msg',"Add ".$data['barcode']." : ".$data['name']." successfull.");
+            if($product->save()==true)
+                Redirect::to('/product/add')->with('msg',"Add ".$data['barcode']." : ".$data['name']." successfull.");
         }
-
         return Redirect::to('/product/add')->withErrors($validator);
     }
 
+    //--- Edit
     public function showEdit($id)
     {
-        $product = App::make('ceddd\Product');
+        $product = App::make('ceddd\\Product');
         $product = $product->getById($id);
         if($product==NULL)
             return App::abort(404);
@@ -94,6 +94,7 @@ class ProductController extends BaseController {
         return Redirect::to('/product/'.$id.'/edit')->withErrors($validator);
     }
 
+    //--- Edit
     public function showView($id)
     {
         $product = App::make('ceddd\Product');
@@ -103,16 +104,13 @@ class ProductController extends BaseController {
         return View::make('product.view')->with('product',$product);
     }
 
-    public function showDel()
-    {
-        return View::make('product.add');
-    }
-
+    //--- Del
     public function actionDel()
     {
         return View::make('product.add');
     }
 
+    //--- TopSell
     public function showTopSell()
     {
         return View::make('product.add');

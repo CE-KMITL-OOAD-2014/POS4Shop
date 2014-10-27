@@ -1,4 +1,7 @@
 @extends('layout')
+@section('head')
+    <title>POS4Shop - Customer::add</title>
+@stop
 
 @section('body')
     <form action="{{url('/customer/add')}}" method="POST" role="form">

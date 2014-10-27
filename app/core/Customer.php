@@ -3,22 +3,23 @@
     class Customer extends User{
 
         function __construct(CustomerRepository $customerRepo){
-            return $this->self['CustomerRepository']=$customerRepo;
+            $this->self['repository']=$customerRepo;
+            parent::__construct();
         }
 
         public function save(){
-            return $this->self['CustomerRepository']->save($this);
+            return $this->self['repository']->save($this);
         }
 
-        public static function find($name){
-            return $this->self['CustomerRepository']->find($name);
+        public function find($name){
+            return $this->self['repository']->find($name);
         }
 
-        public static function getById($id){
-            return CustomerRepository::getById($id);
+        public function getById($id){
+            return $this->self['repository']->getById($id);
         }
 
-        public static function getAll(){
-            return CustomerRepository::getAll();
+        public function getAll(){
+            return $this->self['repository']->getAll();
         }
     }

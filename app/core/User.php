@@ -3,7 +3,7 @@
 	class User{
         protected $self;
 
-        function __construct($sth = null){
+        function __construct(){
             $this->self['id']=NULL;
             $this->self['name']=NULL;
             $this->self['created']=NULL;

@@ -12,7 +12,7 @@
 
         public function save($product){
             $p = new \ProductEloquent;
-            if($p->id!=null)
+            if($product->get('id')!=null)
                 return false; // old product should edit
             $p->barcode = $product->get('barcode');
             $p->name = $product->get('name');
@@ -41,7 +41,7 @@
         
         public static function getAll(){
             $all = \ProductEloquent::all();
-            if($all==NULL)
+            if(count($all)==0)
                 return NULL;
             foreach($all as $key => $val){
                 //$result[$key]=$val;
@@ -56,25 +56,26 @@
                 $p->set('created_at',$val->created_at);
                 $p->set('updated_at',$val->updated_at);
                 $result[$key]=$p;
-            }
-            return $result;
+            } 
+           return $result;
         }
 
         public static function getById($id){
             $product = \ProductEloquent::find($id);
-            if($product==NULL)
-                return NULL;
-            $p = new Product(new ProductRepository);
-            $p->set('id',$product->id);
-            $p->set('barcode',$product->barcode);
-            $p->set('name',$product->name);
-            $p->set('file',$product->file);
-            $p->set('detail',$product->detail);
-            $p->set('cost',$product->cost);
-            $p->set('price',$product->price);
-            $p->set('created_at',$product->created_at);
-            $p->set('updated_at',$product->updated_at);
-            return $p;
+            if($product){
+                $p = new Product(new ProductRepository);
+                $p->set('id',$product->id);
+                $p->set('barcode',$product->barcode);
+                $p->set('name',$product->name);
+                $p->set('file',$product->file);
+                $p->set('detail',$product->detail);
+                $p->set('cost',$product->cost);
+                $p->set('price',$product->price);
+                $p->set('created_at',$product->created_at);
+                $p->set('updated_at',$product->updated_at);
+                return $p;
+            }
+            return NULL;
         }
 
         public static function find($name){

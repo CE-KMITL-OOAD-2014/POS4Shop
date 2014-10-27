@@ -4,7 +4,7 @@
         private $self;
 
         function __construct($sth = null,HistoryRepository $historyRepo){
-            $this->self['historyRepository']=$historyRepo;
+            $this->self['repository']=$historyRepo;
             $this->self['id']=NULL;
             $this->self['item']=NULL;
             $this->self['customerId']=NULL;
@@ -21,14 +21,14 @@
         }
 
         public function save(){
-            $this->self['historyRepository']->save($this);
+            $this->self['repository']->save($this);
         }
 
         public function getAll(){
-            return $this->self['historyRepository']->getAll();
+            return $this->self['repository']->getAll();
         }
 
         public function find($name){
-            return $this->self['historyRepository']->find($name);
+            return $this->self['repository']->find($name);
         }
     }

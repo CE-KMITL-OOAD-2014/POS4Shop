@@ -1,22 +1,11 @@
 @extends('layout')
+@section('head')
+    <title>POS4Shop - Product::add</title>
+@stop
 
 @section('body')
     <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data">
         <legend>Product : New</legend>
-        
-        @foreach($errors->all() as $message)
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <li>{{ $message }}</li>
-            </div>
-        @endforeach
-
-        @if (Session::get('msg')!=null)
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('msg')}}
-            </div>
-        @endif     
 
         <div class="form-group row">
             <label for="inputFile" class="col-md-2 control-label">File</label>
