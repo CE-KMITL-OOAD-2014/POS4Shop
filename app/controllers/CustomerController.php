@@ -26,8 +26,13 @@ class CustomerController extends BaseController {
         return Redirect::to('/customer/add')->withErrors($validator);
     }
 
-    public function showView($id){
-
+    public function showView($id)
+    {
+        $customer = App::make('ceddd\Customer');
+        $customer = $customer->getById($id);
+        if($customer==NULL)
+            return App::abort(404);
+        return View::make('customer.view')->with('customer',$customer);
     }
 
     public function actionDel($id){

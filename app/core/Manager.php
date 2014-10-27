@@ -27,6 +27,10 @@
             parent::set($key,$value);
         }
 
+        public function delete(){
+            return $this->self['repository']->delete($this);
+        }
+
         public function save(){
             return $this->self['repository']->save($this);
         }

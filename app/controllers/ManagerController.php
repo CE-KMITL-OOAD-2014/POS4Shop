@@ -38,7 +38,11 @@ class ManagerController extends BaseController {
 
     // Del manager
     public function actionDel(){
-
+        $data  = Input::get("id");
+        $manager = App::make('ceddd\\Manager');
+        $manager = $manager->getById($data);
+        $manager->delete();
+        return Response::make('delete '.$data, 200);
     }
 
     // Shop cal

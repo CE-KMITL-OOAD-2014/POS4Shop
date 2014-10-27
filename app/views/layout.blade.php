@@ -5,6 +5,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/ripples.min.css" rel="stylesheet">
     <link href="/css/material-wfont.min.css" rel="stylesheet">
+    
     @section('head')
     <title>POS4Shop - Layout</title>
 
@@ -75,6 +76,12 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="/js/ripples.min.js"></script>
     <script src="/js/material.min.js"></script>
+    <!-- swal -->
+    <script src="{{asset('lib/swal/sweet-alert.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('lib/swal/sweet-alert.css')}}">
+
+    @yield('js')
+
 </body>
 
 </html>

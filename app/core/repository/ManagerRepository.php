@@ -19,7 +19,7 @@
         }
 
         public function edit($manager){
-            if($manager->get('id')){ //TODO if not found -> how to handler?
+            if($manager->get('id')){
                 $m = \ManagerEloquent::find($manager->get('id'));
                 $m->id = $manager->get('id');
                 $m->name = $manager->get('name');
@@ -27,6 +27,14 @@
                 //$m->username = $manager->get('username');
                 $m->password = $manager->get('password');
                 return $m->save();
+            }
+            return false;
+        }
+
+        public function delete($manager){
+            if($manager->get('id')){
+                $m = \ManagerEloquent::find($manager->get('id'));
+                return $m->delete();
             }
             return false;
         }

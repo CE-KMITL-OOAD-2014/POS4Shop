@@ -35,7 +35,7 @@ Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
     // View
 Route::get('manager/{id}',array('uses'=>'ManagerController@showView'));
     // Del manager
-Route::post('manager/del',array('uses'=>'ManagerController@actionDel'));
+Route::post('manager/{id}',array('uses'=>'ManagerController@actionDel'));
     // Shop cal
 Route::get('manager/shop',array('uses'=>'ManagerController@showShopCal'));
 Route::post('manager/shop',array('uses'=>'ManagerController@actionShopCal'));

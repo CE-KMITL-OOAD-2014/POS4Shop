@@ -94,7 +94,7 @@ class ProductController extends BaseController {
         return Redirect::to('/product/'.$id.'/edit')->withErrors($validator);
     }
 
-    //--- Edit
+    //--- View
     public function showView($id)
     {
         $product = App::make('ceddd\Product');
