@@ -51,9 +51,9 @@
             $all = \ProductEloquent::all();
             if(count($all)==0)
                 return NULL;
+            $result=array();
             foreach($all as $key => $val){
-                //$result[$key]=$val;
-                $p = new Product(new ProductRepository);
+                $p = \App::make('ceddd\Product');
                 $p->set('id',$val->id);
                 $p->set('barcode',$val->barcode);
                 $p->set('name',$val->name);
@@ -65,13 +65,13 @@
                 $p->set('updated_at',$val->updated_at);
                 $result[$key]=$p;
             } 
-           return $result;
+            return $result;
         }
 
         public static function getById($id){
             $product = \ProductEloquent::find($id);
             if($product){
-                $p = new Product(new ProductRepository);
+                $p = \App::make('ceddd\Product');
                 $p->set('id',$product->id);
                 $p->set('barcode',$product->barcode);
                 $p->set('name',$product->name);
@@ -86,18 +86,45 @@
             return NULL;
         }
 
-        public static function find($name){
-            $p = \ProductEloquent::where('name', 'like', '%'.$name.'%');
-            return $p;
+        public static function find($value){
+            $where = \ProductEloquent::where('barcode', 'like', '%'.$value.'%')->orWhere('name', 'like', '%'.$value.'%')->get();
+            if(count($where)==0)
+                return NULL;
+            $result=array();
+            foreach($where as $key => $val){
+                $p = \App::make('ceddd\Product');
+                $p->set('id',$val->id);
+                $p->set('barcode',$val->barcode);
+                $p->set('name',$val->name);
+                $p->set('file',$val->file);
+                $p->set('detail',$val->detail);
+                $p->set('cost',$val->cost);
+                $p->set('price',$val->price);
+                $p->set('created_at',$val->created_at);
+                $p->set('updated_at',$val->updated_at);
+                $result[$key]=$p;
+            } 
+            return $result;
         }
         
-        public static function where($key,$value){
-            $product = \ProductEloquent::where($key, 'like', '%'.$name.'%');
-            if($all==NULL)
+        public static function where($col,$value){
+            $where = \ProductEloquent::where($col, 'like', '%'.$value.'%')->get();
+            if(count($where)==0)
                 return NULL;
-            foreach($all as $key => $val){
-                $result[$key]=$val;
-            }
+            $result=array();
+            foreach($where as $key => $val){
+                $p = \App::make('ceddd\Product');
+                $p->set('id',$val->id);
+                $p->set('barcode',$val->barcode);
+                $p->set('name',$val->name);
+                $p->set('file',$val->file);
+                $p->set('detail',$val->detail);
+                $p->set('cost',$val->cost);
+                $p->set('price',$val->price);
+                $p->set('created_at',$val->created_at);
+                $p->set('updated_at',$val->updated_at);
+                $result[$key]=$p;
+            } 
             return $result;
         }
     }

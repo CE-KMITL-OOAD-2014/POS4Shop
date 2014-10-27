@@ -30,15 +30,16 @@ class HomeController extends BaseController {
 
     // Top
 	public function showTopSell(){
-
 		return View::make('home.index');
 	}
 
     // Search
 	public function actionSearch(){
-
-		return View::make('home.index');
+		$data = Input::get('search');
+		$product = App::make('ceddd\Product');
+		$searchProduct = $product->find($data);
+		//$searchProduct = $product->where('barcode',$data);
+		//$searchProduct = array_merge($searchProduct,$product->where('name',$data));
+		return View::make('home.search')->with('searchProduct',$searchProduct);
 	}
-
-
 }

@@ -44,7 +44,10 @@
             return $this->self['repository']->getAll();
         }
 
-        public function findByName(){
-            return $this->self['repository']->findByName($name);
+        public function find($name){
+            return $this->self['repository']->find($name);
+        }
+        public function where($key,$value){
+            return $this->self['repository']->where($key,$value);
         }
     }

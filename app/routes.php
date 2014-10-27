@@ -13,7 +13,7 @@ Route::group(array(), function(){
         // Top
     Route::get('top',array('uses'=>'HomeController@showTopSell'));
         // Search
-    Route::post('search',array('uses'=>'HomeController@actionSearch'));
+    Route::post('/',array('uses'=>'HomeController@actionSearch'));
 });
 //--Product---------------------
 Route::group(array('before' => 'auth'), function(){

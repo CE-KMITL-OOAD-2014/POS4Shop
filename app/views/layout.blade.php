@@ -34,8 +34,8 @@
                 <li ><a href="#">Shop</a></li>
 
             </ul>
-            <form class="navbar-form navbar-left">
-                <input class="form-control col-lg-8" placeholder="Search" type="text">
+            <form class="navbar-form navbar-left" action="{{url('/')}}" method="POST" role="form">
+                <input class="form-control col-lg-8" placeholder="Search" type="text" name="search">
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
