@@ -8,8 +8,8 @@
             $this->self['id']=NULL;
             $this->self['item']=NULL;
             $this->self['customerId']=NULL;
-            $this->self['created']=NULL;
-            $this->self['updated']=NULL;
+            $this->self['created_at']=NULL;
+            $this->self['updated_at']=NULL;
         }
 
         public function get($key){
@@ -18,6 +18,10 @@
 
         public function set($key,$value){
             $this->self[$key]=$value;            
+        }
+
+        public function delete(){
+            return $this->self['repository']->delete($this);
         }
 
         public function save(){

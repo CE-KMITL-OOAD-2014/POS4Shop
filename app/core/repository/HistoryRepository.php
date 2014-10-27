@@ -24,6 +24,14 @@
             }
         }
 
+        public function delete($history){
+            if($history->get('id')){
+                $m = \HistoryEloquent::find($history->get('id'));
+                return $m->delete();
+            }
+            return false;
+        }
+
         public function getAll(){
             $h = HistoryEloquent::all();
             return $h;

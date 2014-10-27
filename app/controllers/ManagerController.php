@@ -22,7 +22,7 @@ class ManagerController extends BaseController {
             $manager = App::make('ceddd\\Manager');
             $manager->set('name',$data['name']);
             $manager->set('username',$data['username']);
-            $manager->set('password',$data['password']);
+            $manager->set('password',Hash::make($data['password']));
             if($manager->save())
                 Redirect::to('/manager/add')->with('msg',"Add ".$data['name']." successfull.");
         }

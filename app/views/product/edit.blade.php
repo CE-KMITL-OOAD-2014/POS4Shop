@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('body')
-    <form action="{{url('/product/'.$id.'/edit')}}" method="POST" role="form" enctype="multipart/form-data">
+    <form action="{{URL::current()}}" method="POST" role="form" enctype="multipart/form-data">
         <legend>Product : Edit</legend>
         
         <div class="row">

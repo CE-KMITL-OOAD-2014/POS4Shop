@@ -24,6 +24,10 @@
             $this->self[$key]=$value;
         }
 
+        public function delete(){
+            return $this->self['repository']->delete($this);
+        }
+
         public function save(){
             $this->self['repository']->save($this);
         }

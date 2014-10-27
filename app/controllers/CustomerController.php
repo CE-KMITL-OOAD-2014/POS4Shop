@@ -26,6 +26,39 @@ class CustomerController extends BaseController {
         return Redirect::to('/customer/add')->withErrors($validator);
     }
 
+    public function showEdit($id)
+    {
+        $customer = App::make('ceddd\\Customer');
+        $customer = $customer->getById($id);
+        if($customer==NULL)
+            return App::abort(404);
+        $ctm['id'] = $customer->get('id');        
+        $ctm['name'] = $customer->get('name');
+        $ctm['created_at'] = $customer->get('created_at');
+        $ctm['updated_at'] = $customer->get('updated_at');
+        return View::make('customer.edit',$ctm);
+    }
+
+    public function actionEdit($id)
+    {
+        $data = Input::only('name');
+
+        $rules = ceddd\CustomerRepository::getRules();
+        $rules['id']='exists:customers';
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->passes()) {
+            $ctm = App::make('ceddd\\Customer');
+            $customer = $ctm->getById($id);
+            $customer->set('id',$id);
+            $customer->set('name',$data['name']);
+            $customer->edit();
+            return Redirect::to('/customer/'.$id);
+        }
+
+        return Redirect::to('/customer/'.$id.'/edit')->withErrors($validator);
+    }
+
     public function showView($id)
     {
         $customer = App::make('ceddd\\Customer');

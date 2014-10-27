@@ -38,7 +38,13 @@
                 <input class="form-control col-lg-8" placeholder="Search" type="text">
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                <li>
+                    @if (Auth::guest())
+                        <a href="{{URL::to('/login')}}">Login</a>
+                    @else
+                        <a href="{{URL::to('/logout')}}">{{Auth::user()->name}} ( Logout )</a>
+                    @endif 
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">

@@ -36,7 +36,15 @@
                 $p->price = $product->get('price');
                 return $p->save();
             }
-            //return false;
+            return false;
+        }
+
+        public function delete($product){
+            if($product->get('id')){
+                $m = \ProductEloquent::find($product->get('id'));
+                return $m->delete();
+            }
+            return false;
         }
         
         public static function getAll(){

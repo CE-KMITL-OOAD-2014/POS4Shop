@@ -11,6 +11,14 @@
             return $this->self['repository']->save($this);
         }
 
+        public function edit(){
+            $this->self['repository']->edit($this);
+        }
+
+        public function delete(){
+            return $this->self['repository']->delete($this);
+        }
+
         public function find($name){
             return $this->self['repository']->find($name);
         }

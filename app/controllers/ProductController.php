@@ -97,7 +97,7 @@ class ProductController extends BaseController {
     //--- View
     public function showView($id)
     {
-        $product = App::make('ceddd\Product');
+        $product = App::make('ceddd\\Product');
         $product = $product->getById($id);
         if($product==NULL)
             return App::abort(404);
@@ -105,9 +105,12 @@ class ProductController extends BaseController {
     }
 
     //--- Del
-    public function actionDel()
-    {
-        return View::make('product.add');
+    public function actionDel(){
+        $data  = Input::get("id");
+        $product = App::make('ceddd\\Product');
+        $product = $product->getById($data);
+        $product->delete();
+        return Response::make('delete '.$data, 200);
     }
 
     //--- TopSell

@@ -9,19 +9,36 @@ class HomeController extends BaseController {
 		return View::make('home.index')->with('allProduct',$allProduct);
 	}
 
-	public function showAdd()
-	{
-		return View::make('home.index');
+    // Login
+	public function showLogin(){
+		return View::make('login');
 	}
-	
-	public function actionAdd()
-	{
+
+	public function actionLogin(){
+		$credentials = Input::only('username', 'password');
+		if (Auth::attempt($credentials)) {
+			return Redirect::intended('/');
+		}
+		return Redirect::to('login');
+	}
+
+    // Logout
+	public function actionLogout(){
+		Auth::logout();
+		return Redirect::to('/');
+	}
+
+    // Top
+	public function showTopSell(){
+
 		return View::make('home.index');
 	}
 
-	public function showTopSell()
-	{
+    // Search
+	public function actionSearch(){
+
 		return View::make('home.index');
 	}
+
 
 }
