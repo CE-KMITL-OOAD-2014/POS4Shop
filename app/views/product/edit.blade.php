@@ -4,24 +4,23 @@
     <form action="{{url('/product/'.$id.'/edit')}}" method="POST" role="form" enctype="multipart/form-data">
         <legend>Product : Edit</legend>
         
-        @foreach($errors->all() as $message)
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <li>{{ $message }}</li>
-            </div>
-        @endforeach
-
-        <div class="form-group row">
+        <div class="row">
             <label class="col-md-2 control-label">ID {{$id}}</label>
-            <label class="col-md-5 control-label">Create at {{$created_at}}</label>
-            <label class="col-md-5 control-label">Update at {{$updated_at}}</label>
         </div>
 
         <div class="form-group row">
-            <label for="inputFile" class="col-md-2 control-label">File</label>
-            <div class="col-md-10">
+            <label for="inputFile" class="col-md-2 control-label">Image</label>
+            
+            <div class="col-md-5">
+                <img src="{{asset('upload/product/'.$file)}}" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-md-5">
                 <input readonly="" class="form-control floating-label" placeholder="Browse..." type="text">
                 <input name="img" multiple="" type="file">
+                <div class="row">
+                    <label class="col-md-6 control-label">Create at {{$created_at}}</label>
+                    <label class="col-md-6 control-label">Update at {{$updated_at}}</label>
+                </div>
             </div>
         </div>
 

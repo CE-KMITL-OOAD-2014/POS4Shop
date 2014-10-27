@@ -13,7 +13,7 @@ Route::post('logout',array('uses'=>'HomeController@actionLogout'));
 Route::get('home/top',array('uses'=>'HomeController@showTopSell'));
     // Search
 Route::post('home/search',array('uses'=>'HomeController@actionSearch'));
-//--Product
+//--Product---------------------
     // Index
 Route::get('product',array('uses'=>'ProductController@showIndex'));
     // Add
@@ -25,10 +25,12 @@ Route::post('product/{id}/edit',array('uses'=>'ProductController@actionEdit'));
     // View
 Route::get('product/{id}',array('uses'=>'ProductController@showView'));
     // Del
-Route::post('product/{id}/del',array('uses'=>'ProductController@actionDel'));
+Route::post('product/{id}',array('uses'=>'ProductController@actionDel'));
     // TopSell
 Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
-//--Manager
+//--Manager---------------------
+    // Index
+Route::get('manager',array('uses'=>'ManagerController@showIndex'));
     // Add manager
 Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
 Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
@@ -44,7 +46,7 @@ Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'))
 Route::post('manager/setting',array('uses'=>'ManagerController@actionshowShopSetting'));
     // Shop history
 Route::get('manager/history',array('uses'=>'ManagerController@showHistory'));
-//--Customer
+//--Customer---------------------
     // Add customer
 Route::get('customer/add',array('uses'=>'CustomerController@showAdd'));
 Route::post('customer/add',array('uses'=>'CustomerController@actionAdd'));
@@ -54,4 +56,4 @@ Route::get('customer/{id}',array('uses'=>'CustomerController@showView'));
 Route::get('customer/{id}/edit',array('uses'=>'CustomerController@showEdit'));
 Route::post('customer/{id}/edit',array('uses'=>'CustomerController@actionEdit'));
     // del
-Route::post('customer/{id}/del',array('uses'=>'CustomerController@actionDel'));
+Route::post('customer/{id}',array('uses'=>'CustomerController@actionDel'));

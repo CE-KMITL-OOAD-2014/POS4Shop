@@ -28,14 +28,18 @@ class CustomerController extends BaseController {
 
     public function showView($id)
     {
-        $customer = App::make('ceddd\Customer');
+        $customer = App::make('ceddd\\Customer');
         $customer = $customer->getById($id);
         if($customer==NULL)
             return App::abort(404);
         return View::make('customer.view')->with('customer',$customer);
     }
 
-    public function actionDel($id){
-
+    public function actionDel(){
+        $data  = Input::get("id");
+        $customer = App::make('ceddd\\Customer');
+        $customer = $customer->getById($data);
+        $customer->delete();
+        return Response::make('delete '.$data, 200);
     }
 }
