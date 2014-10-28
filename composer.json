@@ -7,7 +7,7 @@
         "laravel/framework": "4.2.*"
     },
     "require-dev": {
-        "phpmd/phpmd" : "@stable"
+        "mockery/mockery": "dev-master"
     },
     "autoload": {
         "classmap": [

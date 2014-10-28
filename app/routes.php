@@ -34,12 +34,12 @@ Route::group(array('before' => 'auth'), function(){
 );
 
 //--Manager---------------------
-Route::group(array('before' => 'auth'), function(){
-        // Index
-    Route::get('manager',array('uses'=>'ManagerController@showIndex'));
         // Add manager
     Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
     Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
+Route::group(array('before' => 'auth'), function(){
+        // Index
+    Route::get('manager',array('uses'=>'ManagerController@showIndex'));
         // View
     Route::get('manager/{id}',array('uses'=>'ManagerController@showView'));
         // Del manager

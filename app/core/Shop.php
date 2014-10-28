@@ -7,10 +7,6 @@
 			$this->self['name']="New Shop";
 			//echo $this->self['name'];
 		}
-		
-		function dump(){
-			return "dump fn";
-		}
 
 		function cal($item,Customer $customer,Manager $manager){
 			$result=0;
