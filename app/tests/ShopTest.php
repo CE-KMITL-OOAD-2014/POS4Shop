@@ -2,11 +2,6 @@
 
 class ShopTest extends TestCase {
 
-    function genArr(){
-
-    }
-
-
     public function testCal()
     {    
         
@@ -15,7 +10,7 @@ class ShopTest extends TestCase {
         $totalPrice=0;
         $quantity=0;
         $arrItem=array();       
-        for ($i=1 ; $i < 5; $i++) { 
+        for ($i=1 ; $i < 5; $i++) { // Mock 5 SoldItem object
             $quantity = $i*2;
             $price = ($i*10);
             $totalPrice += $price*$quantity; // price * quantity
@@ -37,7 +32,7 @@ class ShopTest extends TestCase {
         $result=$shop->cal($arrItem,$customer,$manager);
         
         // Assert
-        $this->assertEquals($totalPrice, $result,'price');
+        $this->assertEquals($totalPrice, $result);
         
     }
 

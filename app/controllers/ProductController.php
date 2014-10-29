@@ -20,10 +20,11 @@ class ProductController extends BaseController {
 
         $file = Input::file('img');
         $data['file']=$file;
-        $newFileName = $data['barcode'].".".$file->guessExtension();
 
         $validator = Validator::make($data, $rules);
         if ($validator->passes()) {
+            $newFileName = $data['barcode'].".".$file->guessExtension();
+            
             $product = App::make('ceddd\\Product');
             $product->set('barcode',$data['barcode']);
             $product->set('name',$data['name']);
