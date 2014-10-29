@@ -2,7 +2,7 @@
 
 class SummaryTest extends TestCase {
 
-    public function testProductSoldQuantity()
+    public function testCountProductSoldQuantity()
     {            
         // Asset
         
@@ -40,7 +40,7 @@ class SummaryTest extends TestCase {
 
         // Act
         $topSell = new Summary($historyRepository);
-        $result = $topSell->getProductSoldQuantity($productId); // $productId = 1
+        $result = $topSell->countProductSoldQuantity($productId); // $productId = 1
         
         // Assert
         $this->assertEquals($expectedQuantity, $result);
