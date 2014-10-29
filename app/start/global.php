@@ -14,7 +14,8 @@
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',
-	app_path().'/controllers',
+    app_path().'/controllers',
+	app_path().'/core', //TODO ziko : add my class
 	app_path().'/models',
 	app_path().'/database/seeds',
 
@@ -79,3 +80,13 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+// Regis my IOC : ziko
+//require app_path().'/ioc.php';
+
+
+// ZIKO
+App::missing(function($exception)
+{
+    return Response::view('error404', array(), 404);
+});

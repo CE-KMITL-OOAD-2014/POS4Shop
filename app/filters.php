@@ -32,7 +32,11 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
-
+Route::filter('auth', function()
+{
+	if (Auth::guest()) return Redirect::guest('login');
+});
+/*
 Route::filter('auth', function()
 {
 	if (Auth::guest())
@@ -47,7 +51,7 @@ Route::filter('auth', function()
 		}
 	}
 });
-
+*/
 
 Route::filter('auth.basic', function()
 {
