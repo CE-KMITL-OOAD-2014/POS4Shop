@@ -4,24 +4,43 @@
 
         
         public static function getRules(){
-            return array('barcode' => 'required|min:4|unique:products',
-                         'name'=>'required',
-                         'file'=>'image',
-                         'cost'=>'required|numeric',
-                         'price'=>'required|numeric');
+            return array('hid' => 'required|integer',
+                         'product_id'=>'required|exists:products,id',
+                         'quantity'=>'required|numeric',
+                         'price'=>'required|numeric',
+                         'customer_id'=>'exists:customers,id');
         }
 
         public function save($history){
-            $h = new \HistoryEloquent;
-            if($history->get('id')!=null)
-                return false; // old product should edit
-            $h->barcode = $history->get('barcode');
-            $h->name = $history->get('name');
-            $h->file = $history->get('file');
-            $h->detail = $history->get('detail');
-            $h->cost = $history->get('cost');
-            $h->price = $history->get('price');
-            return $h->save();
+            $arrItem = $history->get('item');
+            $count = count($arrItem);
+            for($i=0;$i < $count;$i++){
+                $rules = $this->getRules();
+                $data = array('hid','product_id','quantity','price','customer_id');
+                $data['hid'] = $history->get('hid');
+                $data['product_id'] = $arrItem[$i]->get('product_id');
+                $data['quantity'] = $arrItem[$i]->get('quantity');
+                $data['price'] = $arrItem[$i]->get('price');
+                $data['customer_id'] = $history->get('customer_id');
+                $validator = Validator::make($data, $rules);
+                if ($validator->passes()) {
+                    $h = new \HistoryEloquent;
+                    if($history->get('id')!=null)
+                        return false; // old product should edit
+                    $h->hid = $data['hid'];
+                    $h->product_id = $data['product_id'];
+                    $h->quantity = $data['quantity'];
+                    $h->price = $data['price'];
+                    $h->customer_id = $data['customer_id'];
+                    if(!$h->save()){
+                       return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+            return true;
+
         }
         
         public function edit($history){
@@ -29,12 +48,11 @@
                 $h = \HistoryEloquent::find($history->get('id'));
                 if($h==NULL)
                     return false;
-                $h->barcode = $history->get('barcode');
-                $h->name = $history->get('name');
-                $h->file = $history->get('file');
-                $h->detail = $history->get('detail');
-                $h->cost = $history->get('cost');
+                $h->hid = $history->get('hid');
+                $h->product_id = $history->get('product_id');
+                $h->quantity = $history->get('quantity');
                 $h->price = $history->get('price');
+                $h->customer_id = $history->get('customer_id');
                 return $h->save();
             }
             return false;
@@ -52,16 +70,18 @@
             $all = \HistoryEloquent::all();
             if(count($all)==0)
                 return NULL;
+            $soldItem = App::make('ceddd\\SoldItem');;
+            $soldArr = array();
             $result=array();
+
             foreach($all as $key => $val){
                 $h = \App::make('ceddd\History');
                 $h->set('id',$val->id);
-                $h->set('barcode',$val->barcode);
-                $h->set('name',$val->name);
-                $h->set('file',$val->file);
-                $h->set('detail',$val->detail);
-                $h->set('cost',$val->cost);
-                $h->set('price',$val->price);
+                $h->set('hid',$val->hid);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('customer_id',$val->customer_id);
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;
@@ -74,12 +94,11 @@
             if($history){
                 $h = \App::make('ceddd\History');
                 $h->set('id',$history->id);
-                $h->set('barcode',$history->barcode);
-                $h->set('name',$history->name);
-                $h->set('file',$history->file);
-                $h->set('detail',$history->detail);
-                $h->set('cost',$history->cost);
+                $h->set('hid',$history->hid);
+                $h->set('product_id',$history->product_id);
+                $h->set('quantity',$history->quantity);
                 $h->set('price',$history->price);
+                $h->set('customer_id',$history->customer_id);
                 $h->set('created_at',$history->created_at);
                 $h->set('updated_at',$history->updated_at);
                 return $h;
@@ -88,24 +107,7 @@
         }
 
         public static function find($value){
-            $where = \HistoryEloquent::where('barcode', 'like', '%'.$value.'%')->orWhere('name', 'like', '%'.$value.'%')->get();
-            if(count($where)==0)
-                return NULL;
-            $result=array();
-            foreach($where as $key => $val){
-                $h = \App::make('ceddd\History');
-                $h->set('id',$val->id);
-                $h->set('barcode',$val->barcode);
-                $h->set('name',$val->name);
-                $h->set('file',$val->file);
-                $h->set('detail',$val->detail);
-                $h->set('cost',$val->cost);
-                $h->set('price',$val->price);
-                $h->set('created_at',$val->created_at);
-                $h->set('updated_at',$val->updated_at);
-                $result[$key]=$h;
-            } 
-            return $result;
+
         }
         
         public static function where($col,$value){
@@ -116,12 +118,11 @@
             foreach($where as $key => $val){
                 $h = \App::make('ceddd\History');
                 $h->set('id',$val->id);
-                $h->set('barcode',$val->barcode);
-                $h->set('name',$val->name);
-                $h->set('file',$val->file);
-                $h->set('detail',$val->detail);
-                $h->set('cost',$val->cost);
+                $h->set('hid',$val->hid);
+                $h->set('product_id',$val->product_id);
+                $h->set('quantity',$val->quantity);
                 $h->set('price',$val->price);
+                $h->set('customer_id',$val->customer_id);
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;

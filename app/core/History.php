@@ -7,9 +7,7 @@
             $this->self['repository']=$historyRepo;
             $this->self['id']=NULL;
             $this->self['hid']=NULL;
-            $this->self['product_id']=NULL;
-            $this->self['quantity']=NULL;
-            $this->self['price']=NULL;
+            $this->self['item']=NULL;
             $this->self['customer_Id']=NULL;
             $this->self['created_at']=NULL;
             $this->self['updated_at']=NULL;
