@@ -50,4 +50,8 @@
         public function where($key,$value){
             return $this->self['repository']->where($key,$value);
         }
+
+        /*public static function paginate($number){
+            return ProductRepository::paginate($number);
+        }*/
     }

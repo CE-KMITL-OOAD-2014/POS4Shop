@@ -18,7 +18,7 @@ class ProductController extends BaseController {
 
         $rules = ceddd\ProductRepository::getRules();
 
-        $file = Input::file('img');
+        $file = Input::file('file');
         $data['file']=$file;
 
         $validator = Validator::make($data, $rules);
@@ -68,7 +68,7 @@ class ProductController extends BaseController {
         $rules = ceddd\ProductRepository::getRules();
         $rules['id']='exists:products';
 
-        $file = Input::file('img');
+        $file = Input::file('file');
         $data['file']=$file;
         if($data['file']!=NULL)
             $newFileName = $data['barcode'].".".$file->guessExtension();

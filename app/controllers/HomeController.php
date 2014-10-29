@@ -6,6 +6,7 @@ class HomeController extends BaseController {
 	{
 		$product = App::make('ceddd\Product');
 		$allProduct = $product->getAll();
+		//$allProduct = $product::paginate(2);
 		return View::make('home.index')->with('allProduct',$allProduct);
 	}
 

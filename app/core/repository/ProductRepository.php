@@ -53,7 +53,7 @@
                 return NULL;
             $result=array();
             foreach($all as $key => $val){
-                $p = \App::make('ceddd\Product');
+                $p = \App::make('ceddd\\Product');
                 $p->set('id',$val->id);
                 $p->set('barcode',$val->barcode);
                 $p->set('name',$val->name);
@@ -71,7 +71,7 @@
         public static function getById($id){
             $product = \ProductEloquent::find($id);
             if($product){
-                $p = \App::make('ceddd\Product');
+                $p = \App::make('ceddd\\Product');
                 $p->set('id',$product->id);
                 $p->set('barcode',$product->barcode);
                 $p->set('name',$product->name);
@@ -92,7 +92,7 @@
                 return NULL;
             $result=array();
             foreach($where as $key => $val){
-                $p = \App::make('ceddd\Product');
+                $p = \App::make('ceddd\\Product');
                 $p->set('id',$val->id);
                 $p->set('barcode',$val->barcode);
                 $p->set('name',$val->name);
@@ -113,7 +113,7 @@
                 return NULL;
             $result=array();
             foreach($where as $key => $val){
-                $p = \App::make('ceddd\Product');
+                $p = \App::make('ceddd\\Product');
                 $p->set('id',$val->id);
                 $p->set('barcode',$val->barcode);
                 $p->set('name',$val->name);
@@ -127,4 +127,23 @@
             } 
             return $result;
         }
+
+        /*public static function paginate($number){
+            $page = \ProductEloquent::paginate($number);
+            $result=array();
+            foreach($page as $key => $val){
+                $p = \App::make('ceddd\\Product');
+                $p->set('id',$val->id);
+                $p->set('barcode',$val->barcode);
+                $p->set('name',$val->name);
+                $p->set('file',$val->file);
+                $p->set('detail',$val->detail);
+                $p->set('cost',$val->cost);
+                $p->set('price',$val->price);
+                $p->set('created_at',$val->created_at);
+                $p->set('updated_at',$val->updated_at);
+                $result[$key]=$p;
+            }
+            return $result;
+        }*/
     }
