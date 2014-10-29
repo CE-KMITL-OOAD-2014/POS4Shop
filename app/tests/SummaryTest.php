@@ -10,14 +10,14 @@ class SummaryTest extends TestCase {
         $expectedQuantity = 0;
 
         $arrOfHistory = array();
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < 5; $i++) { // Mock History object and data
 
             $arrOfSoldItem=array();
-            for ($j=0; $j < 3; $j++) { 
+            for ($j=0; $j < 3; $j++) { // Mock SoldItem object for use in History object
                 $productId = $j+1;
                 $quantity = $i+2;
 
-                $product = Mockery::mock('ceddd\Product');
+                $product = Mockery::mock('ceddd\Product');  // Mock Product object 
                 $product->shouldReceive('get')->with('id')->andReturn($productId); // productId =1, 2, 3
 
                 $solditem = Mockery::mock('ceddd\SoldItem');
