@@ -68,24 +68,51 @@
         
         public static function getAll(){
             $all = \HistoryEloquent::all();
-            if(count($all)==0)
+            $count = count($all);
+            if($count == 0)
                 return NULL;
-            $soldItem = App::make('ceddd\\SoldItem');;
+            $i = 0;
+            $arrCount = 0;
+            $product = App::make('ceddd\\Product');
+            $soldItem = App::make('ceddd\\SoldItem');
+            $h = \App::make('ceddd\History');
+            $h->set('id',$all[$i]->id);
+            $h->set('hid',$all[$i]->hid);
+            $h->set('customer_id',$all[$i]->customer_id);
+            $h->set('created_at',$all[$i]->created_at);
+            $h->set('updated_at',$all[$i]->updated_at);
+            $result = array();
             $soldArr = array();
-            $result=array();
-
-            foreach($all as $key => $val){
-                $h = \App::make('ceddd\History');
-                $h->set('id',$val->id);
-                $h->set('hid',$val->hid);
-                $soldItem->set('item',$product->getById($val->product_id));
-                $soldItem->set('quantity',$val->quantity);
-                $soldItem->set('price',$val->price);
-                $h->set('customer_id',$val->customer_id);
-                $h->set('created_at',$val->created_at);
-                $h->set('updated_at',$val->updated_at);
-                $result[$key]=$h;
-            } 
+            while($i < $count){
+                if($h->id == $all[$i]->id){
+                    $soldItem->set('item',$product->getById($all[$i]->product_id));
+                    $soldItem->set('quantity',$all[$i]->quantity);
+                    $soldItem->set('price',$all[$i]->price);
+                    $soldArr[$arrCount] = $soldItem;
+                    $arrCount++;
+                }else{
+                    $h->set('id',$all[$i]->id);
+                    $h->set('hid',$all[$i]->hid);
+                    $h->set('item',$soldArr);
+                    $h->set('customer_id',$all[$i]->customer_id);
+                    $h->set('created_at',$all[$i]->created_at);
+                    $h->set('updated_at',$all[$i]->updated_at);
+                    $soldArr = array();
+                    $arrCount = 0;
+                }
+            }
+       /*         foreach($all as $key => $val){
+                    $h = \App::make('ceddd\History');
+                    $h->set('id',$val->id);
+                    $h->set('hid',$val->hid);
+                    $soldItem->set('item',$product->getById($val->product_id));
+                    $soldItem->set('quantity',$val->quantity);
+                    $soldItem->set('price',$val->price);
+                    $h->set('customer_id',$val->customer_id);
+                    $h->set('created_at',$val->created_at);
+                    $h->set('updated_at',$val->updated_at);
+                    $result[$key]=$h;
+                }*/
             return $result;
         }
 
@@ -109,7 +136,7 @@
         public static function find($value){
 
         }
-        
+
         public static function where($col,$value){
             $where = \HistoryEloquent::where($col, 'like', '%'.$value.'%')->get();
             if(count($where)==0)
