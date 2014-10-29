@@ -21,7 +21,7 @@ class SummaryTest extends TestCase {
                 $product->shouldReceive('get')->with('id')->andReturn($productId); // productId =1, 2, 3
 
                 $solditem = Mockery::mock('ceddd\SoldItem');
-                $solditem->shouldReceive('get')->with('product')->andReturn($product);
+                $solditem->shouldReceive('get')->with('item')->andReturn($product);
                 $solditem->shouldReceive('get')->with('quantity')->andReturn($quantity);    // quantity = 2, 3, 4
                 $arrOfSoldItem[$i]=$solditem;
 

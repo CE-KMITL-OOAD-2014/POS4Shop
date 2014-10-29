@@ -5,10 +5,13 @@
 @stop
 
 @section('body')
-    
-    @for ($i=0;$i<count($allProduct);$i++)
-        <img src="upload/product/{{$allProduct[$i]->get('file')}}" class="img-responsive" alt="Image">
-        {{$allProduct[$i]->get('name')}} <br>
-    @endfor
+    <div class="row">
+        @for ($i=0;$i<count($allProduct);$i++)
+            <div class="col-md-2">
+                <img src="upload/product/{{$allProduct[$i]->get('file')}}" class="img-responsive" alt="Image">
+                {{$allProduct[$i]->get('name')}}
+            </div>
+        @endfor
+    </div>
 
 @stop

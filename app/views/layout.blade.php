@@ -60,13 +60,6 @@
     </div>
 
     <div class='container'>
-
-        @if (Session::get('msg')!=null)
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('msg')}}
-            </div>
-        @endif 
         
         @foreach($errors->all() as $message)
             <div class="alert alert-danger">

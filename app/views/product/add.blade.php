@@ -7,11 +7,18 @@
     <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data">
         <legend>Product : New</legend>
 
+        @if (Session::get('msg')!=null)
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{Session::get('msg')}}
+            </div>
+        @endif 
+
         <div class="form-group row">
             <label for="inputFile" class="col-md-2 control-label">File</label>
             <div class="col-md-10">
                 <input readonly="" class="form-control floating-label" placeholder="Browse..." type="text">
-                <input name="img" multiple="" type="file">
+                <input name="file" multiple="" type="file">
             </div>
         </div>
 
