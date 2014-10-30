@@ -60,7 +60,7 @@
     </div>
 
     <div class='container'>
-        
+    
         @foreach($errors->all() as $message)
             <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

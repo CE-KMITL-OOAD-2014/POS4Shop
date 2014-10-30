@@ -51,6 +51,12 @@ Route::group(array('before' => 'auth'), function(){
         // Shop cal
     Route::get('manager/shop',array('uses'=>'ManagerController@showShopCal'));
     Route::post('manager/shop',array('uses'=>'ManagerController@actionShopCal'));
+
+    Route::post('manager/shop/product',array('uses'=>'ManagerController@showShopCalProduct'));
+    Route::get('manager/shop/product/{id}',array('uses'=>'ManagerController@actionShopCalProduct'));
+
+    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer'));
+    //Route::post('manager/shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
         // Shop setting
     Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
     Route::post('manager/setting',array('uses'=>'ManagerController@actionshowShopSetting'));
