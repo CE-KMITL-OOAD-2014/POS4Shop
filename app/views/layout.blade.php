@@ -3,8 +3,8 @@
 <head>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/ripples.min.css" rel="stylesheet">
-    <link href="/css/material-wfont.min.css" rel="stylesheet">
+    <link href="{{asset('css/ripples.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/material-wfont.min.css')}}" rel="stylesheet">
     
     @section('head')
     <title>POS4Shop - Layout</title>
@@ -27,14 +27,14 @@
             <ul class="nav navbar-nav">
                 <!-- class="active" -->
                 <li ><a href="#">Menu for Dev</a></li>
-                <li ><a href="product">Product</a></li>
-                <li ><a href="customer">Customer</a></li>
-                <li ><a href="manager">Manager</a></li>
-                <li ><a href="history">History</a></li>
+                <li ><a href="{{asset('product')}}">Product</a></li>
+                <li ><a href="{{asset('customer')}}">Customer</a></li>
+                <li ><a href="{{asset('manager')}}">Manager</a></li>
+                <li ><a href="{{asset('history')}}">History</a></li>
                 <li ><a href="#">Shop</a></li>
 
             </ul>
-            <form class="navbar-form navbar-left" action="{{url('/')}}" method="POST" role="form">
+            <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
                 <input class="form-control col-lg-8" placeholder="Search" type="text" name="search">
             </form>
             <ul class="nav navbar-nav navbar-right">
@@ -73,8 +73,8 @@
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/js/ripples.min.js"></script>
-    <script src="/js/material.min.js"></script>
+    <script src="{{asset('js/ripples.min.js')}}"></script>
+    <script src="{{asset('js/material.min.js')}}"></script>
     <!-- swal -->
     <script src="{{asset('lib/swal/sweet-alert.js')}}"></script>
     <link rel="stylesheet" href="{{asset('lib/swal/sweet-alert.css')}}">
