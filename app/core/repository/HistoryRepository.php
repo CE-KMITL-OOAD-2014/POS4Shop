@@ -64,42 +64,21 @@
             }
             return false;
         }
-        
+
+        public function deleteByHID($history){
+            $h = \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
+            if($h->delete()){
+                return true;
+            }
+            return false;
+        }
+
         public static function getAll(){
             $all = \HistoryEloquent::all();
             $count = count($all);
             if($count == 0)
                 return NULL;
-            $i = 0;
-            $arrCount = 0;
-            $product = App::make('ceddd\Product');
-            $soldItem = App::make('ceddd\SoldItem');
-            $h = \App::make('ceddd\History');
-            $h->set('id',$all[$i]->id);
-            $h->set('hid',$all[$i]->hid);
-            $h->set('customer_id',$all[$i]->customer_id);
-            $h->set('created_at',$all[$i]->created_at);
-            $h->set('updated_at',$all[$i]->updated_at);
-            $result = array();
-            $soldArr = array();
-            while($i < $count){
-                if($h->id == $all[$i]->id){
-                    $soldItem->set('item',$product->getById($all[$i]->product_id));
-                    $soldItem->set('quantity',$all[$i]->quantity);
-                    $soldItem->set('price',$all[$i]->price);
-                    $soldArr[$arrCount] = $soldItem;
-                    $arrCount++;
-                }else{
-                    $h->set('id',$all[$i]->id);
-                    $h->set('hid',$all[$i]->hid);
-                    $h->set('item',$soldArr);
-                    $h->set('customer_id',$all[$i]->customer_id);
-                    $h->set('created_at',$all[$i]->created_at);
-                    $h->set('updated_at',$all[$i]->updated_at);
-                    $soldArr = array();
-                    $arrCount = 0;
-                }
-            }
+
             return $result;
         }
 
@@ -120,8 +99,50 @@
             return NULL;
         }
 
-        public static function find($value){
+        public static function getByProductId($pid){
+            $history = \HistoryEloquent::where('product_id', $pid)->get();
+            if(count($history)==0)
+                return NULL;
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
+            $h = \App::make('ceddd\History');
+            $result = array();
+            foreach($history as $key => $val){
+                $h->set('id',$val->id);
+                $h->set('hid',$val->hid);
+                $h->set('customer_id',$val->customer_id);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('item',$soldItem);
+                $h->set('created_at',$val->created_at);
+                $h->set('updated_at',$val->updated_at);
+                $result[$key]=$h;
+            }
+            return $result;
+        }
 
+        public static function find($hid){
+            $where = \HistoryEloquent::where('hid', $hid)->get();
+            if(count($where)==0)
+                return NULL;
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
+            $result=array();
+            foreach($where as $key => $val){
+                $h = \App::make('ceddd\History');
+                $h->set('id',$val->id);
+                $h->set('hid',$val->hid);
+                $h->set('customer_id',$val->customer_id);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('item',$soldItem);
+                $h->set('created_at',$val->created_at);
+                $h->set('updated_at',$val->updated_at);
+                $result[$key]=$h;
+            }
+            return $result;
         }
 
         public static function where($col,$value){

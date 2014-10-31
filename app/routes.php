@@ -8,10 +8,10 @@ Route::group(array(), function(){
     Route::get('/',array('as'=>'home','uses'=>'HomeController@showIndex'));
     Route::get('home',array('uses'=>'HomeController@showIndex'));
         // Login
-    Route::get('login',array('uses'=>'HomeController@showLogin'));
-    Route::post('login',array('uses'=>'HomeController@actionLogin'));
+    Route::get('login',array('uses'=>'HomeController@showLogin','https'=>'https'));
+    Route::post('login',array('uses'=>'HomeController@actionLogin','https'=>'https'));
         // Logout
-    Route::get('logout',array('before' => 'auth','uses'=>'HomeController@actionLogout'));
+    Route::get('logout',array('before' => 'auth','uses'=>'HomeController@actionLogout','https'=>'https'));
         // Top
     Route::get('top',array('uses'=>'HomeController@showTopSell'));
         // Search
@@ -56,7 +56,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('manager/shop/product/{id}',array('uses'=>'ManagerController@actionShopCalProduct'));
     Route::post('manager/shop/product/{barcode}/del',array('uses'=>'ManagerController@actionShopCalProductDelete'));
 
-    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer'));
+    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer')); //Customer Finder and Select
     //Route::post('manager/shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
         // Shop setting
     Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
@@ -79,4 +79,95 @@ Route::group(array('before' => 'auth'), function(){
     Route::post('customer/{id}/edit',array('uses'=>'CustomerController@actionEdit'));
         // del
     Route::post('customer/{id}',array('uses'=>'CustomerController@actionDel'));
+});
+Route::get('/test', function() {
+
+    $product = App::make('ceddd\\Product');
+    $soldItem = App::make('ceddd\\SoldItem');
+    $soldItem->set('item',$product->getById('13'));
+    $soldItem->set('quantity','1000');
+    $soldItem->set('price','99');
+    $history = App::make('ceddd\\History');
+    $history->set('hid','1234567890');
+    $history->set('product_id',$soldItem->get('product')->get('id'));
+    $history->set('quantity',$soldItem->get('quantity'));
+    $history->set('price',$soldItem->get('price'));
+    $history->set('customer_id','26');
+    if($history->save()==true)
+    return View::make('test');
+});
+Route::post('/test', function() {
+    $data = Input::only(array('hid','product_id','quantity','price','customer_id'));
+
+    $rules = ceddd\HistoryRepository::getRules();
+
+    $validator = Validator::make($data, $rules);
+    if ($validator->passes()) {
+        $history = App::make('ceddd\\History');
+        $history->set('hid',$data['hid']);
+        $history->set('product_id',$data['product_id']);
+        $history->set('quantity',$data['quantity']);
+        $history->set('price',$data['price']);
+        $history->set('customer_id',$data['customer_id']);
+        if($history->save()==true)
+            return Redirect::to('/test')->with('msg',"Add ".$data['hid']."successfull.");
+    }
+    return Redirect::to('/test')->withErrors($validator);
+});
+
+
+Route::get('/{id}/testEdit', function($id) {
+    $history = App::make('ceddd\\History');
+    $history = $history->getById($id);
+        if($history==NULL)
+            return App::abort(404);
+
+        $pd['id'] = $history->get('id');
+        $pd['hid'] = $history->get('hid');
+        $pd['product_id'] = $history->get('product_id');
+        $pd['quantity'] = $history->get('quantity');
+        $pd['price'] = $history->get('price');
+        $pd['customer_id'] = $history->get('customer_id');
+        $pd['created_at'] = $history->get('created_at');
+        $pd['updated_at'] = $history->get('updated_at');
+        //var_dump($pd);
+        //return View::make('product.edit')->with('product',$pd);
+    return View::make('testEdit',$pd);
+});
+
+Route::post('/{id}/testEdit', function($id) {
+
+        $data = Input::only(array('hid','product_id','quantity','price','customer_id'));
+
+        $rules = ceddd\HistoryRepository::getRules();
+
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->passes()) {
+            $pd = App::make('ceddd\History');
+            $history = $pd->getById($id);
+            $history->set('id',$id);
+            $history->set('hid',$data['hid']);
+            $history->set('product_id',$data['product_id']);
+            $history->set('quantity',$data['quantity']);
+            $history->set('price',$data['price']);
+            $history->set('customer_id',$data['customer_id']);
+            $history->edit();
+            return Redirect::to('/'.$id.'/testEdit');
+        }
+        return Redirect::to('/'.$id.'/testEdit')->withErrors($validator);
+});
+
+Route::get('/testGet', function() {
+    $history = App::make('ceddd\\History');
+    $id = 12;
+    $arr = $history->getByProductId($id);
+    $count = count($arr);
+    for($i = 0;$i < $count;$i++){
+        $h = $arr[$i];
+        echo $h->get('id')."-".$h->get('hid').$h->get('item')->get('item')->get('name')."-"."-".$h->get('item')->get('quantity')."-".$h->get('item')->get('price');
+        echo '\n';
+    }
+    return View::make('testGet');
+   // return Redirect::to('/testGet')->withErrors($validator);
 });
