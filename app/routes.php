@@ -146,3 +146,15 @@ Route::post('/{id}/testEdit', function($id) {
         }
         return Redirect::to('/'.$id.'/testEdit')->withErrors($validator);
 });
+
+Route::get('/testGet', function() {
+    $history = App::make('ceddd\\History');
+    $arr = $history->getAll();
+    $count = count($arr);
+    for($i = 0;$i < $count;$i++){
+        $history = $arr[$i];
+        echo $history->get('id')."\n";
+    }
+    return View::make('testGet');
+   // return Redirect::to('/testGet')->withErrors($validator);
+});

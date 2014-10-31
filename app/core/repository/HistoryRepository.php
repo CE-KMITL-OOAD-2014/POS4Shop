@@ -65,7 +65,15 @@
             }
             return false;
         }
-        
+
+        public function deleteByHID($history){
+            $h = \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
+            if($h->delete()){
+                return true;
+            }
+            return false;
+        }
+
         public static function getAll(){
             $all = \HistoryEloquent::all();
             $count = count($all);
@@ -73,8 +81,9 @@
                 return NULL;
             $i = 0;
             $arrCount = 0;
-            $product = App::make('ceddd\\Product');
-            $soldItem = App::make('ceddd\\SoldItem');
+            $resCount = 0;
+            $product = \App::make('ceddd\\Product');
+            $soldItem = \App::make('ceddd\\SoldItem');
             $h = \App::make('ceddd\History');
             $h->set('id',$all[$i]->id);
             $h->set('hid',$all[$i]->hid);
@@ -84,7 +93,7 @@
             $result = array();
             $soldArr = array();
             while($i < $count){
-                if($h->id == $all[$i]->id){
+                if($h->get('id') == $all[$i]->id){
                     $soldItem->set('item',$product->getById($all[$i]->product_id));
                     $soldItem->set('quantity',$all[$i]->quantity);
                     $soldItem->set('price',$all[$i]->price);
@@ -99,7 +108,10 @@
                     $h->set('updated_at',$all[$i]->updated_at);
                     $soldArr = array();
                     $arrCount = 0;
+                    $result[$resCount] = $h;
+                    $resCount++;
                 }
+                $i++;
             }
        /*         foreach($all as $key => $val){
                     $h = \App::make('ceddd\History');
@@ -133,8 +145,24 @@
             return NULL;
         }
 
-        public static function find($value){
-
+        public static function find($hid){
+            $where = \HistoryEloquent::where('hid', '=', $hid)->get();
+            if(count($where)==0)
+                return NULL;
+            $result=array();
+            foreach($where as $key => $val){
+                $h = \App::make('ceddd\History');
+                $h->set('id',$val->id);
+                $h->set('hid',$val->hid);
+                $h->set('product_id',$val->product_id);
+                $h->set('quantity',$val->quantity);
+                $h->set('price',$val->price);
+                $h->set('customer_id',$val->customer_id);
+                $h->set('created_at',$val->created_at);
+                $h->set('updated_at',$val->updated_at);
+                $result[$key]=$h;
+            }
+            return $result;
         }
 
         public static function where($col,$value){
