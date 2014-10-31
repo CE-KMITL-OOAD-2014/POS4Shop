@@ -78,7 +78,11 @@
             $count = count($all);
             if($count == 0)
                 return NULL;
-
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
+            $h = \App::make('ceddd\History');
+            $result = array();
+            
             return $result;
         }
 
@@ -149,15 +153,18 @@
             $where = \HistoryEloquent::where($col, 'like', '%'.$value.'%')->get();
             if(count($where)==0)
                 return NULL;
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
             $result=array();
             foreach($where as $key => $val){
                 $h = \App::make('ceddd\History');
                 $h->set('id',$val->id);
                 $h->set('hid',$val->hid);
-                $h->set('product_id',$val->product_id);
-                $h->set('quantity',$val->quantity);
-                $h->set('price',$val->price);
                 $h->set('customer_id',$val->customer_id);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('item',$soldItem);
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;
