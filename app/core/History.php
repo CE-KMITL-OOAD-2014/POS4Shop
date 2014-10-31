@@ -17,12 +17,20 @@
             return $this->self[$key];
         }
 
+        public function getByProductId($pid){
+            return $this->self['repository']->getByProductId($pid);
+        }
+
         public function set($key,$value){
             $this->self[$key]=$value;
         }
 
         public function delete(){
-            return $this->self['repository']->delete($this);
+            return $this->self['repository']->deleteByID($this);
+        }
+
+        public function deleteByHID(){
+            return $this->self['repository']->deleteByHID($this);
         }
 
         public function save(){
@@ -41,8 +49,8 @@
             return $this->self['repository']->getAll();
         }
 
-        public function find($name){
-            return $this->self['repository']->find($name);
+        public function find($hid){
+            return $this->self['repository']->find($hid);
         }
 
         public function where($key,$value){
