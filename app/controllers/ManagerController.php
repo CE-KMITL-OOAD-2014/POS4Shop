@@ -47,8 +47,15 @@ class ManagerController extends BaseController {
 
     // Shop cal
     public function showShopCal(){
-        //Cookie::has('key');
-        return View::make('manager.pos')->with('pos',Session::get('pos', array()));
+        
+        $shop = App::make('ceddd\\Shop');
+        $arrayOfSoldItem = Session::get('pos', array());
+        $manager = App::make('ceddd\\Manager');
+        $manager = $manager->getById(Auth::user()->id);
+
+        $allPrice = $shop->cal($arrayOfSoldItem,$manager,NULL);
+
+        return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'allPrice'=>$allPrice));
     }
 
     public function actionShopCal(){
@@ -60,6 +67,7 @@ class ManagerController extends BaseController {
         $data = Input::get('search');
         $product = App::make('ceddd\Product');
         $searchProduct = $product->find($data);
+
         return View::make('manager.product')->with(array('searchProduct'=>$searchProduct,'search'=>$data));
 
     }
@@ -80,16 +88,30 @@ class ManagerController extends BaseController {
             $soldItem->set('quantity',$soldItemOld->get('quantity')+1);        
         }
         else
-            $soldItem->set('quantity',0);
+            $soldItem->set('quantity',1);
 
         $soldItem->set('price',$product->get('price'));
-
         $arrayOfSoldItem[strval($soldItem->get('item')->get('barcode'))] = $soldItem;
-
         Session::put('pos', $arrayOfSoldItem);
-
         return Redirect::to('manager/shop');
         //return Redirect::to('manager.pos')->withCookie(array($cookieB,$cookieN,$cookieP,$cookieQ,$cookieLength));
+    }
+
+    public function actionShopCalProductDelete($barcode){
+        if($barcode==0){
+            Session::put('pos', array());
+            return 1;
+        }
+        
+        $arrayOfSoldItem = Session::get('pos', array());
+        $isHas=array_key_exists($barcode,$arrayOfSoldItem);
+        if($isHas){
+            unset($arrayOfSoldItem[$barcode]);
+            Session::put('pos', $arrayOfSoldItem);
+            return 1;
+        }
+        return 0;
+        
     }
 
     public function actionShopCalCustomer(){

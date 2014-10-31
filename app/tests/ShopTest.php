@@ -29,7 +29,7 @@ class ShopTest extends TestCase {
         $customer=$this->getMock('ceddd\\Customer',array('__construct'),array($this->getMock('ceddd\\CustomerRepository')));
         $manager=$this->getMock('ceddd\\Manager',array('__construct'),array($this->getMock('ceddd\ManagerRepository')));
         $shop = new ceddd\Shop;
-        $result=$shop->cal($arrItem,$customer,$manager);
+        $result=$shop->cal($arrItem,$manager,$customer);
         
         // Assert
         $this->assertEquals($totalPrice, $result);
