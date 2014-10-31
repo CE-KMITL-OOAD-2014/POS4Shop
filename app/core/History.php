@@ -34,11 +34,11 @@
         }
 
         public function save(){
-            $this->self['repository']->save($this);
+            return $this->self['repository']->save($this);
         }
 
         public function edit(){
-            $this->self['repository']->edit($this);
+            return $this->self['repository']->edit($this);
         }
 
         public function getById($id){

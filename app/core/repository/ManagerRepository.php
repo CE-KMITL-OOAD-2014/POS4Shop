@@ -15,7 +15,11 @@
             $m->name = $manager->get('name');
             $m->username = $manager->get('username');
             $m->password = $manager->get('password');
-            return $m->save();
+             if($m->save()){
+                $manager->set('id',$m->id);
+                return true;
+            }
+            return false;
         }
 
         public function edit($manager){

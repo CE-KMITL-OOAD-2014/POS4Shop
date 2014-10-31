@@ -1,5 +1,7 @@
 <?php
+
 Route::pattern('id', '[0-9]+');
+
 //--Home
 Route::group(array(), function(){
         // Index
@@ -13,31 +15,33 @@ Route::group(array(), function(){
         // Top
     Route::get('top',array('uses'=>'HomeController@showTopSell'));
         // Search
-    Route::post('/',array('uses'=>'HomeController@actionSearch'));
+    Route::get('/search',array('uses'=>'HomeController@actionSearch'));
 });
 //--Product---------------------
+    // Index
+Route::get('product',array('uses'=>'ProductController@showIndex'));
+    // View
+Route::get('product/{id}',array('uses'=>'ProductController@showView'));
+    // TopSell
+Route::get('product/top',array('uses'=>'ProductController@showTopSell'));
+
 Route::group(array('before' => 'auth'), function(){
-        // Index
-    Route::get('product',array('uses'=>'ProductController@showIndex'));
         // Add
     Route::get('product/add',array('uses'=>'ProductController@showAdd'));
     Route::post('product/add',array('uses'=>'ProductController@actionAdd'));
         // Edit
     Route::get('product/{id}/edit',array('uses'=>'ProductController@showEdit'));
     Route::post('product/{id}/edit',array('uses'=>'ProductController@actionEdit'));
-        // View
-    Route::get('product/{id}',array('uses'=>'ProductController@showView'));
         // Del
     Route::post('product/{id}',array('uses'=>'ProductController@actionDel'));
-        // TopSell
-    Route::get('product/top',array('uses'=>'ProductController@showTopSell'));}
-);
+//    }
+//);
 
 //--Manager---------------------
+//Route::group(array('before' => 'auth'), function(){
         // Add manager
     Route::get('manager/add',array('uses'=>'ManagerController@showAdd'));
-    Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));
-Route::group(array('before' => 'auth'), function(){
+    Route::post('manager/add',array('uses'=>'ManagerController@actionAdd'));    
         // Index
     Route::get('manager',array('uses'=>'ManagerController@showIndex'));
         // View
@@ -47,16 +51,24 @@ Route::group(array('before' => 'auth'), function(){
         // Shop cal
     Route::get('manager/shop',array('uses'=>'ManagerController@showShopCal'));
     Route::post('manager/shop',array('uses'=>'ManagerController@actionShopCal'));
+
+    Route::post('manager/shop/product',array('uses'=>'ManagerController@showShopCalProduct'));
+    Route::get('manager/shop/product/{id}',array('uses'=>'ManagerController@actionShopCalProduct'));
+    Route::post('manager/shop/product/{barcode}/del',array('uses'=>'ManagerController@actionShopCalProductDelete'));
+
+    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer'));
+    //Route::post('manager/shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
         // Shop setting
     Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
     Route::post('manager/setting',array('uses'=>'ManagerController@actionshowShopSetting'));
         // Shop history
-    Route::get('manager/history',array('uses'=>'ManagerController@showHistory'));}
-);
+    Route::get('manager/history',array('uses'=>'ManagerController@showHistory'));
+//}
+//);
 
 //--Customer---------------------
-Route::group(array('before' => 'auth'), function()
-{
+//Route::group(array('before' => 'auth'), function()
+//{
         // Add customer
     Route::get('customer/add',array('uses'=>'CustomerController@showAdd'));
     Route::post('customer/add',array('uses'=>'CustomerController@actionAdd'));
@@ -68,7 +80,6 @@ Route::group(array('before' => 'auth'), function()
         // del
     Route::post('customer/{id}',array('uses'=>'CustomerController@actionDel'));
 });
-
 Route::get('/test', function() {
 
     $product = App::make('ceddd\\Product');

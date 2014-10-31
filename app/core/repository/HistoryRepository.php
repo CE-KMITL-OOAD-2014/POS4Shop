@@ -12,11 +12,13 @@
         }
 
         public function save($history){
+            if($history->get('id')!=null)
+                return false; // old id should edit
             $arrItem = $history->get('item');
             $count = count($arrItem);
             for($i=0;$i < $count;$i++){
                 $rules = $this->getRules();
-                $data = array('hid','product_id','quantity','price','customer_id');
+                //$data = array('hid','product_id','quantity','price','customer_id');
                 $data['hid'] = $history->get('hid');
                 $data['product_id'] = $arrItem[$i]->get('product_id');
                 $data['quantity'] = $arrItem[$i]->get('quantity');
@@ -25,8 +27,6 @@
                 $validator = Validator::make($data, $rules);
                 if ($validator->passes()) {
                     $h = new \HistoryEloquent;
-                    if($history->get('id')!=null)
-                        return false; // old product should edit
                     $h->hid = $data['hid'];
                     $h->product_id = $data['product_id'];
                     $h->quantity = $data['quantity'];
@@ -40,7 +40,6 @@
                 }
             }
             return true;
-
         }
         
         public function edit($history){
@@ -59,7 +58,7 @@
         }
 
         public function delete($history){
-            if($history->get('id')){
+            if($history->get('hid')){
                 $m = \HistoryEloquent::find($history->get('id'));
                 return $m->delete();
             }
@@ -113,18 +112,6 @@
                 }
                 $i++;
             }
-       /*         foreach($all as $key => $val){
-                    $h = \App::make('ceddd\History');
-                    $h->set('id',$val->id);
-                    $h->set('hid',$val->hid);
-                    $soldItem->set('item',$product->getById($val->product_id));
-                    $soldItem->set('quantity',$val->quantity);
-                    $soldItem->set('price',$val->price);
-                    $h->set('customer_id',$val->customer_id);
-                    $h->set('created_at',$val->created_at);
-                    $h->set('updated_at',$val->updated_at);
-                    $result[$key]=$h;
-                }*/
             return $result;
         }
 

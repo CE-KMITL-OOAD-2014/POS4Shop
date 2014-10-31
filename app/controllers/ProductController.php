@@ -20,21 +20,28 @@ class ProductController extends BaseController {
 
         $file = Input::file('file');
         $data['file']=$file;
-
+        if($file==NULL){
+            $rules['file'] = "";
+        }else{
+            $newFileName = $data['barcode'].".".$file->guessExtension();            
+        }
         $validator = Validator::make($data, $rules);
         if ($validator->passes()) {
-            $newFileName = $data['barcode'].".".$file->guessExtension();
             
             $product = App::make('ceddd\\Product');
             $product->set('barcode',$data['barcode']);
             $product->set('name',$data['name']);
-            $product->set('file',$newFileName);
             $product->set('detail',$data['detail']);
             $product->set('cost',$data['cost']);
             $product->set('price',$data['price']);
-            $file->move(app_path().'/../public/upload/product/', $newFileName);
-            if($product->save()==true)
-                Redirect::to('/product/add')->with('msg',"Add ".$data['barcode']." : ".$data['name']." successfull.");
+            if($file!=NULL){
+                $product->set('file',$newFileName);
+                $file->move(app_path().'/../public/upload/product/', $newFileName);
+            }
+            if($product->save()==true){
+                Redirect::to('/product/add')->with('msg',"Add ".$product->get('id')."# <b>".$data['name']."</b> successfull.");
+                //return Redirect::to('/product/'.$product->get('id'));
+            }
         }
         return Redirect::to('/product/add')->withErrors($validator);
     }
@@ -89,7 +96,7 @@ class ProductController extends BaseController {
             if($data['file']!=NULL)
                 $file->move(app_path().'/../public/upload/product/', $newFileName);
             $product->edit();
-            return Redirect::to('/product/'.$id);
+            return Redirect::to('/product/'.$id)->with('msg',"Add ".$product->get('id')."# <b>".$data['name']."</b> successfull.");
         }
 
         return Redirect::to('/product/'.$id.'/edit')->withErrors($validator);
