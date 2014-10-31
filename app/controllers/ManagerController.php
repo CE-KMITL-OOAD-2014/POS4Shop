@@ -59,6 +59,7 @@ class ManagerController extends BaseController {
     }
 
     public function actionShopCal(){
+        // Selecto Customer Here
         return $id;
 
     }

@@ -8,10 +8,10 @@ Route::group(array(), function(){
     Route::get('/',array('as'=>'home','uses'=>'HomeController@showIndex'));
     Route::get('home',array('uses'=>'HomeController@showIndex'));
         // Login
-    Route::get('login',array('uses'=>'HomeController@showLogin'));
-    Route::post('login',array('uses'=>'HomeController@actionLogin'));
+    Route::get('login',array('uses'=>'HomeController@showLogin','https'=>'https'));
+    Route::post('login',array('uses'=>'HomeController@actionLogin','https'=>'https'));
         // Logout
-    Route::get('logout',array('before' => 'auth','uses'=>'HomeController@actionLogout'));
+    Route::get('logout',array('before' => 'auth','uses'=>'HomeController@actionLogout','https'=>'https'));
         // Top
     Route::get('top',array('uses'=>'HomeController@showTopSell'));
         // Search
@@ -56,7 +56,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('manager/shop/product/{id}',array('uses'=>'ManagerController@actionShopCalProduct'));
     Route::post('manager/shop/product/{barcode}/del',array('uses'=>'ManagerController@actionShopCalProductDelete'));
 
-    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer'));
+    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer')); //Customer Finder and Select
     //Route::post('manager/shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
         // Shop setting
     Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
