@@ -20,7 +20,11 @@
             $p->detail = $product->get('detail');
             $p->cost = $product->get('cost');
             $p->price = $product->get('price');
-            return $p->save();
+            if($p->save()){
+                $product->set('id',$p->id);
+                return true;
+            }
+            return false;
         }
         
         public function edit($product){

@@ -41,6 +41,6 @@ class HomeController extends BaseController {
 		$searchProduct = $product->find($data);
 		//$searchProduct = $product->where('barcode',$data);
 		//$searchProduct = array_merge($searchProduct,$product->where('name',$data));
-		return View::make('home.search')->with('searchProduct',$searchProduct);
+		return View::make('home.search')->with(array('searchProduct'=>$searchProduct,'search'=>$data));
 	}
 }

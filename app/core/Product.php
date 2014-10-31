@@ -29,11 +29,11 @@
         }
 
         public function save(){
-            $this->self['repository']->save($this);
+            return $this->self['repository']->save($this);
         }
 
         public function edit(){
-            $this->self['repository']->edit($this);
+            return $this->self['repository']->edit($this);
         }
 
         public function getById($id){
@@ -47,11 +47,24 @@
         public function find($name){
             return $this->self['repository']->find($name);
         }
+
+        public function findJSON($name){
+            return \Response::json($this->self['repository']->find($name));
+        }
+
         public function where($key,$value){
             return $this->self['repository']->where($key,$value);
         }
 
-        /*public static function paginate($number){
-            return ProductRepository::paginate($number);
-        }*/
+        public function __toString(){
+            return \Response::json($this->self);
+        }
+
+        public function json(){
+            $result = $this->self;
+            unset($result['repository']);
+            unset($result['created_at']);
+            unset($result['updated_at']);
+            return $result;
+        }
     }

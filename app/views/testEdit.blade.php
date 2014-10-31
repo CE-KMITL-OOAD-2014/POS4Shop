@@ -2,7 +2,7 @@
 
 @section('body')
 <form action="{{URL::current()}}" method="POST" role="form" enctype="multipart/form-data">
-    <legend>Product : Edit</legend>
+    <legend>History: Edit</legend>
 
     <div class="row">
         <label class="col-md-2 control-label">ID {{$id}}</label>

@@ -12,7 +12,7 @@
         }
 
         public function edit(){
-            $this->self['repository']->edit($this);
+            return $this->self['repository']->edit($this);
         }
 
         public function delete(){

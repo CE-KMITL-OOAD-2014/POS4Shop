@@ -29,8 +29,9 @@ class ShopTest extends TestCase {
         $customer=$this->getMock('ceddd\\Customer',array('__construct'),array($this->getMock('ceddd\\CustomerRepository')));
         $manager=$this->getMock('ceddd\\Manager',array('__construct'),array($this->getMock('ceddd\ManagerRepository')));
         $shop = new ceddd\Shop;
-        $resultNullItem=$shop->cal(NULL,$customer,$manager);
-        $resultWithItem=$shop->cal($arrItem,$customer,$manager);
+
+        $resultNullItem=$shop->cal(NULL,$manager,$customer);
+        $resultWithItem=$shop->cal($arrItem,$manager,$customer);
         
         // Assert
         $this->assertEquals(0, $resultNullItem);

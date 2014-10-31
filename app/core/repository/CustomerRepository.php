@@ -11,7 +11,11 @@
                 return false;
             $c = new \CustomerEloquent;
             $c->name = $customer->get('name');
-            return $c->save();
+            if($c->save()){
+                $customer->set('id',$c->id);
+                return true;
+            }
+            return false;
         }
 
         public function edit($customer){
