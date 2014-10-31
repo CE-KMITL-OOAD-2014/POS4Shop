@@ -149,11 +149,13 @@ Route::post('/{id}/testEdit', function($id) {
 
 Route::get('/testGet', function() {
     $history = App::make('ceddd\\History');
-    $arr = $history->getAll();
+    $id = 3;
+    $arr = $history->getByProductId($id);
     $count = count($arr);
     for($i = 0;$i < $count;$i++){
-        $history = $arr[$i];
-        echo $history->get('id')."\n";
+        $h = $arr[$i];
+        echo $h->get('id')."-".$h->get('hid').$h->get('item')->get('item')->get('name')."-"."-".$h->get('item')->get('quantity')."-".$h->get('item')->get('price');
+        echo '\n';
     }
     return View::make('testGet');
    // return Redirect::to('/testGet')->withErrors($validator);

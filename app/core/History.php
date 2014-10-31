@@ -17,6 +17,10 @@
             return $this->self[$key];
         }
 
+        public function getByProductId($pid){
+            return $this->self['repository']->getByProductId($pid);
+        }
+
         public function set($key,$value){
             $this->self[$key]=$value;
         }

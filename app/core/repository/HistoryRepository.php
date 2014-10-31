@@ -145,6 +145,27 @@
             return NULL;
         }
 
+        public static function getByProductId($pid){
+            $history = \HistoryEloquent::where('product_id', $pid)->get();
+            if(count($history)==0)
+                return NULL;
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
+            $h = \App::make('ceddd\History');
+            $result = array();
+            foreach($history as $key => $val){
+                $h->set('id',$val->id);
+                $h->set('hid',$val->hid);
+                $h->set('customer_id',$val->customer_id);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('item',$soldItem);
+                $result[$key]=$h;
+            }
+            return $result;
+        }
+
         public static function find($hid){
             $where = \HistoryEloquent::where('hid', '=', $hid)->get();
             if(count($where)==0)
