@@ -160,7 +160,7 @@ Route::post('/{id}/testEdit', function($id) {
 
 Route::get('/testGet', function() {
     $history = App::make('ceddd\\History');
-    $id = 3;
+    $id = 12;
     $arr = $history->getByProductId($id);
     $count = count($arr);
     for($i = 0;$i < $count;$i++){
