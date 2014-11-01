@@ -78,23 +78,58 @@
             $count = count($all);
             if($count == 0)
                 return NULL;
-            $soldItem = \App::make('ceddd\\SoldItem');
             $product = \App::make('ceddd\\Product');
             $h = \App::make('ceddd\History');
+            $tempH = \App::make('ceddd\History');
             $result = array();
-            
+            $soldArray = array();
+            $i = 0;
+            $arrCount = 0;
+            foreach($all as $val){
+                if($i == 0){
+                    $tempH = $val;
+                    $i++;
+                }
+                if($val->hid != $tempH->hid){
+                    $h->set('item',$soldArray);
+                    $result[$i-1]=$h;
+                    $tempH = $val;
+                    unset($soldArray);
+                    unset($h);
+                    $h = \App::make('ceddd\History');
+                    $soldArray = array();
+                    $arrCount = 0;
+                    $i++;
+                }
+                $h->set('id',$tempH->id);
+                $h->set('hid',$tempH->hid);
+                $h->set('customer_id',$tempH->customer_id);
+                $h->set('created_at',$tempH->created_at);
+                $h->set('updated_at',$tempH->updated_at);
+                $soldItem = \App::make('ceddd\\SoldItem');
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $soldArray[$arrCount] = $soldItem;
+                $arrCount++;
+            }
+            $h->set('item',$soldArray);
+            $result[$i-1]=$h;
             return $result;
         }
 
         public static function getById($id){
             $history = \HistoryEloquent::find($id);
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
             if($history){
                 $h = \App::make('ceddd\History');
                 $h->set('id',$history->id);
                 $h->set('hid',$history->hid);
-                $h->set('product_id',$history->product_id);
-                $h->set('quantity',$history->quantity);
-                $h->set('price',$history->price);
+                $soldItem->set('item',$product->getById($history->product_id));
+                $soldItem->set('quantity',$history->quantity);
+                $soldItem->set('price',$history->price);
+                $h->set('item',$soldItem);
                 $h->set('customer_id',$history->customer_id);
                 $h->set('created_at',$history->created_at);
                 $h->set('updated_at',$history->updated_at);

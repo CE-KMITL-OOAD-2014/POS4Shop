@@ -160,14 +160,18 @@ Route::post('/{id}/testEdit', function($id) {
 
 Route::get('/testGet', function() {
     $history = App::make('ceddd\\History');
-    $id = 12;
-    $arr = $history->getByProductId($id);
-    $count = count($arr);
-    for($i = 0;$i < $count;$i++){
-        $h = $arr[$i];
-        echo $h->get('id')."-".$h->get('hid').$h->get('item')->get('item')->get('name')."-"."-".$h->get('item')->get('quantity')."-".$h->get('item')->get('price');
-        echo '\n';
+    $arr = $history->getAll();
+    foreach($arr as $val){
+        $h = $val;
+        echo "ID : ".$h->get('id')." HID : ".$h->get('hid')."-";
+        $soldArr =  $h->get('item');
+        echo count($soldArr)." ";
+        foreach($soldArr as $soldVal){
+            echo $soldVal->get('item')->get('name')."-".$soldVal->get('quantity')."-".$soldVal->get('price').'-';
+           // echo $soldVal->get('quantity')."-".$soldVal->get('price').'-';
+        }
+        echo $h->get('customer_id');
+        echo "<br>";
     }
     return View::make('testGet');
-   // return Redirect::to('/testGet')->withErrors($validator);
 });
