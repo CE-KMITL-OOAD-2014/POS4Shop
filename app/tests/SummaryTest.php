@@ -13,34 +13,29 @@ class SummaryTest extends TestCase {
         for ($i=0; $i < 5; $i++) { // Mock History object and data
 
             $arrOfSoldItem=array();
-            for ($j=0; $j < 3; $j++) { // Mock SoldItem object for use in History object
-                $productId = $j+1;
-                $quantity = $i+2;
+            $quantity = $i+1;
 
-                $product = Mockery::mock('ceddd\Product');  // Mock Product object 
-                $product->shouldReceive('get')->with('id')->andReturn($productId); // productId =1, 2, 3
+            $product = Mockery::mock('ceddd\\Product');
+            $product->shouldReceive('get')->with('id')->andReturn($testProductId);
 
-                $solditem = Mockery::mock('ceddd\SoldItem');
-                $solditem->shouldReceive('get')->with('item')->andReturn($product);
-                $solditem->shouldReceive('get')->with('quantity')->andReturn($quantity);    // quantity = 2, 3, 4
-                $arrOfSoldItem[$i]=$solditem;
+            $solditem = Mockery::mock('ceddd\\SoldItem');
+            $solditem->shouldReceive('get')->with('item')->andReturn($product);
+            $solditem->shouldReceive('get')->with('quantity')->andReturn($quantity);    // quantity = 1, 2, 3
+            $arrOfSoldItem[0]=$solditem;
 
-                if($productId == $testProductId) 
-                    $expectedQuantity+=$quantity;
-            }
+            $expectedQuantity+=$quantity;
 
-            $history = Mockery::mock('ceddd\History');
-            $history->shouldReceive('get')->with('item')->andReturn($solditem);
-
+            $history = Mockery::mock('ceddd\\History');
+            $history->shouldReceive('get')->with('item')->andReturn($arrOfSoldItem);
             $arrOfHistory[$i] = $history;
         }
 
-        $historyRepository = Mockery::mock('ceddd\HistoryRepository');
-        $historyRepository->shouldReceive('getAll')->andReturn($arrOfHistory);
+        $historyRepository = Mockery::mock('ceddd\\HistoryRepository');
+        $historyRepository->shouldReceive('getByProductId')->with($testProductId)->andReturn($arrOfHistory);
 
         // Act
-        $topSell = new Summary($historyRepository);
-        $result = $topSell->getProductSoldQuantity($productId); // $productId = 1
+        $topSell = new ceddd\Summary($historyRepository);
+        $result = $topSell->getProductSoldQuantity($testProductId); // $productId = 1
         
         // Assert
         $this->assertEquals($expectedQuantity, $result);
