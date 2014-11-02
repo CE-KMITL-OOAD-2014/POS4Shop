@@ -80,7 +80,7 @@
         public static function getById($id){
             $m = \ManagerEloquent::find($id);
             if($m){
-                $manager = new Manager(new ManagerRepository);
+                $manager = \App::make('ceddd\Manager');
                 $manager->set('id',$m->id);
                 $manager->set('name',$m->name);
                 $manager->set('username',$m->username);

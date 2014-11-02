@@ -24,6 +24,7 @@
                 $data['quantity'] = $arrItem[$i]->get('quantity');
                 $data['price'] = $arrItem[$i]->get('price');
                 $data['customer_id'] = $history->get('customer_id');
+                $data['manager_id'] = $history->get('manager_id');
                 $validator = Validator::make($data, $rules);
                 if ($validator->passes()) {
                     $h = new \HistoryEloquent;
@@ -32,6 +33,7 @@
                     $h->quantity = $data['quantity'];
                     $h->price = $data['price'];
                     $h->customer_id = $data['customer_id'];
+                    $h->manager_id = $data['manager_id'];
                     if(!$h->save()){
                        return false;
                     }
@@ -52,6 +54,7 @@
                 $h->quantity = $history->get('quantity');
                 $h->price = $history->get('price');
                 $h->customer_id = $history->get('customer_id');
+                $h->manager_id = $history->get('manager_id');
                 return $h->save();
             }
             return false;
@@ -104,6 +107,7 @@
                 $h->set('id',$tempH->id);
                 $h->set('hid',$tempH->hid);
                 $h->set('customer_id',$tempH->customer_id);
+                $h->set('manager_id',$tempH->manager_id);
                 $h->set('created_at',$tempH->created_at);
                 $h->set('updated_at',$tempH->updated_at);
                 $soldItem = \App::make('ceddd\\SoldItem');
@@ -131,6 +135,7 @@
                 $soldItem->set('price',$history->price);
                 $h->set('item',$soldItem);
                 $h->set('customer_id',$history->customer_id);
+                $h->set('manager_id',$history->manager_id);
                 $h->set('created_at',$history->created_at);
                 $h->set('updated_at',$history->updated_at);
                 return $h;
@@ -150,6 +155,31 @@
                 $h->set('id',$val->id);
                 $h->set('hid',$val->hid);
                 $h->set('customer_id',$val->customer_id);
+                $h->set('manager_id',$val->manager_id);
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $h->set('item',$soldItem);
+                $h->set('created_at',$val->created_at);
+                $h->set('updated_at',$val->updated_at);
+                $result[$key]=$h;
+            }
+            return $result;
+        }
+
+        public static function getByCustomerId($cid){
+            $history = \HistoryEloquent::where('customer_id', $cid)->get();
+            if(count($history)==0)
+                return NULL;
+            $soldItem = \App::make('ceddd\\SoldItem');
+            $product = \App::make('ceddd\\Product');
+            $h = \App::make('ceddd\History');
+            $result = array();
+            foreach($history as $key => $val){
+                $h->set('id',$val->id);
+                $h->set('hid',$val->hid);
+                $h->set('customer_id',$val->customer_id);
+                $h->set('manager_id',$val->manager_id);
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
@@ -173,6 +203,7 @@
                 $h->set('id',$val->id);
                 $h->set('hid',$val->hid);
                 $h->set('customer_id',$val->customer_id);
+                $h->set('manager_id',$val->manager_id);
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
@@ -196,6 +227,7 @@
                 $h->set('id',$val->id);
                 $h->set('hid',$val->hid);
                 $h->set('customer_id',$val->customer_id);
+                $h->set('manager_id',$val->manager_id);
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
