@@ -77,6 +77,7 @@ Route::group(array('before' => 'auth'), function(){
         // Edit customer
     Route::get('customer/{id}/edit',array('uses'=>'CustomerController@showEdit'));
     Route::post('customer/{id}/edit',array('uses'=>'CustomerController@actionEdit'));
+    Route::get('customer/{id}/history',array('uses'=>'CustomerController@showHistory'));
         // del
     Route::post('customer/{id}',array('uses'=>'CustomerController@actionDel'));
 

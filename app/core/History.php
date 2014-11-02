@@ -46,6 +46,9 @@
             return $this->self['repository']->getById($id);
         }
 
+        public function getByCustomerId($cid){
+            return $this->self['repository']->getByCustomerId($cid);
+        }
         public function getAll(){
             return $this->self['repository']->getAll();
         }
