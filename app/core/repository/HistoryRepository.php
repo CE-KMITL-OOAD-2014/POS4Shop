@@ -171,23 +171,45 @@
             $history = \HistoryEloquent::where('customer_id', $cid)->get();
             if(count($history)==0)
                 return NULL;
-            $soldItem = \App::make('ceddd\\SoldItem');
+
             $product = \App::make('ceddd\\Product');
             $h = \App::make('ceddd\History');
+            $tempH = \App::make('ceddd\History');
             $result = array();
-            foreach($history as $key => $val){
-                $h->set('id',$val->id);
-                $h->set('hid',$val->hid);
-                $h->set('customer_id',$val->customer_id);
-                $h->set('manager_id',$val->manager_id);
+            $soldArray = array();
+            $i = 0;
+            $arrCount = 0;
+            foreach($history as $val){
+                if($i == 0){
+                    $tempH = $val;
+                    $i++;
+                }
+                if($val->hid != $tempH->hid){
+                    $h->set('item',$soldArray);
+                    $result[$i-1]=$h;
+                    $tempH = $val;
+                    unset($soldArray);
+                    unset($h);
+                    $h = \App::make('ceddd\History');
+                    $soldArray = array();
+                    $arrCount = 0;
+                    $i++;
+                }
+                $h->set('id',$tempH->id);
+                $h->set('hid',$tempH->hid);
+                $h->set('customer_id',$tempH->customer_id);
+                $h->set('manager_id',$tempH->manager_id);
+                $h->set('created_at',$tempH->created_at);
+                $h->set('updated_at',$tempH->updated_at);
+                $soldItem = \App::make('ceddd\\SoldItem');
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
-                $h->set('item',$soldItem);
-                $h->set('created_at',$val->created_at);
-                $h->set('updated_at',$val->updated_at);
-                $result[$key]=$h;
+                $soldArray[$arrCount] = $soldItem;
+                $arrCount++;
             }
+            $h->set('item',$soldArray);
+            $result[$i-1]=$h;
             return $result;
         }
 
