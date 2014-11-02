@@ -29,8 +29,8 @@
 
         public function delete($customer){
             if($customer->get('id')){
-                $m = \CustomerEloquent::find($customer->get('id'));
-                return $m->delete();
+                $c = \CustomerEloquent::find($customer->get('id'));
+                return $c->delete();
             }
             return false;
         }
@@ -46,7 +46,7 @@
                 $c->set('name',$val->name);
                 $c->set('created_at',$val->created_at);
                 $c->set('updated_at',$val->updated_at);
-                $result[$key]=$p;
+                $result[$key]=$c;
             }
             return $result;
         }
@@ -61,7 +61,7 @@
                 $c->set('name',$val->name);
                 $c->set('created_at',$val->created_at);
                 $c->set('updated_at',$val->updated_at);
-                $result[$key]=$p;
+                $result[$key]=$c;
             }
             return $result;
         }

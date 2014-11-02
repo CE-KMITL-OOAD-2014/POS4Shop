@@ -4,7 +4,9 @@ class CustomerController extends BaseController {
 
     public function showIndex()
     {
-        return "Customer";
+        $customer = App::make('ceddd\Customer');
+        $allCustomer = $customer->getAll();
+        return View::make('customer.index')->with('allCustomer',$allCustomer);
     }
 
     public function showAdd()

@@ -69,6 +69,7 @@ Route::group(array('before' => 'auth'), function(){
 //--Customer---------------------
 //Route::group(array('before' => 'auth'), function()
 //{
+    Route::get('customer',array('uses'=>'CustomerController@showIndex'));
         // Add customer
     Route::get('customer/add',array('uses'=>'CustomerController@showAdd'));
     Route::post('customer/add',array('uses'=>'CustomerController@actionAdd'));
