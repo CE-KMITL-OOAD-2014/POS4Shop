@@ -62,6 +62,10 @@ class ManagerController extends BaseController {
 
     public function actionShopCal(){
         // Selecto Customer Here
+        
+        // Make history obj and save
+        $arrayOfSoldItem = Session::get('pos', array());
+        
         return $id;
 
     }
