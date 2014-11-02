@@ -51,13 +51,14 @@ class ManagerController extends BaseController {
     public function showShopCal(){
         
         $shop = App::make('ceddd\\Shop');
+        $cus = Session::get('cus');
         $arrayOfSoldItem = Session::get('pos', array());
         $manager = App::make('ceddd\\Manager');
         $manager = $manager->getById(Auth::user()->id);
 
         $allPrice = $shop->cal($arrayOfSoldItem,$manager,NULL);
 
-        return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'allPrice'=>$allPrice));
+        return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'cus'=>$cus,'allPrice'=>$allPrice));
     }
 
     public function actionShopCal(){
@@ -65,8 +66,16 @@ class ManagerController extends BaseController {
         
         // Make history obj and save
         $arrayOfSoldItem = Session::get('pos', array());
-        
-        return $id;
+        $h = \App::make('ceddd\History');
+        $lastID= $h->getLast()->get('hid')+1;
+        $history = \App::make('ceddd\History');
+        $history->set('hid',$lastID+1);
+        $history->set('item',$arrayOfSoldItem);
+       // $history->set('customer_id',$arrayOfSoldItem); //Get customer id from customer that use choose.
+        $id = Auth::user()->id;
+        $history->set('manager_id',$id);
+        $history->save();
+        return Redirect::to('manager/shop');
 
     }
 
@@ -121,8 +130,19 @@ class ManagerController extends BaseController {
         
     }
 
-    public function actionShopCalCustomer(){
+    public function showShopCalCustomer(){
+        $data = Input::get('searchCustomer');
+        $customer = App::make('ceddd\Customer');
+        $searchCustomer = $customer->find($data);
 
+        return View::make('manager.customer')->with(array('searchCustomer'=>$searchCustomer,'searchC'=>$data));
+
+    }
+    public function actionShopCalCustomer($id){
+        $customer = App::make('ceddd\Customer');
+        $customer = $customer->getById($id);
+        Session::put('cus', $customer);
+        return Redirect::to('manager/shop');
     }
 
     // Shop setting

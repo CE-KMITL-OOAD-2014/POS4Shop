@@ -22,6 +22,10 @@
             return $this->self['repository']->getByProductId($pid);
         }
 
+        public function getLast(){
+            return $this->self['repository']->getLast();
+        }
+
         public function set($key,$value){
             $this->self[$key]=$value;
         }

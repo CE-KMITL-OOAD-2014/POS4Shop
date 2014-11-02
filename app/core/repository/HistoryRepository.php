@@ -143,6 +143,13 @@
             return NULL;
         }
 
+        public static function getLast(){
+            $history = \HistoryEloquent::all()->orderBy('hid', 'desc')->first();;
+            if(count($history)==0)
+                return NULL;
+            return $history;
+        }
+
         public static function getByProductId($pid){
             $history = \HistoryEloquent::where('product_id', $pid)->get();
             if(count($history)==0)

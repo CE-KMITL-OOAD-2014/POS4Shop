@@ -56,7 +56,8 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('manager/shop/product/{id}',array('uses'=>'ManagerController@actionShopCalProduct'));
     Route::post('manager/shop/product/{barcode}/del',array('uses'=>'ManagerController@actionShopCalProductDelete'));
 
-    Route::get('manager/shop/customer',array('uses'=>'ManagerController@actionShopCalCustomer')); //Customer Finder and Select
+    Route::post('manager/shop/customer',array('uses'=>'ManagerController@showShopCalCustomer'));
+    Route::get('manager/shop/customer/{id}',array('uses'=>'ManagerController@actionShopCalCustomer')); //Customer Finder and Select
     //Route::post('manager/shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
         // Shop setting
     Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));

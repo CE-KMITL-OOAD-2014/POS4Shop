@@ -8,7 +8,7 @@
 			//echo $this->self['name'];
 		}
 
-		function cal($item,Manager $manager,Customer $customer=NULL){
+        function cal($item,Manager $manager,Customer $customer=NULL){
 			$result=0;
 			if($item==NULL)
 				return $result;			
