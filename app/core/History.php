@@ -8,7 +8,8 @@
             $this->self['id']=NULL;
             $this->self['hid']=NULL;
             $this->self['item']=NULL;
-            $this->self['customer_Id']=NULL;
+            $this->self['manager_id']=NULL;
+            $this->self['customer_id']=NULL;
             $this->self['created_at']=NULL;
             $this->self['updated_at']=NULL;
         }
@@ -45,6 +46,9 @@
             return $this->self['repository']->getById($id);
         }
 
+        public function getByCustomerId($cid){
+            return $this->self['repository']->getByCustomerId($cid);
+        }
         public function getAll(){
             return $this->self['repository']->getAll();
         }

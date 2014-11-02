@@ -4,7 +4,9 @@ class ProductController extends BaseController {
 
     public function showIndex()
     {
-        return "Product manager";
+        $product = App::make('ceddd\Product');
+        $allProduct = $product->getAll();
+        return View::make('product.index')->with('allProduct',$allProduct);
     }
     //--- Add
     public function showAdd()

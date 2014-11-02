@@ -4,7 +4,9 @@ class ManagerController extends BaseController {
 
     public function showIndex()
     {
-        return "manager";
+        $manager = App::make('ceddd\Manager');
+        $allManager = $manager->getAll();
+        return View::make('manager.index')->with('allManager',$allManager);
     }
 
     // Add manager
@@ -60,6 +62,10 @@ class ManagerController extends BaseController {
 
     public function actionShopCal(){
         // Selecto Customer Here
+        
+        // Make history obj and save
+        $arrayOfSoldItem = Session::get('pos', array());
+        
         return $id;
 
     }

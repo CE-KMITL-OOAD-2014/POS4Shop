@@ -4,7 +4,9 @@ class CustomerController extends BaseController {
 
     public function showIndex()
     {
-        return "Customer";
+        $customer = App::make('ceddd\Customer');
+        $allCustomer = $customer->getAll();
+        return View::make('customer.index')->with('allCustomer',$allCustomer);
     }
 
     public function showAdd()
@@ -66,6 +68,15 @@ class CustomerController extends BaseController {
         if($customer==NULL)
             return App::abort(404);
         return View::make('customer.view')->with('customer',$customer);
+    }
+
+    public function showHistory($cid)
+    {
+        $history = App::make('ceddd\\History');
+        $history = $history->getByCustomerId($cid);
+        if($history==NULL)
+            return App::abort(404);
+        return View::make('customer.history')->with('history',$history);
     }
 
     public function actionDel(){

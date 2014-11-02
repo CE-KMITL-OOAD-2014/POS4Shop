@@ -14,10 +14,6 @@
     <div class="well">
         Barcode : {{$product->get('barcode')}} <br>
         Name : {{$product->get('name')}} <br>
-        <img src="/upload/product/{{$product->get('file')}}" class="img-responsive" alt="Image">
-
-        <a href="{{URL::current().'/edit'}}"><button type="button" class="btn btn-primary">edit</button></a>
-        <button type="button" class="btn btn-danger" onclick="delConfirm()">del</button>
     </div>
 @stop
 
