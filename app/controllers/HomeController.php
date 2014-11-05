@@ -31,7 +31,21 @@ class HomeController extends BaseController {
 
     // Top
 	public function showTopSell(){
-		return View::make('home.index');
+        $product = App::make('ceddd\Product');
+        $product = $product->getAll();
+        $history = App::make('ceddd\History');
+        $resultCount = array();
+        $count = 0;
+        $arrCount = 0;
+        foreach($product as $val){
+            $history->getByProductID($val->get('id'));
+            if(count($history) != 0){
+                $resultCount[$arrCount][0] = $history[0]->get('hid');
+                $resultCount[$arrCount][1] = count($history);
+                $arrCount++;
+            }
+        }
+        //SORTTTT
 	}
 
     // Search
