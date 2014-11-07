@@ -1,7 +1,6 @@
 <?php 
     namespace ceddd;
     class HistoryRepository implements Repository{
-
         
         public static function getRules(){
             return array('hid' => 'required|integer',
@@ -17,28 +16,18 @@
             $arrItem = $history->get('item');
             $count = count($arrItem);
             for($i=0;$i < $count;$i++){
-                $rules = $this->getRules();
-                //$data = array('hid','product_id','quantity','price','customer_id');
-                $data['hid'] = $history->get('hid');
-                $data['product_id'] = $arrItem[$i]->get('product_id');
-                $data['quantity'] = $arrItem[$i]->get('quantity');
-                $data['price'] = $arrItem[$i]->get('price');
-                $data['customer_id'] = $history->get('customer_id');
-                $data['manager_id'] = $history->get('manager_id');
-                $validator = Validator::make($data, $rules);
-                if ($validator->passes()) {
-                    $h = new \HistoryEloquent;
-                    $h->hid = $data['hid'];
-                    $h->product_id = $data['product_id'];
-                    $h->quantity = $data['quantity'];
-                    $h->price = $data['price'];
-                    $h->customer_id = $data['customer_id'];
-                    $h->manager_id = $data['manager_id'];
-                    if(!$h->save()){
-                       return false;
-                    }
-                }else{
-                    return false;
+                //$data = array('hid','product_id','quantity','price','customer_id');                
+                //$data['hid'];//$data['product_id'];//$data['quantity'];//$data['price'];
+                //$data['customer_id'];//$data['manager_id'];
+                $h              = new \HistoryEloquent;
+                $h->hid         = $history->get('hid');
+                $h->product_id  = $arrItem[$i]->get('item')->get('id');
+                $h->quantity    = $arrItem[$i]->get('quantity');
+                $h->price       = $arrItem[$i]->get('price');
+                $h->customer_id = $history->get('customer_id');
+                $h->manager_id  = $history->get('manager_id');
+                if(!$h->save()){
+                   return false;
                 }
             }
             return true;
@@ -144,10 +133,13 @@
         }
 
         public static function getLast(){
-            $history = \HistoryEloquent::all()->orderBy('hid', 'desc')->first();;
+            //$history = \HistoryEloquent::all()->orderBy('hid', 'desc')->first();
+            $h = \HistoryEloquent::all();
+            $history = $h->last();
+
             if(count($history)==0)
                 return NULL;
-            return $history;
+            return $history->hid;
         }
 
         public static function getByProductId($pid){

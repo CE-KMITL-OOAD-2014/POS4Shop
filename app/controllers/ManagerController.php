@@ -51,32 +51,34 @@ class ManagerController extends BaseController {
     public function showShopCal(){
         
         $shop = App::make('ceddd\\Shop');
-        $cus = Session::get('cus');
         $arrayOfSoldItem = Session::get('pos', array());
         $manager = App::make('ceddd\\Manager');
         $manager = $manager->getById(Auth::user()->id);
+        $customer = Session::get('customer', NULL);
+        $customerName='';
+        if($customer!=NULL)
+            $customerName=$customer->get('name');
 
         $allPrice = $shop->cal($arrayOfSoldItem,$manager,NULL);
 
-        return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'cus'=>$cus,'allPrice'=>$allPrice));
+        return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'allPrice'=>$allPrice,'customer'=>$customerName));
     }
 
     public function actionShopCal(){
         // Selecto Customer Here
+        $customer = Session::get('customer',NULL);
         
         // Make history obj and save
         $arrayOfSoldItem = Session::get('pos', array());
-        $h = \App::make('ceddd\History');
-        $lastID= $h->getLast()->get('hid')+1;
-        $history = \App::make('ceddd\History');
-        $history->set('hid',$lastID+1);
-        $history->set('item',$arrayOfSoldItem);
-       // $history->set('customer_id',$arrayOfSoldItem); //Get customer id from customer that use choose.
-        $id = Auth::user()->id;
-        $history->set('manager_id',$id);
-        $history->save();
-        return Redirect::to('manager/shop');
+        $manager = App::make('ceddd\\Manager');
+        $manager = $manager->getById(Auth::user()->id);
 
+        $shop = App::make('ceddd\\Shop');
+        if($shop->buy($arrayOfSoldItem,$manager,$customer)){
+            Session::forget('pos');
+            Session::forget('customer');
+        }
+        return Redirect::to('manager/shop');
     }
 
     public function showShopCalProduct(){
@@ -85,11 +87,10 @@ class ManagerController extends BaseController {
         $searchProduct = $product->find($data);
 
         return View::make('manager.product')->with(array('searchProduct'=>$searchProduct,'search'=>$data));
-
     }
 
     public function actionShopCalProduct($id){
-
+        //TODO (ziko) : Move this into Class sth..
         $product = App::make('ceddd\Product');
         $product = $product->getById($id);
 
@@ -131,17 +132,15 @@ class ManagerController extends BaseController {
     }
 
     public function showShopCalCustomer(){
-        $data = Input::get('searchCustomer');
+        $data = Input::get('search');
         $customer = App::make('ceddd\Customer');
         $searchCustomer = $customer->find($data);
-
-        return View::make('manager.customer')->with(array('searchCustomer'=>$searchCustomer,'searchC'=>$data));
+        return View::make('manager.customer')->with(array('searchCustomer'=>$searchCustomer,'search'=>$data));
 
     }
     public function actionShopCalCustomer($id){
         $customer = App::make('ceddd\Customer');
-        $customer = $customer->getById($id);
-        Session::put('cus', $customer);
+        Session::put('customer', $customer->getById($id));
         return Redirect::to('manager/shop');
     }
 

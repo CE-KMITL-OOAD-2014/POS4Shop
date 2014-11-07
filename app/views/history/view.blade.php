@@ -22,10 +22,16 @@
         <tbody>
         <?php
         foreach ($allHistory as $val) {
-            $customer = \App::make('ceddd\Customer');
-            $manager = \App::make('ceddd\Manager');
+            $customer = App::make('ceddd\Customer');
+            $manager = App::make('ceddd\Manager');
             $customer = $customer->getById($val->get('customer_id'));
+            if($customer!=NULL)
+                $customerName=$customer->get('name');
+            else
+                $customerName='-'; 
+
             $manager = $manager->getById($val->get('manager_id'));
+            $manager = $manager->get('name');
             ?>
             <tr>
                 <td>{{$val->get('hid')}}</td>
@@ -45,8 +51,8 @@
                 <td><?php foreach ($nameArr as $nameVal) echo $nameVal."<br>";?></td>
                 <td><?php foreach ($quantityArr as $quantityVal) echo $quantityVal."<br>"; ?></td>
                 <td><?php foreach ($priceArr as $priceVal) echo $priceVal."<br>"; ?></td>
-                <td>{{$customer->get('name')}}</td>
-                <td>{{$manager->get('name')}}</td>
+                <td>{{$customerName}}</td>
+                <td>{{$manager}}</td>
                 <td>{{$val->get('created_at')}}</td>
                 <td>{{$val->get('updated_at')}}</td>
             </tr>

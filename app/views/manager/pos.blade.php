@@ -25,10 +25,10 @@
         <!-- </form> -->
             <div class="form-group">
                 <div class="input-group">
-                    <input class="form-control" type="text" name="searchC" id="searchC" placeholder="ลูกค้า">
-                        <span class="input-group-btn">
-                            <input type="submit" class="btn btn-primary" value="ค้นหา" onclick="searchCustomer()" data-toggle="modal" data-target="#customerModal">
-                        </span>
+                    <input class="form-control" type="text" name="searchC" id="searchCustomer" placeholder="ลูกค้า" value="{{ isset($customer) ? $customer: '' }}">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="ค้นหา" onclick="searchCustomer()" data-toggle="modal" data-target="#customerModal">
+                    </span>
                 </div>
             </div>
         <table class="table table-striped table-hover" id="item">
@@ -69,7 +69,7 @@
                 <button type="submit" class="btn btn-danger" onclick="delConfirm(0)">ล้างรายการ</button>
             </div>
             <div class="col-md-3">
-                <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal">
+                <form action="{{url('/manager/shop')}}" method="POST" role="form" class="form-horizontal">
                     <fieldset>  
                         <button type="submit" class="btn btn-success pull-right">ทำรายการ</button>
                     </fieldset>            
@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Product -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -86,18 +86,14 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">ค้นหา</h4>
               </div>
-              <div class="modal-body">
+              <div class="modal-body product">
                 ...
-              </div>
-              <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button> -->
               </div>
             </div>
           </div>
         </div>
 
-    <!-- Modal -->
+    <!-- Modal Customer -->
     <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -105,12 +101,8 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="customerModalLabel">ค้นหาลูกค้า</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body customer">
                     ...
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
         </div>
@@ -120,7 +112,6 @@
 @section('js')
     <script>
         function del(barcode){
-            //alert("{{URL::current().'/product/'}}"+barcode+"/del");
             $.post("{{URL::current().'/product/'}}"+barcode+"/del",{barcode:barcode},function(result){
                 location.reload(true);
             });
@@ -148,13 +139,13 @@
         function search(){
             var name=$( "#search" ).val();
             $.post("{{url('/manager/shop/product')}}",{search:name},function(result){
-                $( ".modal-body" ).html(result);        
+                $( ".product" ).html(result);
             });   
         }
         function searchCustomer(){
-            var name=$( "#searchC" ).val();
-            $.post("{{url('/manager/shop/customer')}}",{searchC:name},function(result){
-                $( ".modal-body" ).html(result);
+            var name=$( "#searchCustomer" ).val();
+            $.post("{{url('/manager/shop/customer')}}",{search:name},function(result){
+                $( ".customer" ).html(result);
             });
         }
     </script>

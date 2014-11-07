@@ -52,9 +52,10 @@
         }
 
         public static function find($name){
-            $ce = \CustomerEloquent::where('name', 'like', '%'.$name.'%');
+            $ce = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
             if(!$ce)
                 return NULL;
+            $result=array();
             foreach($ce as $key => $val){
                 $c=\App::make('ceddd\\Customer');
                 $c->set('id',$val->id);
