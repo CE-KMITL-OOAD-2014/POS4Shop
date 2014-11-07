@@ -26,12 +26,11 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <!-- class="active" -->
-                <li ><a href="#">Menu for Dev</a></li>
                 <li ><a href="{{asset('product')}}">Product</a></li>
                 <li ><a href="{{asset('customer')}}">Customer</a></li>
                 <li ><a href="{{asset('manager')}}">Manager</a></li>
                 <li ><a href="{{asset('history')}}">History</a></li>
-                <li ><a href="#">Shop</a></li>
+                <li ><a href="{{asset('manager/shop')}}">Shop</a></li>
 
             </ul>
             <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
@@ -44,16 +43,6 @@
                     @else
                         <a href="{{URL::to('/logout')}}">{{Auth::user()->name}} ( Logout )</a>
                     @endif 
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
                 </li>
             </ul>
         </div>

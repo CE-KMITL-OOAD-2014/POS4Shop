@@ -18,7 +18,7 @@ class HomeController extends BaseController {
 	public function actionLogin(){
 		$credentials = Input::only('username', 'password');
 		if (Auth::attempt($credentials)) {
-			return Redirect::intended('/');
+			return Redirect::intended('manager/shop');
 		}
 		return Redirect::to('login');
 	}
