@@ -49,7 +49,7 @@
             return false;
         }
 
-        public function delete($history){
+        public function delete($history){ //TODO (ziko) : Not working
             if($history->get('hid')){
                 $m = \HistoryEloquent::find($history->get('id'));
                 return $m->delete();
@@ -57,7 +57,7 @@
             return false;
         }
 
-        public function deleteByHID($history){
+        public function deleteByHID($history){ //TODO (ziko) : change param - -
             $h = \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
             if($h->delete()){
                 return true;
@@ -119,7 +119,7 @@
                 $h = \App::make('ceddd\History');
                 $h->set('id',$history->id);
                 $h->set('hid',$history->hid);
-                $soldItem->set('item',$product->getById($history->product_id));
+                $soldItem->set('item',$product->getById($history->product_id));// TODO (ziko) : Not woring -- 
                 $soldItem->set('quantity',$history->quantity);
                 $soldItem->set('price',$history->price);
                 $h->set('item',$soldItem);
@@ -146,19 +146,21 @@
             $history = \HistoryEloquent::where('product_id', $pid)->get();
             if(count($history)==0)
                 return NULL;
-            $soldItem = \App::make('ceddd\\SoldItem');
-            $product = \App::make('ceddd\\Product');
-            $h = \App::make('ceddd\History');
             $result = array();
             foreach($history as $key => $val){
+                $h = \App::make('ceddd\History');
+                $soldItem = \App::make('ceddd\\SoldItem');
+                $product = \App::make('ceddd\\Product');
+
                 $h->set('id',$val->id);
                 $h->set('hid',$val->hid);
-                $h->set('customer_id',$val->customer_id);
-                $h->set('manager_id',$val->manager_id);
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
-                $h->set('item',$soldItem);
+                $arrOfSoldItem[0]=$soldItem;
+                $h->set('item',$arrOfSoldItem);
+                $h->set('manager_id',$val->manager_id);
+                $h->set('customer_id',$val->customer_id);
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;
@@ -212,7 +214,7 @@
             return $result;
         }
 
-        public static function find($hid){
+        public static function find($hid){ //TODO (ziko) : Not working
             $where = \HistoryEloquent::where('hid', $hid)->get();
             if(count($where)==0)
                 return NULL;
@@ -228,7 +230,7 @@
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
-                $h->set('item',$soldItem);
+                $h->set('item',$soldItem);// TODO (ziko) : Not woring -- 
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;
@@ -252,11 +254,39 @@
                 $soldItem->set('item',$product->getById($val->product_id));
                 $soldItem->set('quantity',$val->quantity);
                 $soldItem->set('price',$val->price);
-                $h->set('item',$soldItem);
+                $h->set('item',$soldItem);// TODO (ziko) : Not woring -- 
                 $h->set('created_at',$val->created_at);
                 $h->set('updated_at',$val->updated_at);
                 $result[$key]=$h;
             } 
+            return $result;
+        }
+
+        public static function getAllMonthRow(){
+            $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
+            
+            $all = \HistoryEloquent::where('created_at','>=',$monthTime)->orderBy('product_id')->get();
+            if(count($all) == 0)
+                return NULL;
+            $result = array();
+            $product = \App::make('ceddd\\Product');
+            foreach($all as $key => $val){
+
+                $history = \App::make('ceddd\History');
+                $history->set('id',$val->id);
+                $history->set('hid',$val->hid);
+                $soldItem = \App::make('ceddd\\SoldItem');
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $arrOfSoldItem[0]=$soldItem;
+                $history->set('item',$arrOfSoldItem);
+                $history->set('manager_id',$val->manager_id);
+                $history->set('customer_id',$val->customer_id);
+                $history->set('created_at',$val->created_at);
+                $history->set('updated_at',$val->updated_at);
+                $result[$key]=$history;
+            }
             return $result;
         }
     }

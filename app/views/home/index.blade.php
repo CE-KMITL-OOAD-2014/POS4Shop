@@ -5,6 +5,10 @@
 @stop
 
 @section('body')
+<?php 
+//var_dump($allProduct);
+//exit();
+ ?>
     <div class="row">
         @for ($i=0;$i<count($allProduct);$i++)
             <a href="{{URL::to('/product/'.$allProduct[$i]->get('id'))}}">
