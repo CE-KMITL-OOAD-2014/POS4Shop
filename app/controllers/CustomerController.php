@@ -67,17 +67,19 @@ class CustomerController extends BaseController {
         $customer = $customer->getById($id);
         if($customer==NULL)
             return App::abort(404);
-        return View::make('customer.view')->with('customer',$customer);
+
+        $history = $customer->getHistory($id);
+        return View::make('customer.view')->with(array('customer'=>$customer,'history'=>$history));
     }
 
-    public function showHistory($cid)
+    /*public function showHistory($cid)
     {
         $history = App::make('ceddd\\History');
         $history = $history->getByCustomerId($cid);
         if($history==NULL)
             return App::abort(404);
         return View::make('customer.history')->with('history',$history);
-    }
+    }*/
 
     public function actionDel(){
         $data  = Input::get("id");

@@ -3,7 +3,7 @@
     class History{
         private $self;
 
-        function __construct($sth = null,HistoryRepository $historyRepo){
+        function __construct(HistoryRepository $historyRepo){
             $this->self['repository']=$historyRepo;
             $this->self['id']=NULL;
             $this->self['hid']=NULL;

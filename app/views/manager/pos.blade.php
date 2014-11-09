@@ -1,6 +1,6 @@
 @extends('layout')
 @section('head')
-    <title>POS4Shop - Product::add</title>
+    <title>{{App::make('ceddd\Shop')->getName()}} - Product::add</title>
 @stop
 
 @section('body')

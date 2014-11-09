@@ -25,11 +25,11 @@
         public function edit($manager){
             if($manager->get('id')){
                 $m = \ManagerEloquent::find($manager->get('id'));
-                //$m->id = $manager->get('id');
                 $m->name = $manager->get('name');
                 // Not allow to change username
-                //$m->username = $manager->get('username');
                 $m->password = $manager->get('password');
+                var_dump($m);
+                exit();
                 return $m->save();
             }
             return false;

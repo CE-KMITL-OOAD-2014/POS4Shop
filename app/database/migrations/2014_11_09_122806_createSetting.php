@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomer extends Migration {
+class CreateSetting extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,11 @@ class CreateCustomer extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('customers', function ($table) {
-            $table->increments('id');
-            $table->string('name', 200);
-            $table->timestamps();
-        });
-    }
+		Schema::create('shop', function ($table) {
+			$table->string('name', 200);
+			$table->timestamps();
+		});
+	}
 
     /**
      * Reverse the migrations.
@@ -26,7 +25,7 @@ class CreateCustomer extends Migration {
      */
     public function down()
     {
-        Schema::drop('customers');
+    	Schema::drop('shop');
     }
 
-}
+  }

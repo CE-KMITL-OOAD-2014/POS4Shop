@@ -38,8 +38,10 @@ Route::group(array(), function(){
 
     //--Manager---------------------
     Route::group(array('prefix'=>'manager','before' => 'auth'), function(){
-            // Index
+            // Dashboard
         Route::get('/',array('uses'=>'ManagerController@showIndex'));
+            // list
+        Route::get('list',array('uses'=>'ManagerController@showList'));
             // Add manager
         Route::get('add',array('uses'=>'ManagerController@showAdd'));
         Route::post('add',array('uses'=>'ManagerController@actionAdd'));    
@@ -47,6 +49,8 @@ Route::group(array(), function(){
         Route::get('{id}',array('uses'=>'ManagerController@showView'));
             // Del manager
         Route::post('{id}',array('uses'=>'ManagerController@actionDel'));
+            // Manager change pwd
+        Route::post('pwd',array('uses'=>'ManagerController@actionPassword'));
 
             // Shop setting
         // Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('head')
-<title>POS4Shop - history</title>
+<title>{{App::make('ceddd\Shop')->getName()}} - history</title>
 @stop
 
 @section('body')

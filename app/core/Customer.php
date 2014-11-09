@@ -30,4 +30,11 @@
         public function getAll(){
             return $this->self['repository']->getAll();
         }
+
+        public function getHistory(){
+            $history = \App::make('ceddd\History');
+            //$customerHistory = 
+            return $history->getByCustomerId($this->self['id']);
+            //return $customerHistory;
+        }
     }

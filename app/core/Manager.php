@@ -12,13 +12,15 @@
         public function setPassword($oldPw,$newPw,$confPw){
             if($newPw == $confPw){
                 if(Hash::check($oldPw,$this->self['password'])){
-                    $this->self['password'] = $newPw;
-                }else{
-                    throw new \Exception("Current password incorrect", 1);
+                    $this->self['password'] = Hash::make($newPw);
+                    return true;
+                }/*else{
+                    //throw new \Exception("Current password incorrect", 1);
                 }
             }else{
-                throw new \Exception("Confirm password incorrect", 1);                
+                //throw new \Exception("Confirm password incorrect", 1);*/
             }
+            return false;
         }
 
         public function set($key,$value){

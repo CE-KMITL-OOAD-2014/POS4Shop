@@ -7,7 +7,7 @@
     <link href="{{asset('css/material-wfont.min.css')}}" rel="stylesheet">
     
     @section('head')
-    <title>POS4Shop - Layout</title>
+    <title>{{App::make('ceddd\Shop')->getName()}}</title>
 
     @show
 
@@ -21,20 +21,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">POS4Shop</a>
+            <a class="navbar-brand" href="/">{{App::make('ceddd\Shop')->getName()}}</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <!-- class="active" -->
-                <li ><a href="{{asset('product')}}">Product</a></li>
+                <!-- <li ><a href="{{asset('product')}}">Product</a></li>
                 <li ><a href="{{asset('customer')}}">Customer</a></li>
                 <li ><a href="{{asset('manager')}}">Manager</a></li>
                 <li ><a href="{{asset('history')}}">History</a></li>
-                <li ><a href="{{asset('manager/shop')}}">Shop</a></li>
-
+                <li ><a href="{{asset('manager/shop')}}">Shop</a></li> -->
+                <li ><a href="{{asset('manager')}}">จัดการ</a></li>
             </ul>
             <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
-                <input class="form-control col-lg-8" placeholder="Search" type="text" name="search">
+                <input class="form-control col-md-8" placeholder="ค้นหาสินค้า" type="text" name="search">
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>

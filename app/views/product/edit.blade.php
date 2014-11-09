@@ -1,4 +1,7 @@
 @extends('layout')
+@section('head')
+    <title>{{App::make('ceddd\Shop')->getName()}} - Product::edit</title>
+@stop
 
 @section('body')
     <form action="{{URL::current()}}" method="POST" role="form" enctype="multipart/form-data">

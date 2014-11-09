@@ -4,15 +4,30 @@ class ManagerController extends BaseController {
 
   public function showIndex()
   {
+    return View::make('manager.index');
+  }
+  
+  public function showList()
+  {
     $manager = App::make('ceddd\Manager');
     $allManager = $manager->getAll();
-    return View::make('manager.index')->with('allManager',$allManager);
+    return View::make('manager.list')->with('allManager',$allManager);
   }
 
     // Add manager
   public function showAdd()
   {
     return View::make('manager.add');
+  }
+  // Change password
+  public function actionPassword(){
+    $manager = App::make('ceddd\\Manager');
+    $manager = $manager->getById(Auth::user()->id);
+    if($manager->setPassword(Input::get('oldpwd'),Input::get('newold'),Input::get('conpwd')));
+      if($manager->edit())
+        return "fail0";
+        //return Redirect::to('manager');
+    return "fail";
   }
 
   public function actionAdd()
@@ -144,16 +159,9 @@ class ManagerController extends BaseController {
     return Redirect::to('manager/shop');
   }
 
-    // Shop setting
-  public function showShopSetting(){
-
-  }
-  public function actionshowShopSetting(){
+  // Shop setting
+  public function actionShopSetting(){
 
   }
 
-    // Shop history
-  public function showHistory(){
-
-  }
 }

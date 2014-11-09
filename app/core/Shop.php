@@ -3,10 +3,43 @@ namespace ceddd;
 class Shop {
 	private $self;
 
-	function __construct($item = null){
-		$this->self['name']="New Shop";
-			//echo $this->self['name'];
-	}
+  function __construct(){
+    $this->self['name']="New Shop";
+  }
+
+  public function getName(){
+    $name=\Session::get('shop', NULL);
+    if($name==NULL){
+      $shop=\ShopEloquent::All();
+      if(count($shop)>0){
+        $shop=$shop[0];
+        $shop = $shop->name;
+      }else{
+        $shop=new \ShopEloquent;
+        $shop->name="New Shop";
+        $shop->save();
+        \Session::put('shop', "New Shop");
+        $name = $shop->name;
+      }
+    }
+    $this->self['name']=$name;
+    return $this->self['name'];
+  }
+
+  public function setName($name){
+    $shop=\ShopEloquent::All();
+    if(count($shop)>0){
+      $shop=$shop[0];
+      $shop->name=$name;
+    }else{
+      $shop=new \ShopEloquent;      
+    }
+    $shop->name=$name;
+    $shop->save();
+    \Session::put('shop', $name);
+    $this->self['name']=$shop->name;
+    return $this->self['name'];
+  }
 
 	function cal($item,Manager $manager,Customer $customer=NULL){
 		$result=0;
