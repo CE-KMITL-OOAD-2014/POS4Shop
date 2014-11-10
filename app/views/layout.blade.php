@@ -3,8 +3,8 @@
 <head>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('css/ripples.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/material-wfont.min.css')}}" rel="stylesheet">
+    <link href="/css/ripples.min.css" rel="stylesheet">
+    <link href="/css/material-wfont.min.css" rel="stylesheet">
     
     @section('head')
     <title>{{App::make('ceddd\Shop')->getName()}}</title>
@@ -62,11 +62,11 @@
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="{{asset('js/ripples.min.js')}}"></script>
-    <script src="{{asset('js/material.min.js')}}"></script>
+    <script src="/js/ripples.min.js"></script>
+    <script src="/js/material.min.js"></script>
     <!-- swal -->
-    <script src="{{asset('lib/swal/sweet-alert.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('lib/swal/sweet-alert.css')}}">
+    <script src="/lib/swal/sweet-alert.js"></script>
+    <link rel="stylesheet" href="lib/swal/sweet-alert.css">
 
     @yield('js')
 

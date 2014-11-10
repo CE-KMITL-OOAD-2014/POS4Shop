@@ -13,7 +13,7 @@
         @for ($i=0;$i<count($allProduct);$i++)
             <a href="{{URL::to('/product/'.$allProduct[$i]->get('id'))}}">
                 <div class="col-md-2">
-                    <img src="upload/product/{{$allProduct[$i]->get('file')}}" class="img-responsive" alt="Image">
+                    <img src="/upload/product/{{$allProduct[$i]->get('file')}}" class="img-responsive" alt="Image">
                     {{$allProduct[$i]->get('name')}}
                 </div>
             </a>
