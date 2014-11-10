@@ -23,11 +23,10 @@ class ManagerController extends BaseController {
   public function actionPassword(){
     $manager = App::make('ceddd\\Manager');
     $manager = $manager->getById(Auth::user()->id);
-    if($manager->setPassword(Input::get('oldpwd'),Input::get('newold'),Input::get('conpwd')));
+    if($manager->setPassword(Input::get('oldpwd'),Input::get('newpwd'),Input::get('conpwd')));
       if($manager->edit())
-        return "fail0";
-        //return Redirect::to('manager');
-    return "fail";
+        return Redirect::to('manager');
+    return Redirect::to('manager');
   }
 
   public function actionAdd()

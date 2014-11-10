@@ -66,7 +66,7 @@
     <script src="/js/material.min.js"></script>
     <!-- swal -->
     <script src="/lib/swal/sweet-alert.js"></script>
-    <link rel="stylesheet" href="lib/swal/sweet-alert.css">
+    <link rel="stylesheet" href="/lib/swal/sweet-alert.css">
 
     @yield('js')
 

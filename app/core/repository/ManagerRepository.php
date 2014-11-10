@@ -28,8 +28,7 @@
                 $m->name = $manager->get('name');
                 // Not allow to change username
                 $m->password = $manager->get('password');
-                var_dump($m);
-                exit();
+                
                 return $m->save();
             }
             return false;

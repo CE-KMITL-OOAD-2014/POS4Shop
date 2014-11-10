@@ -9,10 +9,10 @@
             parent::__construct();
         }
         
-        public function setPassword($oldPw,$newPw,$confPw){
-            if($newPw == $confPw){
-                if(Hash::check($oldPw,$this->self['password'])){
-                    $this->self['password'] = Hash::make($newPw);
+        public function setPassword($oldPwd,$newPwd,$conPwd){
+            if($newPwd == $conPwd){
+                if(\Hash::check($oldPwd,$this->self['password'])){
+                    $this->self['password'] = \Hash::make($newPwd);
                     return true;
                 }/*else{
                     //throw new \Exception("Current password incorrect", 1);
