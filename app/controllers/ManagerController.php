@@ -29,6 +29,12 @@ class ManagerController extends BaseController {
     return Redirect::to('manager');
   }
 
+  public function actionName(){
+    $shop = App::make('ceddd\\Shop');
+    $shop->setName(Input::get('name'));
+    return Redirect::to('manager');
+  }
+
   public function actionAdd()
   {
     $data = Input::only(array('name','username','password'));

@@ -41,11 +41,11 @@ class ProductController extends BaseController {
                 $file->move(app_path().'/../public/upload/product/', $newFileName);
             }
             if($product->save()==true){
-                Redirect::to('/product/add')->with('msg',"Add ".$product->get('id')."# <b>".$data['name']."</b> successfull.");
+                Redirect::to('/product')->with('msg',"เพิ่ม <b>".$data['name']."</b> สำเร็จ");
                 //return Redirect::to('/product/'.$product->get('id'));
             }
         }
-        return Redirect::to('/product/add')->withErrors($validator);
+        return Redirect::to('/product')->withErrors($validator);
     }
 
     //--- Edit
@@ -76,6 +76,7 @@ class ProductController extends BaseController {
 
         $rules = ceddd\ProductRepository::getRules();
         $rules['id']='exists:products';
+        $rules['barcode']='required|min:4';
 
         $file = Input::file('file');
         $data['file']=$file;
@@ -98,7 +99,7 @@ class ProductController extends BaseController {
             if($data['file']!=NULL)
                 $file->move(app_path().'/../public/upload/product/', $newFileName);
             $product->edit();
-            return Redirect::to('/product/'.$id)->with('msg',"Add ".$product->get('id')."# <b>".$data['name']."</b> successfull.");
+            return Redirect::to('/product/'.$id)->with('msg',"แก้ไข <b>".$data['name']."</b> สำเร็จ");
         }
 
         return Redirect::to('/product/'.$id.'/edit')->withErrors($validator);

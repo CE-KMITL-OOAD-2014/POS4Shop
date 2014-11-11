@@ -49,6 +49,8 @@ Route::group(array(), function(){
         Route::get('{id}',array('uses'=>'ManagerController@showView'));
             // Del manager
         Route::post('{id}',array('uses'=>'ManagerController@actionDel'));
+            // Manager change Shop name
+        Route::post('name',array('uses'=>'ManagerController@actionName'));
             // Manager change pwd
         Route::post('pwd',array('uses'=>'ManagerController@actionPassword'));
 

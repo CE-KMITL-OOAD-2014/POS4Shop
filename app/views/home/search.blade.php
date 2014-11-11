@@ -8,19 +8,24 @@
     @if ($search!=null)
         <div class="row">
                 <div class="alert alert-success">
-                    <h3>Search : {{$search}}</h3>
+                    <h4>Search : {{$search}}</h4>
                 </div>
         </div>
     @endif
     
-    
-    <div class="row">
-        @for ($i=0;$i<count($searchProduct);$i++)
-            <div class="col-md-2">
-                <img src="upload/product/{{$searchProduct[$i]->get('file')}}" class="img-responsive" alt="Image">
-                {{$searchProduct[$i]->get('name')}} <br>
-            </div>
-        @endfor
-    </div>
+    <div class="well">
+        <div class="row">
 
+        @for ($i=0;$i<count($searchProduct);$i++)
+        <a href="{{URL::to('/product/'.$searchProduct[$i]->get('id'))}}">
+          <div class="col-md-2">
+            <p class="text-center">
+          <img src="/upload/product/{{$searchProduct[$i]->get('file')}}" style="max-height:80px"></p>
+            <p class="text-center" style="z-index:1">{{$searchProduct[$i]->get('name')}} ({{ substr($searchProduct[$i]->get('price'),0,-5) }}฿)</p>
+          </div>
+        </a>
+        @endfor
+        </div>
+    </div>
+    
 @stop

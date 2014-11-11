@@ -1,6 +1,6 @@
 @extends('layout')
 @section('head')
-    <title>{{App::make('ceddd\Shop')->getName()}} - Product::add</title>
+    <title>{{App::make('ceddd\Shop')->getName()}} :: เพิ่มสิน้คาใหม่</title>
 @stop
 
 @section('body')
@@ -23,31 +23,29 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-md-2 control-label">Barcode</label>
-            <input type="text" class="col-md-10 form-control" placeholder="" name="barcode">
+            <label class="col-md-2 control-label">บาร์โค้ด</label>
+            <input type="text" class="col-md-10 form-control" placeholder="" name="barcode" required>
         </div>
         
         <div class="form-group row">
-            <label class="col-md-2 control-label">Name</label>
-            <input type="text" class="col-md-10 form-control" placeholder="" name="name">
+            <label class="col-md-2 control-label">สินค้า</label>
+            <input type="text" class="col-md-10 form-control" placeholder="" name="name" required>
         </div>
         
         <div class="form-group row">
-            <label class="col-md-2 control-label">Detail</label>
+            <label class="col-md-2 control-label">รายละเอียด</label>
             <input type="text" class="col-md-10 form-control" placeholder="" name="detail">
         </div>
         
         <div class="form-group row">
-            <label class="col-md-2 control-label">Cost</label>
-            <input type="text" class="col-md-10 form-control" placeholder="" name="cost">
+            <label class="col-md-2 control-label">ราคาทุน</label>
+            <input type="text" class="col-md-10 form-control" placeholder="" name="cost" required>
         </div>
         
         <div class="form-group row">
-            <label class="col-md-2 control-label">Price</label>
-            <input type="text" class="col-md-10 form-control" placeholder="" name="price">
+            <label class="col-md-2 control-label">ราคาขาย</label>
+            <input type="text" class="col-md-10 form-control" placeholder="" name="price" required>
         </div>
-
-        <button type="submit" class="btn btn-primary">New</button>
-
+        <input type="submit" class="btn btn-primary" value="เพิ่ม">
     </form>
 @stop

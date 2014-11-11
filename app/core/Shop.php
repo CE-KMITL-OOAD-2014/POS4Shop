@@ -8,8 +8,8 @@ class Shop {
   }
 
   public function getName(){
-    $name=\Session::get('shop', NULL);
-    if($name==NULL){
+    $shop=\Session::get('shop', NULL);
+    if($shop==NULL){
       $shop=\ShopEloquent::All();
       if(count($shop)>0){
         $shop=$shop[0];
@@ -22,7 +22,7 @@ class Shop {
         $name = $shop->name;
       }
     }
-    $this->self['name']=$name;
+    $this->self['name']=$shop;
     return $this->self['name'];
   }
 
