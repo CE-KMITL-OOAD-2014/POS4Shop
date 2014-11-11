@@ -6,12 +6,8 @@
 
 @section('body')
 <div class="well">
-  <a href="{{url('manager/shop')}}"><button type="button" class="btn btn-lg btn-primary">P.O.S.</button></a>
-  <a href="{{url('product')}}"><button type="button" class="btn btn-lg btn-primary">จัดการสินค้า</button></a>
-  <a href="{{url('customer')}}"><button type="button" class="btn btn-lg btn-primary">จัดการลูกค้า</button></a>
+  <a href="{{url('manager/shop')}}"><button type="button" class="btn btn-lg btn-primary">คิดเงิน</button></a>
   <a href="{{url('manager/list')}}"><button type="button" class="btn btn-lg btn-primary">จัดการพนักงาน</button></a>
-  <a href="{{url('history')}}"><button type="button" class="btn btn-lg btn-primary">ประวัติการขาย</button></a>
-
 
   <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#namechg">เปลี่ยนชื่อร้าน</button>
 

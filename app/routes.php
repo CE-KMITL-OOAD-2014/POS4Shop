@@ -93,4 +93,9 @@ Route::group(array(), function(){
 
     //--History---------------------
         Route::get('history',array('uses'=>'HistoryController@showView'));
+
+    Route::group(array('prefix'=>'api'), function(){
+        Route::get('history/{id}', 'CustomerController@api');
+        Route::get('product/{id}', 'ProductController@api');
+    });
 });

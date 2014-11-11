@@ -98,7 +98,7 @@ class ManagerController extends BaseController {
       Session::forget('pos');
       Session::forget('customer');
     }
-    return Redirect::to('manager/shop');
+    return Redirect::to('manager/shop')->with('msg',"ทำรายการสำเร็จ");
   }
 
   public function showShopCalProduct(){

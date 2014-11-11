@@ -25,13 +25,14 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
-                <!-- class="active" -->
-                <!-- <li ><a href="{{asset('product')}}">Product</a></li>
-                <li ><a href="{{asset('customer')}}">Customer</a></li>
-                <li ><a href="{{asset('manager')}}">Manager</a></li>
-                <li ><a href="{{asset('history')}}">History</a></li>
-                <li ><a href="{{asset('manager/shop')}}">Shop</a></li> -->
-                <li ><a href="{{asset('manager')}}">จัดการ</a></li>
+                @if (Auth::check())
+                    <!-- class="active" -->
+                    <li ><a href="{{url('product')}}">สินค้า</a></li>
+                    <li ><a href="{{url('customer')}}">ลูกค้า</a></li>
+                    <li ><a href="{{url('manager')}}">ผู้จัดการ</a></li>
+                    <li ><a href="{{url('history')}}">ประวัติการขาย</a></li>
+                    <li ><a href="{{url('manager/shop')}}">คิดเงิน</a></li>
+                @endif 
             </ul>
             <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
                 <input class="form-control col-md-8" placeholder="ค้นหาสินค้า" type="text" name="search">

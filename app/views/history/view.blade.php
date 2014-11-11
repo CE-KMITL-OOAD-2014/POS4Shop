@@ -21,6 +21,7 @@
         </thead>
         <tbody>
         <?php
+        if(count($allHistory))
         foreach ($allHistory as $val) {
             $customer = App::make('ceddd\Customer');
             $manager = App::make('ceddd\Manager');
