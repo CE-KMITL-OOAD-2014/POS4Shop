@@ -13,9 +13,9 @@
 
 App::before(function($request)
 {
-	/*if( ! Request::secure()){
+	if( !Request::secure()){
     return Redirect::secure(Request::path());
-  }*/
+  }
 });
 
 

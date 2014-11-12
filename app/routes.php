@@ -2,7 +2,7 @@
 
 Route::pattern('id', '[0-9]+');
 //,'https'=>'https'
-Route::group(array(), function(){
+Route::group(array('https'), function(){
     //--Home
     Route::group(array(), function(){
             // Index
