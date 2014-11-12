@@ -21,7 +21,7 @@ class ManagerController extends BaseController {
   }
   // Change password
   public function actionPassword(){
-    $manager = App::make('ceddd\\Manager');
+    $manager = App::make('ceddd\Manager');
     $manager = $manager->getById(Auth::user()->id);
     if($manager->setPassword(Input::get('oldpwd'),Input::get('newpwd'),Input::get('conpwd')));
       if($manager->edit())
@@ -30,7 +30,7 @@ class ManagerController extends BaseController {
   }
 
   public function actionName(){
-    $shop = App::make('ceddd\\Shop');
+    $shop = App::make('ceddd\Shop');
     $shop->setName(Input::get('name'));
     return Redirect::to('manager');
   }
@@ -72,9 +72,9 @@ class ManagerController extends BaseController {
     // Shop cal
   public function showShopCal(){
     
-    $shop = App::make('ceddd\\Shop');
+    $shop = App::make('ceddd\Shop');
     $arrayOfSoldItem = Session::get('pos', array());
-    $manager = App::make('ceddd\\Manager');
+    $manager = App::make('ceddd\Manager');
     $manager = $manager->getById(Auth::user()->id);
     $customer = Session::get('customer', NULL);
     $customerName='';
@@ -92,10 +92,10 @@ class ManagerController extends BaseController {
     
         // Make history obj and save
     $arrayOfSoldItem = Session::get('pos', array());
-    $manager = App::make('ceddd\\Manager');
+    $manager = App::make('ceddd\Manager');
     $manager = $manager->getById(Auth::user()->id);
 
-    $shop = App::make('ceddd\\Shop');
+    $shop = App::make('ceddd\Shop');
     if($shop->buy($arrayOfSoldItem,$manager,$customer)){
       Session::forget('pos');
       Session::forget('customer');

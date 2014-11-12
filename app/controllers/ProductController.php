@@ -30,7 +30,7 @@ class ProductController extends BaseController {
     $validator = Validator::make($data, $rules);
     if ($validator->passes()) {
 
-      $product = App::make('ceddd\\Product');
+      $product = App::make('ceddd\Product');
       $product->set('barcode',$data['barcode']);
       $product->set('name',$data['name']);
       $product->set('detail',$data['detail']);
@@ -51,7 +51,7 @@ class ProductController extends BaseController {
     //--- Edit
   public function showEdit($id)
   {
-    $product = App::make('ceddd\\Product');
+    $product = App::make('ceddd\Product');
     $product = $product->getById($id);
     if($product==NULL)
       return App::abort(404);
@@ -108,7 +108,7 @@ class ProductController extends BaseController {
     //--- View
   public function showView($id)
   {
-    $product = App::make('ceddd\\Product');
+    $product = App::make('ceddd\Product');
     $product = $product->getById($id);
     if($product==NULL)
       return App::abort(404);
@@ -117,7 +117,7 @@ class ProductController extends BaseController {
 
     //api
   public function api($id){
-    $product = App::make('ceddd\\Product');
+    $product = App::make('ceddd\Product');
     $product = $product->getById($id);
     if($product==NULL)
       return App::abort(404);
@@ -128,7 +128,7 @@ class ProductController extends BaseController {
     //--- Del
   public function actionDel(){
     $data  = Input::get("id");
-    $product = App::make('ceddd\\Product');
+    $product = App::make('ceddd\Product');
     $product = $product->getById($data);
     $product->delete();
     return Response::make('delete '.$data, 200);
