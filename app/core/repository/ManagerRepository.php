@@ -46,6 +46,7 @@ class ManagerRepository implements Repository{
     $all = \ManagerEloquent::all();
     if(count($all)==0)
       return NULL;
+    $result=array();
     foreach($all as $key => $val){
       $m = new Manager(new ManagerRepository);
       $m->set('id',$val->id);
@@ -63,6 +64,7 @@ class ManagerRepository implements Repository{
     $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%');;
     if(count($all)==0)
       return NULL;
+    $result=array();
     foreach($all as $key => $val){
       $m = new Manager(new ManagerRepository);
       $m->set('id',$val->id);
@@ -95,6 +97,7 @@ class ManagerRepository implements Repository{
     $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%');;
     if(count($all)==0)
       return NULL;
+    $result=array();
     foreach($all as $index => $val){
       $m = new Manager(new ManagerRepository);
       $m->set('id',$val->id);

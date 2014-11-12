@@ -19,7 +19,7 @@ class Shop {
         $shop->name="New Shop";
         $shop->save();
         \Session::put('shop', "New Shop");
-        $name = $shop->name;
+        //$name = $shop->name;
       }
     }
     $this->self['name']=$shop;
@@ -41,7 +41,7 @@ class Shop {
     return $this->self['name'];
   }
 
-	function cal($item,Manager $manager,Customer $customer=NULL){
+	function cal($item){
 		$result=0;
 		if($item==NULL)
 			return $result;			

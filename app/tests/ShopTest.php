@@ -6,9 +6,7 @@ class ShopTest extends TestCase {
     {    
         
         // Asset
-        $price=0;
         $totalPrice=0;
-        $quantity=0;
         $arrItem=array();       
         for ($i=1 ; $i < 5; $i++) { // Mock 5 SoldItem object
             $quantity = $i*2;

@@ -22,6 +22,7 @@ class ProductController extends BaseController {
 
     $file = Input::file('file');
     $data['file']=$file;
+    $newFileName="";
     if($file==NULL){
       $rules['file'] = "";
     }else{
@@ -80,6 +81,7 @@ class ProductController extends BaseController {
 
     $file = Input::file('file');
     $data['file']=$file;
+    $newFileName="";
     if($data['file']!=NULL)
       $newFileName = $data['barcode'].".".$file->guessExtension();
 
