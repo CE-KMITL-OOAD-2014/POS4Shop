@@ -18,7 +18,7 @@ class CreateHistory extends Migration {
             $table->integer('product_id');
             $table->float('quantity',8,4);
             $table->float('price',8,4);
-            $table->integer('customer_id');
+            $table->integer('customer_id')->nullable(true);
             $table->timestamps();
         });
     }

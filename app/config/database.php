@@ -83,16 +83,16 @@ return array(
 			'prefix'   => '',
 		),
 
-        'myDB' => array(
-            'driver'    => 'mysql',
-            'host'      => 'ioniz.tk',
-            'database'  => 'ooad',
-            'username'  => 'ooad',
-            'password'  => 'ooad',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-        )
+    'myDB' => array(
+        'driver'    => 'mysql',
+        'host'      => 'ioniz.tk',
+        'database'  => 'ooad',
+        'username'  => 'ooad',
+        'password'  => 'ooad',
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
+    )
 	),
 
 	/*

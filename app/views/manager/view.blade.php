@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('head')
-    <title>POS4Shop - Manager::view</title>    
+    <title>{{App::make('ceddd\Shop')->getName()}} - Manager::view</title>    
 @stop
 
 @section('body')
@@ -27,7 +27,7 @@
                 closeOnConfirm: false
             },
             function(){
-                swal("Deleted!", "Deleted.", "success");
+                swal("Deleted!", "Deleted.", "success. Wait for refresh in a few second");
                 $.post("{{URL::current()}}",{id:{{$manager->get('id')}} },function(result){
                     window.location.assign("{{URL::to('manager')}}");
                 });

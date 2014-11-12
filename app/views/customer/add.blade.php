@@ -1,6 +1,6 @@
 @extends('layout')
 @section('head')
-    <title>POS4Shop - Customer::add</title>
+    <title>{{App::make('ceddd\Shop')->getName()}} - Customer::add</title>
 @stop
 
 @section('body')
@@ -9,7 +9,7 @@
 
         <div class="form-group">
             <label for="">Name</label>
-            <input type="text" class="form-control" id="" placeholder="Input field" name="name">
+            <input type="text" class="form-control" id="" placeholder="Input field" name="name" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
