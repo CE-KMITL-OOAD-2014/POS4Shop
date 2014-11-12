@@ -9,14 +9,14 @@
     <table class="table table-striped table-hover ">
         <thead>
         <tr>
-            <th>History ID</th>
-            <th>Product Name</th>
-            <th>quantity</th>
-            <th>price</th>
-            <th>Customer Name</th>
-            <th>Manager Name</th>
-            <th>Create at</th>
-            <th>Update at</th>
+            <th>ID</th>
+            <th>รายการ</th>
+            <th>จำนวน</th>
+            <th>ราคา</th>
+            <th>ลูกค้า</th>
+            <th>ผู้จัดการ</th>
+            <th>เมื่อ</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -54,8 +54,8 @@
                 <td><?php foreach ($priceArr as $priceVal) echo $priceVal."<br>"; ?></td>
                 <td>{{$customerName}}</td>
                 <td>{{$manager}}</td>
-                <td>{{$val->get('created_at')}}</td>
                 <td>{{$val->get('updated_at')}}</td>
+                <td><button type="button" class="btn btn-danger" onclick="delConfirm({{$val->get('id')}})">ลบ</button></td>
             </tr>
         <?php
         }
@@ -66,4 +66,24 @@
 @stop
 
 @section('js')
+    <script type="text/javascript">
+    function delConfirm(hid){
+        swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function(){
+                swal("Deleted!", "Deleted.", "success. Wait for refresh in a few second");
+                $.post("{{URL::current()}}",{hid:hid},function(result){
+                    window.location.assign("{{URL::to('history')}}");
+                });
+            }
+        );
+    }
+    </script>
 @stop

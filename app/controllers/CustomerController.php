@@ -23,9 +23,9 @@ class CustomerController extends BaseController {
             $c = App::make('ceddd\\Customer');
             $c->set('name',$data['name']);
             if($c->save())
-                Redirect::to('/customer/add')->with('msg',"Add ".$data['name']." successfull.");
+                Redirect::to('/customer')->with('msg',"เพิ่ม ".$data['name']." สำเร็จ");
         }
-        return Redirect::to('/customer/add')->withErrors($validator);
+        return Redirect::to('/customer')->withErrors($validator);
     }
 
     public function showEdit($id)
@@ -89,7 +89,7 @@ class CustomerController extends BaseController {
         return View::make('customer.history')->with('history',$history);
     }*/
 
-    public function actionDel(){
+    public function actionDel($id){
         $data  = Input::get("id");
         $customer = App::make('ceddd\\Customer');
         $customer = $customer->getById($data);

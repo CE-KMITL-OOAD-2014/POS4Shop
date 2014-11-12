@@ -27,7 +27,7 @@ Route::group(array(), function(){
             // TopSell
         // Route::get('top',array('uses'=>'ProductController@showTopSell'));
             // Add
-        Route::get('add',array('uses'=>'ProductController@showAdd','before' => 'auth'));
+        //Route::get('add',array('uses'=>'ProductController@showAdd','before' => 'auth'));
         Route::post('add',array('uses'=>'ProductController@actionAdd','before' => 'auth'));
             // Edit
         Route::get('{id}/edit',array('uses'=>'ProductController@showEdit','before' => 'auth'));
@@ -43,7 +43,7 @@ Route::group(array(), function(){
             // list
         Route::get('list',array('uses'=>'ManagerController@showList'));
             // Add manager
-        Route::get('add',array('uses'=>'ManagerController@showAdd'));
+        //Route::get('add',array('uses'=>'ManagerController@showAdd'));
         Route::post('add',array('uses'=>'ManagerController@actionAdd'));    
             // View
         Route::get('{id}',array('uses'=>'ManagerController@showView'));
@@ -79,7 +79,7 @@ Route::group(array(), function(){
     Route::group(array('prefix'=>'customer'), function(){
         Route::get('/',array('uses'=>'CustomerController@showIndex','before' => 'auth'));
             // Add customer
-        Route::get('add',array('uses'=>'CustomerController@showAdd','before' => 'auth'));
+        //Route::get('add',array('uses'=>'CustomerController@showAdd','before' => 'auth'));
         Route::post('add',array('uses'=>'CustomerController@actionAdd','before' => 'auth'));
             // view + history
         Route::get('{id}',array('uses'=>'CustomerController@showView'));
@@ -88,11 +88,14 @@ Route::group(array(), function(){
         Route::post('{id}/edit',array('uses'=>'CustomerController@actionEdit','before' => 'auth'));
             // History  //Route::get('{id}/history',array('uses'=>'CustomerController@showHistory'));
             // del
-        Route::post('customer/{id}',array('uses'=>'CustomerController@actionDel','before' => 'auth'));
+        Route::post('{id}',array('uses'=>'CustomerController@actionDel','before' => 'auth'));
     });
 
     //--History---------------------
-        Route::get('history',array('uses'=>'HistoryController@showView'));
+    Route::group(array('prefix'=>'history'), function(){
+        Route::get('/',array('uses'=>'HistoryController@showView'));
+        Route::post('/',array('uses'=>'HistoryController@actionDel'));
+    });
 
     Route::group(array('prefix'=>'api'), function(){
         Route::get('history/{id}', 'CustomerController@api');

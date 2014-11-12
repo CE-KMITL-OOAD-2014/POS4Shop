@@ -5,13 +5,9 @@
 @stop
 
 @section('body')
-<?php 
-//var_dump($allProduct);
-//exit();
-?>
 <div class="well">
-  <div class="row">
   <h3>สินค้าขายดี</h3>
+  <div class="row">
     @for ($i=0;$i<count($top);$i++)
     <a href="{{URL::to('/product/'.$top[$i]->get('id'))}}">
       <div class="col-md-2">
@@ -24,6 +20,7 @@
     @endfor
   </div>
   <hr>
+  <h3>สินค้า</h3>
   <div class="row">
     @for ($i=0;$i<count($allProduct);$i++)
     <a href="{{URL::to('/product/'.$allProduct[$i]->get('id'))}}">
@@ -36,5 +33,6 @@
     </a>
     @endfor
   </div>
+  <style></style>
 </div>
 @stop

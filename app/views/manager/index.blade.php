@@ -6,12 +6,12 @@
 
 @section('body')
 <div class="well">
-  <a href="{{url('manager/shop')}}"><button type="button" class="btn btn-lg btn-primary">คิดเงิน</button></a>
-  <a href="{{url('manager/list')}}"><button type="button" class="btn btn-lg btn-primary">จัดการพนักงาน</button></a>
+  <a href="{{url('manager/shop')}}"><button type="button" class="btn btn-lg btn-primary">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></button></a>
+  <a href="{{url('manager/list')}}"><button type="button" class="btn btn-lg btn-primary">รายชื่อผู้จัดการ <span class="glyphicon glyphicon-user"></span></button></a>
 
-  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#namechg">เปลี่ยนชื่อร้าน</button>
+  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#namechg">เปลี่ยนชื่อร้าน <span class="glyphicon glyphicon-registration-mark"></span></button>
 
-  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#pwdchg">เปลี่ยนรหัสผ่าน</button>
+  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#pwdchg">เปลี่ยนรหัสผ่าน <span class="glyphicon glyphicon-pencil"></span></button>
 
 <!-- Shop name -->
 <div class="modal fade" id="namechg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

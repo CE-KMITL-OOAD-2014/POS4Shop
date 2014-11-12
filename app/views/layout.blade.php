@@ -27,11 +27,11 @@
             <ul class="nav navbar-nav">
                 @if (Auth::check())
                     <!-- class="active" -->
+                    <li ><a href="{{url('manager/shop')}}">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                     <li ><a href="{{url('product')}}">สินค้า</a></li>
                     <li ><a href="{{url('customer')}}">ลูกค้า</a></li>
                     <li ><a href="{{url('manager')}}">ผู้จัดการ</a></li>
                     <li ><a href="{{url('history')}}">ประวัติการขาย</a></li>
-                    <li ><a href="{{url('manager/shop')}}">คิดเงิน</a></li>
                 @endif 
             </ul>
             <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
@@ -40,9 +40,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     @if (Auth::guest())
-                        <a href="{{URL::to('/login')}}">Login</a>
+                        <a href="{{URL::to('/login')}}">เข้าสู่ระบบ</a>
                     @else
-                        <a href="{{URL::to('/logout')}}">{{Auth::user()->name}} ( Logout )</a>
+                        <a href="{{URL::to('/logout')}}">{{Auth::user()->name}} ( ออกจากระบบ )</a>
                     @endif 
                 </li>
             </ul>

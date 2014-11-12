@@ -30,7 +30,7 @@ class Summary{
   }
   public function getProductType(){
     
-    $arrayOfHistory = $this->self['repository']->getAllMonthRow();
+    $arrayOfHistory = $this->self['repository']->getRowByMonth();
 
     $result = array();
     foreach($arrayOfHistory as $val){
@@ -73,5 +73,24 @@ class Summary{
     $this->self['topSell']=$topSell;
     \Session::put('top', $topSell);
     return $this->self['topSell'];
+  }
+  public function report($date){
+    $arrayOfHistory = $this->self['repository']->getRowByDay();
+
+    $productList = array();
+    foreach($arrayOfHistory as $val){
+      $productId = $val->get('item')[0]->get('item')->get('id');
+      if (!in_array($productId, $productList)) {
+        array_push($productList, $productId);        
+      }
+    }
+  
+    $arrOfProductId = $this->getProductType();
+    $result=array();
+    foreach($arrOfProductId as $val){
+      $result[strval($val)]= $this->getProductSoldQuantity($val);
+    }
+
+    return $result;
   }
 }

@@ -50,7 +50,7 @@
       <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">เปลี่ยนชื่อร้าน</h4>
+          <h4 class="modal-title" id="myModalLabel">สินค้าใหม่</h4>
         </div>
         <div class="modal-body">
 

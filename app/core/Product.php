@@ -48,17 +48,17 @@
             return $this->self['repository']->find($name);
         }
 
-        public function findJSON($name){
+        /*public function findJSON($name){
             return \Response::json($this->self['repository']->find($name));
-        }
+        }*/
 
         public function where($key,$value){
             return $this->self['repository']->where($key,$value);
         }
 
-        public function __toString(){
+        /*public function __toString(){
             return \Response::json($this->self);
-        }
+        }*/
 
         public function json(){
             $result = $this->self;

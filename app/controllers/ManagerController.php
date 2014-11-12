@@ -46,9 +46,9 @@ class ManagerController extends BaseController {
       $manager->set('username',$data['username']);
       $manager->set('password',Hash::make($data['password']));
       if($manager->save())
-        Redirect::to('/manager/add')->with('msg',"Add ".$data['name']." successfull.");
+        Redirect::to('/manager/list')->with('msg',"Add ".$data['name']." สำเร็จ");
     }
-    return Redirect::to('/manager/add')->withErrors($validator);
+    return Redirect::to('/manager/list')->withErrors($validator);
   }
   
   public function showView($id){

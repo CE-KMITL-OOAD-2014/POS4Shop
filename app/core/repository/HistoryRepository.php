@@ -58,11 +58,7 @@
         }
 
         public function deleteByHID($history){ //TODO (ziko) : change param - -
-            $h = \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
-            if($h->delete()){
-                return true;
-            }
-            return false;
+            return \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
         }
 
         public static function getAll(){
@@ -262,7 +258,35 @@
             return $result;
         }
 
-        public static function getAllMonthRow(){
+        public static function getRowByMonth(){
+            $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
+            
+            $all = \HistoryEloquent::where('created_at','>=',$monthTime)->orderBy('product_id')->get();
+            if(count($all) == 0)
+                return NULL;
+            $result = array();
+            $product = \App::make('ceddd\\Product');
+            foreach($all as $key => $val){
+
+                $history = \App::make('ceddd\History');
+                $history->set('id',$val->id);
+                $history->set('hid',$val->hid);
+                $soldItem = \App::make('ceddd\\SoldItem');
+                $soldItem->set('item',$product->getById($val->product_id));
+                $soldItem->set('quantity',$val->quantity);
+                $soldItem->set('price',$val->price);
+                $arrOfSoldItem[0]=$soldItem;
+                $history->set('item',$arrOfSoldItem);
+                $history->set('manager_id',$val->manager_id);
+                $history->set('customer_id',$val->customer_id);
+                $history->set('created_at',$val->created_at);
+                $history->set('updated_at',$val->updated_at);
+                $result[$key]=$history;
+            }
+            return $result;
+        }
+
+        public static function getRowByDay(){
             $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
             
             $all = \HistoryEloquent::where('created_at','>=',$monthTime)->orderBy('product_id')->get();
