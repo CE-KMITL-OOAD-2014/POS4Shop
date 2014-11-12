@@ -1,6 +1,9 @@
 Point-of-service-for-shop
 =========================
-[![Build Status](https://travis-ci.org/CE-KMITL-OOAD-2014/POS4Shop.svg?branch=master)](https://travis-ci.org/CE-KMITL-OOAD-2014/POS4Shop)  
+[![Build Status](https://travis-ci.org/CE-KMITL-OOAD-2014/POS4Shop.svg?branch=master)](https://travis-ci.org/CE-KMITL-OOAD-2014/POS4Shop)
+[![Code Coverage](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CE-KMITL-OOAD-2014/POS4Shop/?branch=master)  
 เว็บไซต์สำหรับคิดราคาสินค้าที่ลูกค้าซื้อจากร้านค้า 
 โดยชื่อสินค้านั้นสามารถระบุจากบาร์โค้ดของสินค้าหรือค้นหาจากชื่อสินค้าก็ได้ พร้อมบันทึกประวัติการซื้อ
 
