@@ -77,7 +77,7 @@ class CustomerController extends BaseController {
         $customer = $customer->getById($id);
         if($customer==NULL)
             return App::abort(404);
-        return json_encode($customer->toJson());
+        return json_encode($customer->toArray());
     }
 
     /*public function showHistory($cid)

@@ -38,7 +38,7 @@ class Customer extends User{
     return $this->self['history'];
             //return $customerHistory;
   }
-  public function toJson(){
+  public function toArray(){
     if($this->self['history']==NULL){
       $this->self['history']=$this->getHistory();
     }
