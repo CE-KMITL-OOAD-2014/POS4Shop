@@ -9,7 +9,7 @@
   <h3>สินค้าขายดี</h3>
   <div class="row">
     @for ($i=0;$i<count($top);$i++)
-    <a href="/product/{{$top[$i]->get('id'))}}">
+    <a href="/product/{{$top[$i]->get('id')}}">
       <div class="col-md-2">
         <p style="text-align:center">
           <img src="/upload/product/{{$top[$i]->get('file')}}" style="max-height:80px">
