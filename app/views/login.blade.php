@@ -4,6 +4,7 @@
 @stop
 
 @section('body')
+<div class="well">    
     <form action="{{url('/login')}}" method="POST" role="form">
         <legend>Login</legend>
 
@@ -19,4 +20,5 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
 @stop

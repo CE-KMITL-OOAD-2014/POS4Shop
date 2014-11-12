@@ -6,7 +6,13 @@ class HomeController extends BaseController {
 	{
 		$product = App::make('ceddd\Product');
 		$allProduct = $product->getAll();
-    return View::make('home.index')->with('allProduct',$allProduct);
+    //topsell
+    $top = Session::get('top', array());
+    if(count($top)==0){
+      $summary = App::make('ceddd\Summary');
+      $top=$summary->getTopSell();
+    }
+    return View::make('home.index')->with(array('allProduct'=>$allProduct,'top'=>$top));
   }
 
     // Login

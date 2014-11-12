@@ -50,6 +50,7 @@ class ManagerController extends BaseController {
     }
     return Redirect::to('/manager/add')->withErrors($validator);
   }
+  
   public function showView($id){
     $manager = App::make('ceddd\Manager');
     $manager = $manager->getById($id);
@@ -60,6 +61,7 @@ class ManagerController extends BaseController {
 
     // Del manager
   public function actionDel(){
+
     $data  = Input::get("id");
     $manager = App::make('ceddd\Manager');
     $manager = $manager->getById($data);

@@ -72,6 +72,14 @@ class CustomerController extends BaseController {
         return View::make('customer.view')->with(array('customer'=>$customer,'history'=>$history));
     }
 
+    public function api($id){
+        $customer = App::make('ceddd\\Customer');
+        $customer = $customer->getById($id);
+        if($customer==NULL)
+            return App::abort(404);
+        return json_encode($customer->toJson());
+    }
+
     /*public function showHistory($cid)
     {
         $history = App::make('ceddd\\History');
