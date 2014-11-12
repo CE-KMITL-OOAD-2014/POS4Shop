@@ -81,7 +81,7 @@ class ManagerController extends BaseController {
     if($customer!=NULL)
       $customerName=$customer->get('name');
 
-    $allPrice = $shop->cal($arrayOfSoldItem,$manager,NULL);
+    $allPrice = $shop->cal($arrayOfSoldItem);
 
     return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'allPrice'=>$allPrice,'customer'=>$customerName));
   }
