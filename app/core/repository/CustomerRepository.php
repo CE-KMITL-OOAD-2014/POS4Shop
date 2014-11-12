@@ -39,7 +39,7 @@ class CustomerRepository implements Repository{
     $all = \CustomerEloquent::all();
     if(count($all)==0)
       return NULL;
-
+    $result=array();
     foreach($all as $key => $val){
       $c=\App::make('ceddd\Customer');
       $c->set('id',$val->id);

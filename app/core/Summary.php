@@ -74,23 +74,5 @@ class Summary{
     \Session::put('top', $topSell);
     return $this->self['topSell'];
   }
-  public function report($date){
-    $arrayOfHistory = $this->self['repository']->getRowByDay();
-
-    $productList = array();
-    foreach($arrayOfHistory as $val){
-      $productId = $val->get('item')[0]->get('item')->get('id');
-      if (!in_array($productId, $productList)) {
-        array_push($productList, $productId);        
-      }
-    }
   
-    $arrOfProductId = $this->getProductType();
-    $result=array();
-    foreach($arrOfProductId as $val){
-      $result[strval($val)]= $this->getProductSoldQuantity($val);
-    }
-
-    return $result;
-  }
 }
