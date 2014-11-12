@@ -47,7 +47,7 @@
 <div class="modal fade" id="namechg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data">
+      <form action="/product/add" method="POST" role="form" enctype="multipart/form-data">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title" id="myModalLabel">สินค้าใหม่</h4>

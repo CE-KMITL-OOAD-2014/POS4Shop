@@ -4,7 +4,7 @@
 @stop
 
 @section('body')
-    <form action="{{url('/customer/add')}}" method="POST" role="form">
+    <form action="/customer/add" method="POST" role="form">
         <legend>Customer : New</legend>
 
         <div class="form-group">

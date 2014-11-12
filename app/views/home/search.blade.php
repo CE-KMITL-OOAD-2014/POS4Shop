@@ -25,7 +25,7 @@
 <div class="well">
   <div class="row">
     @for ($i=0;$i<$size;$i++)
-    <a href="{{URL::to('/product/'.$searchProduct[$i]->get('id'))}}">
+    <a href="/product/{{$searchProduct[$i]->get('id'))}}">
       <div class="col-md-2">
         <p class="text-center">
           <img src="/upload/product/{{$searchProduct[$i]->get('file')}}" style="max-height:80px"></p>

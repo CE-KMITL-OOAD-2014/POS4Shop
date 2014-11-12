@@ -69,7 +69,7 @@
       <button type="submit" class="btn btn-danger" onclick="delConfirm(0)">ล้างรายการ</button>
     </div>
     <div class="col-md-3">
-      <form action="{{url('/manager/shop')}}" method="POST" role="form" class="form-horizontal">
+      <form action="/manager/shop" method="POST" role="form" class="form-horizontal">
         <fieldset>  
           <button type="submit" class="btn btn-success pull-right">ทำรายการ</button>
         </fieldset>            

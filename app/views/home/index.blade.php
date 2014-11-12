@@ -9,7 +9,7 @@
   <h3>สินค้าขายดี</h3>
   <div class="row">
     @for ($i=0;$i<count($top);$i++)
-    <a href="{{URL::to('/product/'.$top[$i]->get('id'))}}">
+    <a href="/product/'{{$top[$i]->get('id'))}}">
       <div class="col-md-2">
         <p style="text-align:center">
           <img src="/upload/product/{{$top[$i]->get('file')}}" style="max-height:80px">
@@ -23,7 +23,7 @@
   <h3>สินค้า</h3>
   <div class="row">
     @for ($i=0;$i<count($allProduct);$i++)
-    <a href="{{URL::to('/product/'.$allProduct[$i]->get('id'))}}">
+    <a href="/product/{{$allProduct[$i]->get('id'))}}">
       <div class="col-md-2">
         <p style="text-align:center">
           <img src="/upload/product/{{$allProduct[$i]->get('file')}}" style="max-height:80px">

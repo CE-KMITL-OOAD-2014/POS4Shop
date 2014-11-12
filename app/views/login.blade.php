@@ -5,7 +5,7 @@
 
 @section('body')
 <div class="well">    
-    <form action="{{url('/login')}}" method="POST" role="form">
+    <form action="/login" method="POST" role="form">
         <legend>Login</legend>
 
         <div class="form-group">

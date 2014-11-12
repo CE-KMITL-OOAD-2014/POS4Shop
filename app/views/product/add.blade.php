@@ -4,7 +4,7 @@
 @stop
 
 @section('body')
-    <form action="{{url('/product/add')}}" method="POST" role="form" enctype="multipart/form-data">
+    <form action="/product/add" method="POST" role="form" enctype="multipart/form-data">
         <legend>Product : New</legend>
 
         @if (Session::get('msg')!=null)

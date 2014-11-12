@@ -4,7 +4,7 @@
 @stop
 
 @section('body')
-    <form action="{{url('/manager/add')}}" method="POST" role="form">
+    <form action="/manager/add" method="POST" role="form">
         <legend>Manager : New</legend>
         
         <div class="form-group">
