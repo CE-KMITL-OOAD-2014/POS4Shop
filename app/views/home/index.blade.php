@@ -31,7 +31,7 @@
 
     <div class="col-md-3">
       <div class="thumbnail">
-        <img src="/upload/product/{{$allProduct[$i]->get('file')}}" alt="{{$allProduct[$i]->get('name')}}" style="max-height:160px">
+        <img src="/upload/product/{{$allProduct[$i]->get('file')}}" alt="{{$allProduct[$i]->get('name')}}" style="max-height:100px">
         <div class="caption">
           <a href="/product/{{$allProduct[$i]->get('id')}}">
             <h4>{{$allProduct[$i]->get('name')}} ({{ substr($allProduct[$i]->get('price'),0,-5) }}฿)</h4>
