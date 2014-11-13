@@ -12,7 +12,7 @@
 
     <div class="col-md-3">
       <div class="thumbnail">
-        <img data-src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}">
+        <img src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}">
         <div class="caption">
           <a href="/product/{{$top[$i]->get('id')}}">
             <h3>{{$top[$i]->get('name')}}</h3>
@@ -28,14 +28,18 @@
   <h3>สินค้า</h3>
   <div class="row">
     @for ($i=0;$i<count($allProduct);$i++)
-    <a href="/product/{{$allProduct[$i]->get('id')}}">
-      <div class="col-md-2">
-        <p style="text-align:center">
-          <img src="/upload/product/{{$allProduct[$i]->get('file')}}" style="max-height:80px">
-        </p>
-        <p class="text-center" style="text-align:center,z-index:1">{{$allProduct[$i]->get('name')}} ({{ substr($allProduct[$i]->get('price'),0,-5) }}฿)</p>
+
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <img src="/upload/product/{{$allProduct[$i]->get('file')}}" alt="{{$allProduct[$i]->get('name')}}">
+        <div class="caption">
+          <a href="/product/{{$allProduct[$i]->get('id')}}">
+            <h4>{{$allProduct[$i]->get('name')}} ({{ substr($allProduct[$i]->get('price'),0,-5) }}฿)</h4>
+          </a>
+        </div>
       </div>
-    </a>
+    </div>
+
     @endfor
   </div>
   <style></style>
