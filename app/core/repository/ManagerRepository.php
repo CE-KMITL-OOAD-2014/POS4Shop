@@ -42,6 +42,21 @@ class ManagerRepository implements Repository{
     return false;
   }
 
+  public static function getById($id){
+    $m = \ManagerEloquent::find($id);
+    if($m){
+      $manager = \App::make('ceddd\Manager');
+      $manager->set('id',$m->id);
+      $manager->set('name',$m->name);
+      $manager->set('username',$m->username);
+      $manager->set('password',$m->password);
+      $manager->set('created_at',$m->created_at);
+      $manager->set('updated_at',$m->updated_at);
+      return $manager;
+    }
+    return NULL;
+  }
+  
   public static function getAll(){
     $all = \ManagerEloquent::all();
     if(count($all)==0)
@@ -78,20 +93,6 @@ class ManagerRepository implements Repository{
     return $result;
   }
 
-  public static function getById($id){
-    $m = \ManagerEloquent::find($id);
-    if($m){
-      $manager = \App::make('ceddd\Manager');
-      $manager->set('id',$m->id);
-      $manager->set('name',$m->name);
-      $manager->set('username',$m->username);
-      $manager->set('password',$m->password);
-      $manager->set('created_at',$m->created_at);
-      $manager->set('updated_at',$m->updated_at);
-      return $manager;
-    }
-    return NULL;
-  }
   
   public static function where($key,$value){
     $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%')->get();

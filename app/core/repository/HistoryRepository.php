@@ -54,10 +54,6 @@ class HistoryRepository implements Repository{
     return false;
   }
 
-  public function deleteByHID($history){
-    return \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
-  }
-
   public static function getAll(){
     $all = \HistoryEloquent::all();
     $count = count($all);
@@ -125,6 +121,58 @@ class HistoryRepository implements Repository{
     return NULL;
   }
 
+  public static function find($hid){ 
+    $where = \HistoryEloquent::where('hid', $hid)->get();
+    if(count($where)==0)
+      return NULL;
+    $soldItem = \App::make('ceddd\SoldItem');
+    $product = \App::make('ceddd\Product');
+    $result=array();
+    foreach($where as $key => $val){
+      $h = \App::make('ceddd\History');
+      $h->set('id',$val->id);
+      $h->set('hid',$val->hid);
+      $h->set('customer_id',$val->customer_id);
+      $h->set('manager_id',$val->manager_id);
+      $soldItem->set('item',$product->getById($val->product_id));
+      $soldItem->set('quantity',$val->quantity);
+      $soldItem->set('price',$val->price);
+      $h->set('item',$soldItem);
+      $h->set('created_at',$val->created_at);
+      $h->set('updated_at',$val->updated_at);
+      $result[$key]=$h;
+    }
+    return $result;
+  }
+
+  public static function where($col,$value){
+    $where = \HistoryEloquent::where($col, 'like', '%'.$value.'%')->get();
+    if(count($where)==0)
+      return NULL;
+    $soldItem = \App::make('ceddd\SoldItem');
+    $product = \App::make('ceddd\Product');
+    $result=array();
+    foreach($where as $key => $val){
+      $h = \App::make('ceddd\History');
+      $h->set('id',$val->id);
+      $h->set('hid',$val->hid);
+      $h->set('customer_id',$val->customer_id);
+      $h->set('manager_id',$val->manager_id);
+      $soldItem->set('item',$product->getById($val->product_id));
+      $soldItem->set('quantity',$val->quantity);
+      $soldItem->set('price',$val->price);
+      $h->set('item',$soldItem);
+      $h->set('created_at',$val->created_at);
+      $h->set('updated_at',$val->updated_at);
+      $result[$key]=$h;
+    } 
+    return $result;
+  }
+
+  public function deleteByHID($history){
+    return \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
+  }
+  
   public static function getLast(){
     $h = \HistoryEloquent::all();
     $history = $h->last();
@@ -206,53 +254,6 @@ class HistoryRepository implements Repository{
     return $result;
   }
 
-  public static function find($hid){ 
-    $where = \HistoryEloquent::where('hid', $hid)->get();
-    if(count($where)==0)
-      return NULL;
-    $soldItem = \App::make('ceddd\SoldItem');
-    $product = \App::make('ceddd\Product');
-    $result=array();
-    foreach($where as $key => $val){
-      $h = \App::make('ceddd\History');
-      $h->set('id',$val->id);
-      $h->set('hid',$val->hid);
-      $h->set('customer_id',$val->customer_id);
-      $h->set('manager_id',$val->manager_id);
-      $soldItem->set('item',$product->getById($val->product_id));
-      $soldItem->set('quantity',$val->quantity);
-      $soldItem->set('price',$val->price);
-      $h->set('item',$soldItem);
-      $h->set('created_at',$val->created_at);
-      $h->set('updated_at',$val->updated_at);
-      $result[$key]=$h;
-    }
-    return $result;
-  }
-
-  public static function where($col,$value){
-    $where = \HistoryEloquent::where($col, 'like', '%'.$value.'%')->get();
-    if(count($where)==0)
-      return NULL;
-    $soldItem = \App::make('ceddd\SoldItem');
-    $product = \App::make('ceddd\Product');
-    $result=array();
-    foreach($where as $key => $val){
-      $h = \App::make('ceddd\History');
-      $h->set('id',$val->id);
-      $h->set('hid',$val->hid);
-      $h->set('customer_id',$val->customer_id);
-      $h->set('manager_id',$val->manager_id);
-      $soldItem->set('item',$product->getById($val->product_id));
-      $soldItem->set('quantity',$val->quantity);
-      $soldItem->set('price',$val->price);
-      $h->set('item',$soldItem);
-      $h->set('created_at',$val->created_at);
-      $h->set('updated_at',$val->updated_at);
-      $result[$key]=$h;
-    } 
-    return $result;
-  }
 
   public static function getRowByMonth(){ // for compute topsell only
     $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));

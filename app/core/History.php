@@ -18,24 +18,8 @@ class History{
     return $this->self[$key];
   }
 
-  public function getByProductId($pid){
-    return $this->self['repository']->getByProductId($pid);
-  }
-
-  public function getLast(){
-    return $this->self['repository']->getLast();
-  }
-
   public function set($key,$value){
     $this->self[$key]=$value;
-  }
-
-  public function delete(){
-    return $this->self['repository']->deleteByID($this);
-  }
-
-  public function deleteByHID(){
-    return $this->self['repository']->deleteByHID($this);
   }
 
   public function save(){
@@ -49,12 +33,30 @@ class History{
   public function getById($id){
     return $this->self['repository']->getById($id);
   }
+  
+  public function getAll(){
+    return $this->self['repository']->getAll();
+  }
+
+  public function delete(){
+    return $this->self['repository']->deleteByID($this);
+  }
+  
+  public function getByProductId($pid){
+    return $this->self['repository']->getByProductId($pid);
+  }
+
+  public function getLast(){
+    return $this->self['repository']->getLast();
+  }
+
+  public function deleteByHID(){
+    return $this->self['repository']->deleteByHID($this);
+  }
+
 
   public function getByCustomerId($cid){
     return $this->self['repository']->getByCustomerId($cid);
-  }
-  public function getAll(){
-    return $this->self['repository']->getAll();
   }
 
   public function find($hid){

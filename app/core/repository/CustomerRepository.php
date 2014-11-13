@@ -35,6 +35,19 @@ class CustomerRepository implements Repository{
     return false;
   }
 
+  public static function getById($id){
+    $ce =\CustomerEloquent::find($id);
+    if($ce){
+      $customer=\App::make('ceddd\Customer');
+      $customer->set('id',$ce->id);
+      $customer->set('name',$ce->name);                
+      $customer->set('created_at',$ce->created_at);
+      $customer->set('updated_at',$ce->updated_at);
+      return $customer;
+    }
+    return NULL;
+  }
+
   public static function getAll(){
     $all = \CustomerEloquent::all();
     if(count($all)==0)
@@ -65,19 +78,6 @@ class CustomerRepository implements Repository{
       $result[$key]=$c;
     }
     return $result;
-  }
-
-  public static function getById($id){
-    $ce =\CustomerEloquent::find($id);
-    if($ce){
-      $customer=\App::make('ceddd\Customer');
-      $customer->set('id',$ce->id);
-      $customer->set('name',$ce->name);                
-      $customer->set('created_at',$ce->created_at);
-      $customer->set('updated_at',$ce->updated_at);
-      return $customer;
-    }
-    return NULL;
   }
 
   public static function where($key,$value){
