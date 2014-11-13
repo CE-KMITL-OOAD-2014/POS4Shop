@@ -15,7 +15,7 @@
         <img src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}" style="max-height:100px">
         <div class="caption">
           <a href="/product/{{$top[$i]->get('id')}}">
-            <h3>{{$top[$i]->get('name')}}</h3>
+            <h3 class="text-center">{{$top[$i]->get('name')}}</h3>
           </a>
           <p>({{ substr($top[$i]->get('price'),0,-5) }}฿)</p>
         </div>
@@ -34,7 +34,7 @@
         <img src="/upload/product/{{$allProduct[$i]->get('file')}}" alt="{{$allProduct[$i]->get('name')}}" style="max-height:100px">
         <div class="caption">
           <a href="/product/{{$allProduct[$i]->get('id')}}">
-            <h4>{{$allProduct[$i]->get('name')}} ({{ substr($allProduct[$i]->get('price'),0,-5) }}฿)</h4>
+            <h4 class="text-center">{{$allProduct[$i]->get('name')}} ({{ substr($allProduct[$i]->get('price'),0,-5) }}฿)</h4>
           </a>
         </div>
       </div>
