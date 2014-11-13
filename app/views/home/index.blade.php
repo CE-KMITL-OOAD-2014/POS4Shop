@@ -15,7 +15,7 @@
         <img src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}" style="max-height:100px">
         <div class="caption">
           <a href="/product/{{$top[$i]->get('id')}}">
-            <h3 class="text-center">{{$top[$i]->get('name')}} ({{ substr($top[$i]->get('price'),0,-5) }}฿)</h3>
+            <h4 class="text-center">{{$top[$i]->get('name')}} ({{ substr($top[$i]->get('price'),0,-5) }}฿)</h4>
           </a>
         </div>
       </div>
