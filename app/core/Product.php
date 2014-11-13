@@ -59,13 +59,4 @@ class Product {
     unset($result['updated_at']);
     return $result;
   }
-        /*public function findJSON($name){
-            return \Response::json($this->self['repository']->find($name));
-          }*/
-
-
-        /*public function __toString(){
-            return \Response::json($this->self);
-          }*/
-
-        }
+}

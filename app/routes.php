@@ -24,10 +24,7 @@ Route::group(array(), function(){
         Route::get('/',array('uses'=>'ProductController@showIndex'));
             // View
         Route::get('{id}',array('uses'=>'ProductController@showView'));
-            // TopSell
-        // Route::get('top',array('uses'=>'ProductController@showTopSell'));
             // Add
-        //Route::get('add',array('uses'=>'ProductController@showAdd','before' => 'auth'));
         Route::post('add',array('uses'=>'ProductController@actionAdd','before' => 'auth'));
             // Edit
         Route::get('{id}/edit',array('uses'=>'ProductController@showEdit','before' => 'auth'));
@@ -43,7 +40,6 @@ Route::group(array(), function(){
             // list
         Route::get('list',array('uses'=>'ManagerController@showList'));
             // Add manager
-        //Route::get('add',array('uses'=>'ManagerController@showAdd'));
         Route::post('add',array('uses'=>'ManagerController@actionAdd'));    
             // View
         Route::get('{id}',array('uses'=>'ManagerController@showView'));
@@ -53,10 +49,6 @@ Route::group(array(), function(){
         Route::post('name',array('uses'=>'ManagerController@actionName'));
             // Manager change pwd
         Route::post('pwd',array('uses'=>'ManagerController@actionPassword'));
-
-            // Shop setting
-        // Route::get('manager/setting',array('uses'=>'ManagerController@showShopSetting'));
-        // Route::post('manager/setting',array('uses'=>'ManagerController@actionshowShopSetting'));
             // Shop history
         Route::get('manager/history',array('uses'=>'ManagerController@showHistory'));
         
@@ -70,8 +62,7 @@ Route::group(array(), function(){
             Route::post('product/{barcode}/del',array('uses'=>'ManagerController@actionShopCalProductDelete'));
 
             Route::post('customer',array('uses'=>'ManagerController@showShopCalCustomer'));
-            Route::get('customer/{id}',array('uses'=>'ManagerController@actionShopCalCustomer')); //Customer Finder and Select
-            //Route::post('shop/select',array('uses'=>'ManagerController@actionShopCalCustomer'));
+            Route::get('customer/{id}',array('uses'=>'ManagerController@actionShopCalCustomer'));
         });
     });
 
@@ -79,14 +70,12 @@ Route::group(array(), function(){
     Route::group(array('prefix'=>'customer'), function(){
         Route::get('/',array('uses'=>'CustomerController@showIndex','before' => 'auth'));
             // Add customer
-        //Route::get('add',array('uses'=>'CustomerController@showAdd','before' => 'auth'));
         Route::post('add',array('uses'=>'CustomerController@actionAdd','before' => 'auth'));
             // view + history
         Route::get('{id}',array('uses'=>'CustomerController@showView'));
             // Edit customer
         Route::get('{id}/edit',array('uses'=>'CustomerController@showEdit','before' => 'auth'));
         Route::post('{id}/edit',array('uses'=>'CustomerController@actionEdit','before' => 'auth'));
-            // History  //Route::get('{id}/history',array('uses'=>'CustomerController@showHistory'));
             // del
         Route::post('{id}',array('uses'=>'CustomerController@actionDel','before' => 'auth'));
     });
@@ -96,7 +85,7 @@ Route::group(array(), function(){
         Route::get('/',array('uses'=>'HistoryController@showView'));
         Route::post('/',array('uses'=>'HistoryController@actionDel'));
     });
-
+    //--API---------------------
     Route::group(array('prefix'=>'api'), function(){
         Route::get('history/{id}', 'CustomerController@api');
         Route::get('product/{id}', 'ProductController@api');

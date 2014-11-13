@@ -61,7 +61,7 @@ class ManagerRepository implements Repository{
   }
 
   public static function find($name){
-    $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%');;
+    $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%')->get());
     if(count($all)==0)
       return NULL;
     $result=array();
@@ -94,7 +94,7 @@ class ManagerRepository implements Repository{
   }
   
   public static function where($key,$value){
-    $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%');;
+    $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%')->get();
     if(count($all)==0)
       return NULL;
     $result=array();
@@ -107,7 +107,7 @@ class ManagerRepository implements Repository{
       $m->set('created_at',$val->created_at);
       $m->set('updated_at',$val->updated_at);
       $result[$index]=$m;
-    } 
+    }
     return $result;
   }
 }

@@ -73,6 +73,5 @@ class Summary{
     $this->self['topSell']=$topSell;
     \Session::put('top', $topSell);
     return $this->self['topSell'];
-  }
-  
+  } 
 }
