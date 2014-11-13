@@ -27,11 +27,12 @@
             <ul class="nav navbar-nav">
                 @if (Auth::check())
                     <!-- class="active" -->
-                    <li ><a href="/manager/shop">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                    <li ><a href="/product">สินค้า</a></li>
-                    <li ><a href="/customer">ลูกค้า</a></li>
-                    <li ><a href="/manager">ผู้จัดการ</a></li>
-                    <li ><a href="/history">ประวัติการขาย</a></li>
+                    <li ><a href="/manager/shop">คิดเงิน <span class="glyphicon glyphicon-euro"></span></a></li>
+                    <li ><a href="/product">สินค้า <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li ><a href="/customer">ลูกค้า <span class="glyphicon glyphicon-user"></span></a></li>
+                    <li ><a href="/history">ประวัติการขาย <span class="glyphicon glyphicon-list"></span></a></li>
+                    <li ><a href="/manager">จัดการ <span class="glyphicon glyphicon-wrench"></span></a></li>
+
                 @endif 
             </ul>
             <form class="navbar-form navbar-left" action="/search" method="GET" role="form">

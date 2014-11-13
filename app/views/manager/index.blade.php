@@ -6,7 +6,7 @@
 
 @section('body')
 <div class="well">
-  <a href="manager/shop"><button type="button" class="btn btn-lg btn-primary">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></button></a>
+  <!-- <a href="manager/shop"><button type="button" class="btn btn-lg btn-primary">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></button></a> -->
   <a href="manager/list"><button type="button" class="btn btn-lg btn-primary">รายชื่อผู้จัดการ <span class="glyphicon glyphicon-user"></span></button></a>
 
   <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#namechg">เปลี่ยนชื่อร้าน <span class="glyphicon glyphicon-registration-mark"></span></button>
