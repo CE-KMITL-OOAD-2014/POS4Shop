@@ -117,13 +117,15 @@ class HistoryRepository implements Repository{
 
   public function where($pack, $query, $order=NULL){
     $queryResult = array();
-    for ($i=0; $i <count($query); $i++) { 
-      $queryResult = \HistoryEloquent::where($query[$i]['column'],$query[$i]['operator'],$query[$i]['value']);
+    $queryResult = \HistoryEloquent::where($query[0]['column'],$query[0]['operator'],$query[0]['value']);
+    for ($i=1; $i <count($query); $i++) { 
+      $queryResult->where($query[$i]['column'],$query[$i]['operator'],$query[$i]['value']);
     }
     
     if($order!=NULL){
       $queryResult->orderBy($order['column'],$order['asc']);
     }
+
     $queryResult = $queryResult->get();
 
     if(count($queryResult) == 0)

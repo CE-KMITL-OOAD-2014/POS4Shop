@@ -2,16 +2,19 @@
 
 class SummaryController extends BaseController {
 
-  public function showDaily(){
-    $product = App::make('ceddd\Product');
-    $allProduct = $product->getAll();
-    //topsell
-    $top = Session::get('top', array());
-    if(count($top)==0){
-      $summary = App::make('ceddd\Summary');
-      $top=$summary->getTopSell();
-    }
-    return View::make('home.index')->with(array('allProduct'=>$allProduct,'top'=>$top));
+  public function showDaily($year,$month,$day){
+
+    $summary = App::make('ceddd\Summary');
+    $history=$summary->getDaily($year,$month,$day);
+    $report=$summary->report();
+    return View::make('summary.daily')->with(array('history'=>$history,'report'=>$report,'date'=>"$day-$month-$year"));
+  }
+
+  public function showMonthly($year,$month){
+    $summary = App::make('ceddd\Summary');
+    $history=$summary->getMonthly($year,$month);
+    $report=$summary->report();
+    return View::make('summary.monthly')->with(array('history'=>$history,'report'=>$report,'date'=>"$month-$year"));
   }
 
 }

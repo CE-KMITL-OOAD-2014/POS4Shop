@@ -1,6 +1,9 @@
 <?php
 
 Route::pattern('id', '[0-9]+');
+Route::pattern('day', '^(0?[1-9]|1[0-9]|3[01])$');
+Route::pattern('month', '^(0?[1-9]|1[012])$');
+Route::pattern('year', '^\d{4}$');
 //,'https'=>'https'
 Route::group(array(), function(){
     //--Home
@@ -84,9 +87,12 @@ Route::group(array(), function(){
         Route::post('/',array('uses'=>'HistoryController@actionDel'));
     });
 
-    //--History---------------------
+    //--Summary---------------------
     Route::group(array('prefix'=>'summary','before' => 'auth'), function(){
-        Route::get('/',array('uses'=>'SummaryController@showDaily'));
+        //summary/year/month/day
+        Route::get('/{year}/{month}',array('uses'=>'SummaryController@showMonthly'));
+        Route::get('/{year}/{month}/{day}',array('uses'=>'SummaryController@showDaily'));
+        //Route::get('/{year}/{month}/{day}',array('uses'=>'SummaryController@showDaily'));
     });
 
     //--API---------------------

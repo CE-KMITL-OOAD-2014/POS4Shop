@@ -87,10 +87,82 @@ class Summary{
     return $this->self['topSell'];
   } 
 
-  public function getDaily($date=NULL){
-    $result=array();
+  public function getDaily($year,$month,$day){
+    //$date='22-09-2014';
+    $date=$day.'-'.$month.'-'.$year;
 
-    return $result;    
+    $date0 = date("Y-m-d H:i:s", strtotime($date));
+    $date24 = date("Y-m-d H:i:s", strtotime($date)+(60*60*24)-1);
+
+    $query=array();
+    $statment['column']='created_at';
+    $statment['operator']='>=';
+    $statment['value']=$date0;
+    $query[0]=$statment;
+
+    $statment['column']='created_at';
+    $statment['operator']='<=';
+    $statment['value']=$date24;
+    $query[1]=$statment;
+
+    $arrayOfHistory = $this->self['repository']->where(false,$query);
+
+    $result=array();
+    foreach ($arrayOfHistory as $key => $history) {
+      $result[$key] = $history;
+    }
+    $this->self['summary']=$result;
+    return $result;
   }
 
+  public function getMonthly($year,$month){
+    $date='1-'.$month.'-'.$year;
+    //$date='22-09-2014';
+    $date='14-11-2014';
+
+    $date0 = date("Y-m-d H:i:s", strtotime($date));
+    $date24 = date("Y-m-d H:i:s", strtotime($date)+(30*60*60*24)-1);
+
+    $query=array();
+    $statment['column']='created_at';
+    $statment['operator']='>=';
+    $statment['value']=$date0;
+    $query[0]=$statment;
+
+    $statment['column']='created_at';
+    $statment['operator']='<=';
+    $statment['value']=$date24;
+    $query[1]=$statment;
+
+    $arrayOfHistory = $this->self['repository']->where(false,$query);
+
+    $result=array();
+    foreach ($arrayOfHistory as $key => $history) {
+      $result[$key] = $history;
+    }
+    $this->self['summary']=$result;
+    return $result;
+  }
+
+  public function report(){
+    $result=array();
+    $result['total']=0;
+    $result['cost']=0;
+    $result['net']=0;
+
+    $size=count($this->self['summary']);
+    for ($i=0; $i < $size; $i++) { 
+      $quantity = $this->self['summary'][$i]->get('item')[0]->get('quantity');
+      $price = $this->self['summary'][$i]->get('item')[0]->get('price');
+      $cost = $this->self['summary'][$i]->get('item')[0]->get('item')->get('cost');
+
+      $result['cost']+=$quantity*$cost;
+      $result['total']+=$quantity*$price;
+    }
+
+    $result['net']=$result['total']-$result['cost'];
+    return $result;
+  }
+
+  //$monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
 }
