@@ -3,6 +3,15 @@ namespace ceddd;
 class Product {
   private $self;
 
+  public static function getRules(){
+    return array('barcode' => 'required|min:4|unique:products',
+     'name'=>'required',
+     'file'=>'image',
+     'cost'=>'required|numeric',
+     'price'=>'required|numeric');
+  }
+
+
   function __construct(ProductRepository $productRepo){
     $this->self['repository']=$productRepo;
     $this->self['id']=NULL;

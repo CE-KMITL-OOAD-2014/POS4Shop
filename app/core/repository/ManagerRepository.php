@@ -2,11 +2,7 @@
 namespace ceddd;
 class ManagerRepository implements Repository{
   
-  public static function getRules(){
-    return array('name' => 'required|min:2|unique:users',
-      'username' => 'required|min:4|unique:users',
-      'password' => 'required|min:4');
-  }
+  
 
   public function save($manager){
     if($manager->get('id')!=NULL)
@@ -42,7 +38,7 @@ class ManagerRepository implements Repository{
     return false;
   }
 
-  public static function getById($id){
+  public function getById($id){
     $m = \ManagerEloquent::find($id);
     if($m){
       $manager = \App::make('ceddd\Manager');
@@ -57,7 +53,7 @@ class ManagerRepository implements Repository{
     return NULL;
   }
   
-  public static function getAll(){
+  public function getAll(){
     $all = \ManagerEloquent::all();
     if(count($all)==0)
       return NULL;
@@ -75,8 +71,8 @@ class ManagerRepository implements Repository{
     return $result;
   }
 
-  public static function find($name){
-    $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%')->get());
+  public function find($name){
+    $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%')->get();
     if(count($all)==0)
       return NULL;
     $result=array();
@@ -94,7 +90,7 @@ class ManagerRepository implements Repository{
   }
 
   
-  public static function where($key,$value){
+  public function where($key,$value){
     $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%')->get();
     if(count($all)==0)
       return NULL;

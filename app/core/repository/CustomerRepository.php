@@ -2,9 +2,7 @@
 namespace ceddd;
 class CustomerRepository implements Repository{
 
-  public static function getRules(){
-    return array('name' => 'required|min:3|unique:customers');
-  }
+  
 
   public function save($customer){
     if($customer->get('id')!=NULL)
@@ -35,7 +33,7 @@ class CustomerRepository implements Repository{
     return false;
   }
 
-  public static function getById($id){
+  public function getById($id){
     $ce =\CustomerEloquent::find($id);
     if($ce){
       $customer=\App::make('ceddd\Customer');
@@ -48,7 +46,7 @@ class CustomerRepository implements Repository{
     return NULL;
   }
 
-  public static function getAll(){
+  public function getAll(){
     $all = \CustomerEloquent::all();
     if(count($all)==0)
       return NULL;
@@ -64,7 +62,7 @@ class CustomerRepository implements Repository{
     return $result;
   }
 
-  public static function find($name){
+  public function find($name){
     $ce = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
     if(!$ce)
       return NULL;
@@ -80,7 +78,7 @@ class CustomerRepository implements Repository{
     return $result;
   }
 
-  public static function where($key,$value){
+  public function where($key,$value){
     return find($value);
   }
 }

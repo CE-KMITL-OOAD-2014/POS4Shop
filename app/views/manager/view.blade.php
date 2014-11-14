@@ -8,8 +8,6 @@
     <div class="well">
         Name : {{$manager->get('name')}} <br>
         Userame : {{$manager->get('username')}} <br>
-
-        <a href="{{URL::current().'/edit'}}"><button type="button" class="btn btn-primary">edit</button></a>
         <button type="button" class="btn btn-danger" onclick="delConfirm()">del</button>
     </div>
 @stop

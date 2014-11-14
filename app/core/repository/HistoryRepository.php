@@ -2,14 +2,7 @@
 namespace ceddd;
 class HistoryRepository implements Repository{
   
-  public static function getRules(){
-    return array('hid' => 'required|integer',
-     'product_id'=>'required|exists:products,id',
-     'quantity'=>'required|numeric',
-     'price'=>'required|numeric',
-     'customer_id'=>'exists:customers,id');
-  }
-
+  
   public function save($history){
     if($history->get('id')!=null)
       return false;
@@ -54,53 +47,14 @@ class HistoryRepository implements Repository{
     return false;
   }
 
-  public static function getAll(){
+  public function getAll(){
     $all = \HistoryEloquent::all();
-    $count = count($all);
-    if($count == 0)
+    if(count($all) == 0)
       return NULL;
-    $product = \App::make('ceddd\Product');
-    $h = \App::make('ceddd\History');
-    $tempH = \App::make('ceddd\History');
-    $result = array();
-    $soldArray = array();
-    $i = 0;
-    $arrCount = 0;
-    foreach($all as $val){
-      if($i == 0){
-        $tempH = $val;
-        $i++;
-      }
-      if($val->hid != $tempH->hid){
-        $h->set('item',$soldArray);
-        $result[$i-1]=$h;
-        $tempH = $val;
-        unset($soldArray);
-        unset($h);
-        $h = \App::make('ceddd\History');
-        $soldArray = array();
-        $arrCount = 0;
-        $i++;
-      }
-      $h->set('id',$tempH->id);
-      $h->set('hid',$tempH->hid);
-      $h->set('customer_id',$tempH->customer_id);
-      $h->set('manager_id',$tempH->manager_id);
-      $h->set('created_at',$tempH->created_at);
-      $h->set('updated_at',$tempH->updated_at);
-      $soldItem = \App::make('ceddd\SoldItem');
-      $soldItem->set('item',$product->getById($val->product_id));
-      $soldItem->set('quantity',$val->quantity);
-      $soldItem->set('price',$val->price);
-      $soldArray[$arrCount] = $soldItem;
-      $arrCount++;
-    }
-    $h->set('item',$soldArray);
-    $result[$i-1]=$h;
-    return $result;
+    return $this->packToObj($all);
   }
 
-  public static function getById($id){
+  public function getById($id){
     $history = \HistoryEloquent::find($id);
     $soldItem = \App::make('ceddd\SoldItem');
     $product = \App::make('ceddd\Product');
@@ -111,7 +65,7 @@ class HistoryRepository implements Repository{
       $soldItem->set('item',$product->getById($history->product_id));
       $soldItem->set('quantity',$history->quantity);
       $soldItem->set('price',$history->price);
-      $h->set('item',$soldItem);
+      $h->set('item',array($soldItem));
       $h->set('customer_id',$history->customer_id);
       $h->set('manager_id',$history->manager_id);
       $h->set('created_at',$history->created_at);
@@ -121,7 +75,7 @@ class HistoryRepository implements Repository{
     return NULL;
   }
 
-  public static function find($hid){ 
+  public function find($hid){ 
     $where = \HistoryEloquent::where('hid', $hid)->get();
     if(count($where)==0)
       return NULL;
@@ -145,35 +99,48 @@ class HistoryRepository implements Repository{
     return $result;
   }
 
-  public static function where($col,$value){
-    $where = \HistoryEloquent::where($col, 'like', '%'.$value.'%')->get();
-    if(count($where)==0)
+  private function byObj($history){
+    $h = \App::make('ceddd\History');
+    $h->set('id',$history->id);
+    $h->set('hid',$history->hid);
+    $soldItem->set('item',$product->getById($history->product_id));
+    $soldItem->set('quantity',$history->quantity);
+    $soldItem->set('price',$history->price);
+    $h->set('item',array($soldItem));
+    $h->set('customer_id',$history->customer_id);
+    $h->set('manager_id',$history->manager_id);
+    $h->set('created_at',$history->created_at);
+    $h->set('updated_at',$history->updated_at);
+    return $h;
+  }
+
+
+  public function where($pack, $query, $order=NULL){
+    $queryResult = array();
+    for ($i=0; $i <count($query); $i++) { 
+      $queryResult = \HistoryEloquent::where($query[$i]['column'],$query[$i]['operator'],$query[$i]['value']);
+    }
+    
+    if($order!=NULL){
+      $queryResult->orderBy($order['column'],$order['asc']);
+    }
+    $queryResult = $queryResult->get();
+
+    if(count($queryResult) == 0)
       return NULL;
-    $soldItem = \App::make('ceddd\SoldItem');
-    $product = \App::make('ceddd\Product');
-    $result=array();
-    foreach($where as $key => $val){
-      $h = \App::make('ceddd\History');
-      $h->set('id',$val->id);
-      $h->set('hid',$val->hid);
-      $h->set('customer_id',$val->customer_id);
-      $h->set('manager_id',$val->manager_id);
-      $soldItem->set('item',$product->getById($val->product_id));
-      $soldItem->set('quantity',$val->quantity);
-      $soldItem->set('price',$val->price);
-      $h->set('item',$soldItem);
-      $h->set('created_at',$val->created_at);
-      $h->set('updated_at',$val->updated_at);
-      $result[$key]=$h;
-    } 
-    return $result;
+
+    if($pack){
+      return $this->packToObj($queryResult);
+    }else{
+      return $this->byRow($queryResult);
+    }
   }
 
   public function deleteByHID($history){
     return \HistoryEloquent::where('hid', '=', $history->get('hid'))->delete();
   }
   
-  public static function getLast(){
+  public function getLast(){
     $h = \HistoryEloquent::all();
     $history = $h->last();
 
@@ -182,37 +149,23 @@ class HistoryRepository implements Repository{
     return $history->hid;
   }
 
-  public static function getByProductId($pid){
+  public function getByProductId($pid){
     $history = \HistoryEloquent::where('product_id', $pid)->get();
     if(count($history)==0)
       return NULL;
-    $result = array();
-    foreach($history as $key => $val){
-      $h = \App::make('ceddd\History');
-      $soldItem = \App::make('ceddd\SoldItem');
-      $product = \App::make('ceddd\Product');
-
-      $h->set('id',$val->id);
-      $h->set('hid',$val->hid);
-      $soldItem->set('item',$product->getById($val->product_id));
-      $soldItem->set('quantity',$val->quantity);
-      $soldItem->set('price',$val->price);
-      $arrOfSoldItem[0]=$soldItem;
-      $h->set('item',$arrOfSoldItem);
-      $h->set('manager_id',$val->manager_id);
-      $h->set('customer_id',$val->customer_id);
-      $h->set('created_at',$val->created_at);
-      $h->set('updated_at',$val->updated_at);
-      $result[$key]=$h;
-    }
-    return $result;
+    return $this->byRow($history);
   }
 
-  public static function getByCustomerId($cid){
+  public function getByCustomerId($cid){
     $history = \HistoryEloquent::where('customer_id', $cid)->get();
     if(count($history)==0)
       return NULL;
 
+    return $this->packToObj($history);
+  }
+
+  private function packToObj($history)
+  {
     $product = \App::make('ceddd\Product');
     $h = \App::make('ceddd\History');
     $tempH = \App::make('ceddd\History');
@@ -254,17 +207,11 @@ class HistoryRepository implements Repository{
     return $result;
   }
 
-
-  public static function getRowByMonth(){ // for compute topsell only
-    $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
-    
-    $all = \HistoryEloquent::where('created_at','>=',$monthTime)->orderBy('product_id')->get();
-    if(count($all) == 0)
-      return NULL;
+  private function byRow($queryResult){
     $result = array();
     $product = \App::make('ceddd\Product');
-    foreach($all as $key => $val){
 
+    foreach($queryResult as $key => $val){
       $history = \App::make('ceddd\History');
       $history->set('id',$val->id);
       $history->set('hid',$val->hid);
@@ -282,6 +229,7 @@ class HistoryRepository implements Repository{
     }
     return $result;
   }
+
 }
 
           

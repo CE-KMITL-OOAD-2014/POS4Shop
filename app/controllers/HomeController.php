@@ -6,12 +6,10 @@ class HomeController extends BaseController {
 	{
 		$product = App::make('ceddd\Product');
 		$allProduct = $product->getAll();
+
     //topsell
-    $top = Session::get('top', array());
-    if(count($top)==0){
-      $summary = App::make('ceddd\Summary');
-      $top=$summary->getTopSell();
-    }
+    $summary = App::make('ceddd\Summary');
+    $top=$summary->getTopSell();
     return View::make('home.index')->with(array('allProduct'=>$allProduct,'top'=>$top));
   }
 
@@ -32,17 +30,6 @@ class HomeController extends BaseController {
   public function actionLogout(){
     Auth::logout();
     return Redirect::to('/');
-  }
-
-    // Top
-  public function showTopSell(){
-    //Keep it in Session
-    $top = Session::get('top', array());
-    if(count($top)==0){
-      $summary = App::make('ceddd\Summary');
-      $top=$summary->getTopSell();
-    }
-		return View::make('home.index')->with('allProduct',$top);
   }
 
     // Search

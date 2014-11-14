@@ -3,6 +3,15 @@ namespace ceddd;
 class History{
   private $self;
 
+  public static function getRules(){
+    return array('hid' => 'required|integer',
+     'product_id'=>'required|exists:products,id',
+     'quantity'=>'required|numeric',
+     'price'=>'required|numeric',
+     'customer_id'=>'exists:customers,id');
+  }
+
+
   function __construct(HistoryRepository $historyRepo){
     $this->self['repository']=$historyRepo;
     $this->self['id']=NULL;

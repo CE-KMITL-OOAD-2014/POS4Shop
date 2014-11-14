@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('head')
-<title>{{App::make('ceddd\Shop')->getName()}} - Dashboard</title>
+<title>{{App::make('ceddd\Shop')->getName()}} - จัดการ</title>
 @stop
 
 @section('body')

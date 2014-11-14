@@ -55,7 +55,7 @@
                 <td>{{$customerName}}</td>
                 <td>{{$manager}}</td>
                 <td>{{$val->get('updated_at')}}</td>
-                <td><button type="button" class="btn btn-danger" onclick="delConfirm({{$val->get('id')}})">ลบ</button></td>
+                <td><button type="button" class="btn btn-danger" onclick="delConfirm({{$val->get('hid')}})">ลบ</button></td>
             </tr>
         <?php
         }

@@ -17,7 +17,7 @@ class CustomerController extends BaseController {
   public function actionAdd()
   {
     $data = Input::only('name');
-    $rules = ceddd\CustomerRepository::getRules();
+    $rules = ceddd\Customer::getRules();
     $validator = Validator::make($data, $rules);
     if ($validator->passes()) {
       $c = App::make('ceddd\Customer');

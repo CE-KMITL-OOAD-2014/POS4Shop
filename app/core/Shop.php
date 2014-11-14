@@ -8,19 +8,16 @@ class Shop {
   }
 
   public function getName(){
-    $shop=\Session::get('shop', NULL);
-    if($shop==NULL){
-      $shop=\ShopEloquent::All();
-      if(count($shop)>0){
-        $shop=$shop[0];
-        $shop = $shop->name;
-      }else{
-        $shop=new \ShopEloquent;
-        $shop->name="New Shop";
-        $shop->save();
-        \Session::put('shop', "New Shop");
-        //$name = $shop->name;
-      }
+    $shop=\ShopEloquent::All();
+    if(count($shop)>0){
+      $shop=$shop[0];
+      $shop = $shop->name;
+    }else{
+      $shop=new \ShopEloquent;
+      $shop->name="New Shop";
+      $shop->save();
+      \Session::put('shop', "New Shop");
+      //$name = $shop->name;
     }
     $this->self['name']=$shop;
     return $this->self['name'];

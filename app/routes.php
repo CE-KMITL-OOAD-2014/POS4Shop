@@ -13,8 +13,6 @@ Route::group(array(), function(){
         Route::post('login',array('uses'=>'HomeController@actionLogin'));
             // Logout
         Route::get('logout',array('before' => 'auth','uses'=>'HomeController@actionLogout'));
-            // Top
-        Route::get('top',array('uses'=>'HomeController@showTopSell'));
             // Search
         Route::get('/search',array('uses'=>'HomeController@actionSearch'));
     });
@@ -81,10 +79,16 @@ Route::group(array(), function(){
     });
 
     //--History---------------------
-    Route::group(array('prefix'=>'history'), function(){
+    Route::group(array('prefix'=>'history','before' => 'auth'), function(){
         Route::get('/',array('uses'=>'HistoryController@showView'));
         Route::post('/',array('uses'=>'HistoryController@actionDel'));
     });
+
+    //--History---------------------
+    Route::group(array('prefix'=>'summary','before' => 'auth'), function(){
+        Route::get('/',array('uses'=>'SummaryController@showDaily'));
+    });
+
     //--API---------------------
     Route::group(array('prefix'=>'api'), function(){
         Route::get('history/{id}', 'CustomerController@api');

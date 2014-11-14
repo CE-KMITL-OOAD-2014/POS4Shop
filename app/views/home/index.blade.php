@@ -6,24 +6,26 @@
 
 @section('body')
 <div class="well">
+  @if (count($top)>0)
   <h3>สินค้าขายดี</h3>
-  <div class="row">
-    @for ($i=0;$i<count($top);$i++)
+    <div class="row">
+      @for ($i=0;$i<count($top);$i++)
 
-    <div class="col-md-3">
-      <div class="thumbnail">
-        <img src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}" style="max-height:100px">
-        <div class="caption">
-          <a href="/product/{{$top[$i]->get('id')}}">
-            <h4 class="text-center">{{$top[$i]->get('name')}} ({{ substr($top[$i]->get('price'),0,-5) }}฿)</h4>
-          </a>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <img src="/upload/product/{{$top[$i]->get('file')}}" alt="{{$top[$i]->get('name')}}" style="max-height:100px">
+          <div class="caption">
+            <a href="/product/{{$top[$i]->get('id')}}">
+              <h4 class="text-center">{{$top[$i]->get('name')}} ({{ substr($top[$i]->get('price'),0,-5) }}฿)</h4>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    @endfor
-  </div>
+      @endfor
+    </div>
   <hr>
+  @endif
   <h3>สินค้า</h3>
   <div class="row">
     @for ($i=0;$i<count($allProduct);$i++)

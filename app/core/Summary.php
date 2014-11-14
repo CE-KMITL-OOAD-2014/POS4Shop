@@ -28,15 +28,27 @@ class Summary{
 
     return $result;
   }
+
   public function getProductType(){
-    
-    $arrayOfHistory = $this->self['repository']->getRowByMonth();
+    $monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
+    $query=array();
+    $statment['column']='created_at';
+    $statment['operator']='>=';
+    $statment['value']=$monthTime;
+    $query[0]=$statment;
+
+    $order['column']='product_id';
+    $order['asc']='asc';
+
+    $arrayOfHistory = $this->self['repository']->where(false,$query,$order);
 
     $result = array();
-    foreach($arrayOfHistory as $val){
-      $productId = $val->get('item')[0]->get('item')->get('id');
-      if (!in_array($productId, $result)) {
-        array_push($result, $productId);        
+    if(count($arrayOfHistory)>0){
+      foreach($arrayOfHistory as $val){
+        $productId = $val->get('item')[0]->get('item')->get('id');
+        if (!in_array($productId, $result)) {
+          array_push($result, $productId);        
+        }
       }
     }
 
@@ -74,4 +86,11 @@ class Summary{
     \Session::put('top', $topSell);
     return $this->self['topSell'];
   } 
+
+  public function getDaily($date=NULL){
+    $result=array();
+
+    return $result;    
+  }
+
 }

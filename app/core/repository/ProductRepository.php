@@ -2,14 +2,7 @@
 namespace ceddd;
 class ProductRepository implements Repository{
   
-  public static function getRules(){
-    return array('barcode' => 'required|min:4|unique:products',
-     'name'=>'required',
-     'file'=>'image',
-     'cost'=>'required|numeric',
-     'price'=>'required|numeric');
-  }
-
+  
   public function save($product){
     $p = new \ProductEloquent;
     if($product->get('id')!=null)
@@ -51,7 +44,7 @@ class ProductRepository implements Repository{
     return false;
   }
           
-  public static function getById($id){
+  public function getById($id){
     $product = \ProductEloquent::find($id);
     if($product){
       $p = \App::make('ceddd\Product');
@@ -69,7 +62,7 @@ class ProductRepository implements Repository{
     return NULL;
   }
   
-  public static function getAll(){
+  public function getAll(){
     $all = \ProductEloquent::all();
     if(count($all)==0)
       return NULL;
@@ -91,8 +84,8 @@ class ProductRepository implements Repository{
   }
 
 
-  public static function find($value){
-    $where = \ProductEloquent::where('barcode', 'like', '%'.$value.'%')->orWhere('name', 'like', '%'.$value.'%')->get();
+  public function find($value){
+    $where = \ProductEloquent::where('name', 'like', '%'.$value.'%')->orWhere('barcode', 'like', '%'.$value.'%')->get();
     if(count($where)==0)
       return NULL;
     $result=array();
@@ -112,7 +105,7 @@ class ProductRepository implements Repository{
     return $result;
   }
           
-  public static function where($col,$value){
+  public function where($col,$value){
     $where = \ProductEloquent::where($col, 'like', '%'.$value.'%')->get();
     if(count($where)==0)
       return NULL;
