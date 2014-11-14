@@ -88,21 +88,19 @@ class Summary{
   } 
 
   public function getDaily($year,$month,$day){
-    //$date='22-09-2014';
     $date=$day.'-'.$month.'-'.$year;
-
-    $date0 = date("Y-m-d H:i:s", strtotime($date));
-    $date24 = date("Y-m-d H:i:s", strtotime($date)+(60*60*24)-1);
+    $dateStart = date("Y-m-d H:i:s", strtotime($date));
+    $dateEnd = date("Y-m-d H:i:s", strtotime($date)+(60*60*24)-1);
 
     $query=array();
     $statment['column']='created_at';
     $statment['operator']='>=';
-    $statment['value']=$date0;
+    $statment['value']=$dateStart;
     $query[0]=$statment;
 
     $statment['column']='created_at';
     $statment['operator']='<=';
-    $statment['value']=$date24;
+    $statment['value']=$dateEnd;
     $query[1]=$statment;
 
     $arrayOfHistory = $this->self['repository']->where(false,$query);
@@ -117,21 +115,18 @@ class Summary{
 
   public function getMonthly($year,$month){
     $date='1-'.$month.'-'.$year;
-    //$date='22-09-2014';
-    $date='14-11-2014';
-
-    $date0 = date("Y-m-d H:i:s", strtotime($date));
-    $date24 = date("Y-m-d H:i:s", strtotime($date)+(30*60*60*24)-1);
+    $dateStart = date("Y-m-d H:i:s", strtotime($date));
+    $dateEnd = date("Y-m-d H:i:s", strtotime($date)+(30*60*60*24)-1);
 
     $query=array();
     $statment['column']='created_at';
     $statment['operator']='>=';
-    $statment['value']=$date0;
+    $statment['value']=$dateStart;
     $query[0]=$statment;
 
     $statment['column']='created_at';
     $statment['operator']='<=';
-    $statment['value']=$date24;
+    $statment['value']=$dateEnd;
     $query[1]=$statment;
 
     $arrayOfHistory = $this->self['repository']->where(false,$query);

@@ -5,6 +5,9 @@
 @stop
 
 @section('body')
+<div class="alert alert-dismissable alert-info">
+    <h2>รายงานประจำเดือน {{$date}}</h2>
+</div>
 <style>
 
 #chart svg {
@@ -19,7 +22,7 @@
 </div>
 <p class="text-right"><small >* หน่วยบาท</small></p>
 <div class="well">
-  <h2>รายงานการขายประจำเดือน {{$date}}</h2>
+  <h2>รายงานประจำเดือน {{$date}}</h2>
   <h3>ยอดขาย {{$report['total']}} ฿</h3>
   <h3>ต้นทุน {{$report['cost']}} ฿</h3>
   <h3>กำไรสุทธิ {{$report['net']}} ฿</h3>  

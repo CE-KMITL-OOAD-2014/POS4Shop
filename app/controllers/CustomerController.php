@@ -45,7 +45,7 @@ class CustomerController extends BaseController {
   {
     $data = Input::only('name');
 
-    $rules = ceddd\CustomerRepository::getRules();
+    $rules = ceddd\Customer::getRules();
     $rules['id']='exists:customers';
 
     $validator = Validator::make($data, $rules);

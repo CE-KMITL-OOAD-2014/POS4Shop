@@ -5,7 +5,7 @@
 @stop
 
 @section('body')
-<div class="well">
+<div class="well text-center">
   <!-- <a href="manager/shop"><button type="button" class="btn btn-lg btn-primary">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></button></a> -->
   <a href="manager/list"><button type="button" class="btn btn-lg btn-primary">รายชื่อผู้จัดการ <span class="glyphicon glyphicon-user"></span></button></a>
 
