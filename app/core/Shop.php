@@ -43,7 +43,7 @@ class Shop {
 		if($item==NULL)
 			return $result;			
 
-		foreach ($item as $key => $value) {
+		foreach ($item as $value) {
 			$result+=$value->get('price')*$value->get('quantity');
 		}
 

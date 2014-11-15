@@ -54,7 +54,11 @@ class CustomerRepository implements Repository{
   }
 
   public function find($name){
-    $arrOfCustomerElo = \CustomerEloquent::where('name', 'like', '%'.$name.'%');
+    return $this->where('name',$name);
+  }
+
+  public function where($col,$value){
+    $arrOfCustomerElo = \CustomerEloquent::where($col, 'like', '%'.$name.'%');
     $arrOfCustomerElo = $arrOfCustomerElo->where('isDelete', '=', 0)->get();
     if(!$arrOfCustomerElo)
       return NULL;
@@ -63,10 +67,6 @@ class CustomerRepository implements Repository{
       $result[$key]=$this->toObj($customerElo);
     }
     return $result;
-  }
-
-  public function where($key,$value){
-    return find($value);
   }
 
   /**

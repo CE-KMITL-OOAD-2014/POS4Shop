@@ -64,7 +64,7 @@ class HistoryRepository implements Repository{
     $arrOfHistoryElo = \HistoryEloquent::where('hid', $hid)->get();
     if(count($arrOfHistoryElo)==0)
       return NULL;
-    return $this->packToObj($historyElo);
+    return $this->packToObj($arrOfHistoryElo);
   }
 
   public function where($pack, $query, $order=NULL){

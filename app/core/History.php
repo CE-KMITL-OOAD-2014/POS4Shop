@@ -72,6 +72,6 @@ class History{
   }
 
   public function where($pack, $query, $order=NULL){
-    return $this->self['repository']->where($key,$value);
+    return $this->self['repository']->where($pack,$query,$order);
   }
 }
