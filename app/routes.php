@@ -90,6 +90,8 @@ Route::group(array(), function(){
     //--Summary---------------------
     Route::group(array('prefix'=>'summary','before' => 'auth'), function(){
         //summary/year/month/day
+        Route::get('/',array('uses'=>'SummaryController@showIndex'));
+        Route::post('/',array('uses'=>'SummaryController@actionIndex'));
         Route::get('/{year}/{month}',array('uses'=>'SummaryController@showMonthly'));
         Route::get('/{year}/{month}/{day}',array('uses'=>'SummaryController@showDaily'));
         //Route::get('/{year}/{month}/{day}',array('uses'=>'SummaryController@showDaily'));

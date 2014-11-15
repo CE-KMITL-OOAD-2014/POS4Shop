@@ -74,12 +74,14 @@ nv.addGraph(function() {
 //Pie chart example data. Note how there is only a single array of key-value pairs.
 function exampleData() {
   return  [
-  @foreach ($history as $data)
-    { 
-      "label": "{{$data->get('item')[0]->get('item')->get('name')}}",
-      "value" : {{$data->get('item')[0]->get('quantity')*$data->get('item')[0]->get('price')}}
-    },
-  @endforeach
+    @if ($history!=NULL)
+      @foreach ($history as $data)
+        { 
+          "label": "{{$data->get('item')[0]->get('item')->get('name')}}",
+          "value" : {{$data->get('item')[0]->get('quantity')*$data->get('item')[0]->get('price')}}
+        },
+      @endforeach
+    @endif
     ];
 }
 </script>

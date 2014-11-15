@@ -7,6 +7,7 @@ class Summary{
     $this->self['repository']=$repository;
     $this->self['topSell']=NULL;
     $this->self['item']=NULL;
+    $this->self['summary']=NULL;
   }
 
   public function get($key){
@@ -104,7 +105,8 @@ class Summary{
     $query[1]=$statment;
 
     $arrayOfHistory = $this->self['repository']->where(false,$query);
-
+    if($arrayOfHistory==NULL)
+      return NULL;
     $result=array();
     foreach ($arrayOfHistory as $key => $history) {
       $result[$key] = $history;
@@ -130,7 +132,8 @@ class Summary{
     $query[1]=$statment;
 
     $arrayOfHistory = $this->self['repository']->where(false,$query);
-
+    if($arrayOfHistory==NULL)
+      return NULL;
     $result=array();
     foreach ($arrayOfHistory as $key => $history) {
       $result[$key] = $history;
