@@ -5,7 +5,7 @@ Route::pattern('day', '^(0?[1-9]|1[0-9]|3[01])$');
 Route::pattern('month', '^(0?[1-9]|1[012])$');
 Route::pattern('year', '^\d{4}$');
 //,'https'=>'https'
-Route::group(array(), function(){
+Route::group(array('secure'), function(){
     //--Home
     Route::group(array(), function(){
             // Index
