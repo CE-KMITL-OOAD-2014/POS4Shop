@@ -31,7 +31,8 @@ class ManagerRepository implements Repository{
   public function delete($manager){
     if($manager->get('id')){
       $managerElo = \ManagerEloquent::find($manager->get('id'));
-      return $managerElo->delete();
+      $managerElo->isDelete = true;
+      return $managerElo->save();
     }
     return false;
   }
