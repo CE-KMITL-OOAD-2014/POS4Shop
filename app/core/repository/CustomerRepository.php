@@ -28,7 +28,8 @@ class CustomerRepository implements Repository{
   public function delete($customer){
     if($customer->get('id')){
       $customerElo = \CustomerEloquent::find($customer->get('id'));
-      return $customerElo->delete();
+      $customerElo->isDelete=true;
+      return $customerElo->save();
     }
     return false;
   }
@@ -42,7 +43,7 @@ class CustomerRepository implements Repository{
   }
 
   public function getAll(){
-    $arrOfCustomerElo = \CustomerEloquent::all();
+    $arrOfCustomerElo = \CustomerEloquent::where('isDelete', '=', 0)->get();
     if(count($arrOfCustomerElo)==0)
       return NULL;
     $result=array();
@@ -53,7 +54,8 @@ class CustomerRepository implements Repository{
   }
 
   public function find($name){
-    $arrOfCustomerElo = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
+    $arrOfCustomerElo = \CustomerEloquent::where('name', 'like', '%'.$name.'%');
+    $arrOfCustomerElo = $arrOfCustomerElo->where('isDelete', '=', 0)->get();
     if(!$arrOfCustomerElo)
       return NULL;
     $result=array();

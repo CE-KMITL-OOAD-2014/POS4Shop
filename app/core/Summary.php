@@ -68,7 +68,6 @@ class Summary{
       if ($a == $b) {
         return -1;
       }
-      //return ($a < $b) ? -1 : 1;
       return ($a < $b) ? 1 : -1;
     });
 
@@ -77,8 +76,10 @@ class Summary{
     foreach($result as $pid => $val){
       $product = \App::make('ceddd\\Product');
       $product = $product->getById($pid);
-      $topSell[$i]=$product;
-      $i++;
+      if(!$product->get('isDelete')){
+        $topSell[$i]=$product;
+        $i++;
+      }
       if($i==10)
         break;
     }
@@ -161,6 +162,5 @@ class Summary{
     $result['net']=$result['total']-$result['cost'];
     return $result;
   }
-
-  //$monthTime = date("Y-m-d H:i:s", strtotime('-1 month'));
+  
 }

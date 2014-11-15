@@ -37,8 +37,8 @@ class ManagerRepository implements Repository{
   }
 
   public function getById($id){
-    $managerEloquent = \ManagerEloquent::find($id);
-    if($managerEloquent){
+    $managerElo = \ManagerEloquent::find($id);
+    if($managerElo){
       return $this->toObj($managerElo);
     }
     return NULL;

@@ -38,7 +38,8 @@ class ProductRepository implements Repository{
   public function delete($product){
     if($product->get('id')){
       $productEloquent = \ProductEloquent::find($product->get('id'));
-      return $productEloquent->delete();
+      $productEloquent->isDelete=true;
+      $productEloquent->save();
     }
     return false;
   }
@@ -56,13 +57,14 @@ class ProductRepository implements Repository{
       $product->set('price',$productEloquent->price);
       $product->set('created_at',$productEloquent->created_at);
       $product->set('updated_at',$productEloquent->updated_at);
+      $product->set('isDelete',$productEloquent->isDelete);
       return $product;
     }
     return NULL;
   }
   
   public function getAll(){
-    $arrayOfProductEloquent = \ProductEloquent::all();
+    $arrayOfProductEloquent = \ProductEloquent::where('isDelete', '=', 0)->get();
     if(count($arrayOfProductEloquent)==0)
       return NULL;
     $result=array();
@@ -73,7 +75,8 @@ class ProductRepository implements Repository{
   }
 
   public function find($value){
-    $arrayOfProductEloquent = \ProductEloquent::where('name', 'like', '%'.$value.'%')->orWhere('barcode', 'like', '%'.$value.'%')->get();
+    $arrayOfProductEloquent = \ProductEloquent::where('name', 'like', '%'.$value.'%')->orWhere('barcode', 'like', '%'.$value.'%');
+    $arrayOfProductEloquent = $arrayOfProductEloquent->where('isDelete', '=', 0)->get();
     if(count($arrayOfProductEloquent)==0)
       return NULL;
     $result=array();

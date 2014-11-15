@@ -80,20 +80,11 @@ class CustomerController extends BaseController {
     return json_encode($customer->toArray());
   }
 
-    /*public function showHistory($cid)
-    {
-        $history = App::make('ceddd\History');
-        $history = $history->getByCustomerId($cid);
-        if($history==NULL)
-            return App::abort(404);
-        return View::make('customer.history')->with('history',$history);
-      }*/
-
-      public function actionDel($id){
-        $data  = Input::get("id");
-        $customer = App::make('ceddd\Customer');
-        $customer = $customer->getById($data);
-        $customer->delete();
-        return Response::make('delete '.$data, 200);
-      }
-    }
+  public function actionDel($id){
+    $data  = Input::get("id");
+    $customer = App::make('ceddd\Customer');
+    $customer = $customer->getById($data);
+    $customer->delete();
+    return Response::make('delete '.$data, 200);
+  }
+}

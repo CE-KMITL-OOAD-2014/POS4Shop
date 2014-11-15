@@ -23,6 +23,7 @@ class Product {
     $this->self['price']=NULL;
     $this->self['created_at']=NULL;
     $this->self['updated_at']=NULL;
+    $this->self['isDelete']=NULL;
   }
 
   public function get($key){

@@ -69,11 +69,12 @@ Route::group(array('secure'), function(){
 
     //--Customer---------------------
     Route::group(array('prefix'=>'customer'), function(){
+            // view + history
+        Route::get('{id}',array('uses'=>'CustomerController@showView'));
+            // Index
         Route::get('/',array('uses'=>'CustomerController@showIndex','before' => 'auth'));
             // Add customer
         Route::post('add',array('uses'=>'CustomerController@actionAdd','before' => 'auth'));
-            // view + history
-        Route::get('{id}',array('uses'=>'CustomerController@showView'));
             // Edit customer
         Route::get('{id}/edit',array('uses'=>'CustomerController@showEdit','before' => 'auth'));
         Route::post('{id}/edit',array('uses'=>'CustomerController@actionEdit','before' => 'auth'));
