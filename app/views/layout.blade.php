@@ -28,10 +28,11 @@
                 @if (Auth::check())
                     <!-- class="active" -->
                     <li ><a href="/manager/shop">คิดเงิน <span class="glyphicon glyphicon-euro"></span></a></li>
-                    <li ><a href="/product">สินค้า <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                    <li ><a href="/customer">ลูกค้า <span class="glyphicon glyphicon-user"></span></a></li>
-                    <li ><a href="/history">ประวัติการขาย <span class="glyphicon glyphicon-list"></span></a></li>
-                    <li ><a href="/manager">จัดการ <span class="glyphicon glyphicon-wrench"></span></a></li>
+                    <li ><a href="/product">สินค้า <span class="mdi-action-add-shopping-cart"></span></a></li>
+                    <li ><a href="/customer">ลูกค้า <span class="mdi-action-face-unlock"></span></a></li>
+                    <li ><a href="/history">ประวัติการขาย <span class="mdi-action-event"></span></a></li>
+                    <li ><a href="/summary">รายงานการขาย <span class="mdi-action-assessment"></span></a></li>
+                    <li ><a href="/manager">จัดการ <span class="mdi-action-settings"></span></a></li>
 
                 @endif 
             </ul>

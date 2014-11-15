@@ -11,8 +11,10 @@ class SummaryController extends BaseController {
     $day=Input::get('day');
     $month=Input::get('month');
     $year=Input::get('year');
+    if(Input::get('summary')==12)//monthly
+      return Redirect::to("/summary/$year/$month");
+    return Redirect::to("/summary/$year/$month/$day");//daily
 
-    return Redirect::to("/summary/$year/$month/$day");
   }
 
   public function showDaily($year,$month,$day){

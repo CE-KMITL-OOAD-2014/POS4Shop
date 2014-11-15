@@ -11,7 +11,7 @@
 
   <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#namechg">เปลี่ยนชื่อร้าน <span class="glyphicon glyphicon-registration-mark"></span></button>
 
-  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#pwdchg">เปลี่ยนรหัสผ่าน <span class="glyphicon glyphicon-pencil"></span></button>
+  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#pwdchg">เปลี่ยนรหัสผ่าน <span class="mdi-communication-vpn-key"></span></button>
 
 <!-- Shop name -->
 <div class="modal fade" id="namechg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

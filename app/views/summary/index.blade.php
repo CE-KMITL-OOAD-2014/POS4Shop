@@ -34,7 +34,7 @@
             <div class="col-md-4">
               <div class="radio radio-primary">
                 <label>
-                  <input name="summary" id="optionsRadios1" value="1" checked="" type="radio">
+                  <input name="summary" value="30" checked="" type="radio">
                   <span class="circle"></span><span class="check"></span>
                   รายวัน
                 </label>
@@ -43,7 +43,7 @@
             <div class="col-md-8">
               <div class="radio radio-primary">
                 <label>
-                  <input name="summary" id="optionsRadios2" value="31" type="radio">
+                  <input name="summary" value="12" type="radio">
                   <span class="circle"></span><span class="check"></span>
                   รายเดือน
                 </label>
