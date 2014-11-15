@@ -7,9 +7,9 @@ class Customer extends User{
   }
 
   function __construct(CustomerRepository $customerRepo){
+    parent::__construct();
     $this->self['repository']=$customerRepo;
     $this->self['history']=NULL;
-    parent::__construct();
   }
 
   public function save(){
@@ -42,6 +42,8 @@ class Customer extends User{
     return $this->self['history'];
             //return $customerHistory;
   }
+
+  // For restAPI
   public function toArray(){
     if($this->self['history']==NULL){
       $this->self['history']=$this->getHistory();

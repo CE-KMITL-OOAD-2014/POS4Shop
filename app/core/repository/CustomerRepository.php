@@ -7,10 +7,10 @@ class CustomerRepository implements Repository{
   public function save($customer){
     if($customer->get('id')!=NULL)
       return false;
-    $c = new \CustomerEloquent;
-    $c->name = $customer->get('name');
-    if($c->save()){
-      $customer->set('id',$c->id);
+    $customerElo = new \CustomerEloquent;
+    $customerElo->name = $customer->get('name');
+    if($customerElo->save()){
+      $customer->set('id',$customerElo->id);
       return true;
     }
     return false;
@@ -18,67 +18,64 @@ class CustomerRepository implements Repository{
 
   public function edit($customer){
     if($customer->get('id')){
-      $ctm = \CustomerEloquent::find($customer->get('id'));
-      $ctm->name = $customer->get('name');
-      return $ctm->save();
+      $customerElo = \CustomerEloquent::find($customer->get('id'));
+      $customerElo->name = $customer->get('name');
+      return $customerElo->save();
     }
     return false;
   }
 
   public function delete($customer){
     if($customer->get('id')){
-      $c = \CustomerEloquent::find($customer->get('id'));
-      return $c->delete();
+      $customerElo = \CustomerEloquent::find($customer->get('id'));
+      return $customerElo->delete();
     }
     return false;
   }
 
   public function getById($id){
-    $ce =\CustomerEloquent::find($id);
-    if($ce){
-      $customer=\App::make('ceddd\Customer');
-      $customer->set('id',$ce->id);
-      $customer->set('name',$ce->name);                
-      $customer->set('created_at',$ce->created_at);
-      $customer->set('updated_at',$ce->updated_at);
-      return $customer;
+    $customerElo =\CustomerEloquent::find($id);
+    if($customerElo){
+      return $this->toObj($customerElo);
     }
     return NULL;
   }
 
   public function getAll(){
-    $all = \CustomerEloquent::all();
-    if(count($all)==0)
+    $arrOfCustomerElo = \CustomerEloquent::all();
+    if(count($arrOfCustomerElo)==0)
       return NULL;
     $result=array();
-    foreach($all as $key => $val){
-      $c=\App::make('ceddd\Customer');
-      $c->set('id',$val->id);
-      $c->set('name',$val->name);
-      $c->set('created_at',$val->created_at);
-      $c->set('updated_at',$val->updated_at);
-      $result[$key]=$c;
+    foreach($arrOfCustomerElo as $key => $customerElo){
+      $result[$key]=$this->toObj($customerElo);
     }
     return $result;
   }
 
   public function find($name){
-    $ce = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
-    if(!$ce)
+    $arrOfCustomerElo = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
+    if(!$arrOfCustomerElo)
       return NULL;
     $result=array();
-    foreach($ce as $key => $val){
-      $c=\App::make('ceddd\Customer');
-      $c->set('id',$val->id);
-      $c->set('name',$val->name);
-      $c->set('created_at',$val->created_at);
-      $c->set('updated_at',$val->updated_at);
-      $result[$key]=$c;
+    foreach($arrOfCustomerElo as $key => $customerElo){
+      $result[$key]=$this->toObj($customerElo);
     }
     return $result;
   }
 
   public function where($key,$value){
     return find($value);
+  }
+
+  /**
+  * Map ManagerEloquent to Manager
+  */
+  private function toObj($customerElo){
+    $customer=\App::make('ceddd\Customer');
+    $customer->set('id',$customerElo->id);
+    $customer->set('name',$customerElo->name);
+    $customer->set('created_at',$customerElo->created_at);
+    $customer->set('updated_at',$customerElo->updated_at);
+    return $customer;
   }
 }

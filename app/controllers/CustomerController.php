@@ -76,7 +76,7 @@ class CustomerController extends BaseController {
     $customer = App::make('ceddd\Customer');
     $customer = $customer->getById($id);
     if($customer==NULL)
-      return App::abort(404);
+      return Response::json(array(404,'Nope'), 404);
     return json_encode($customer->toArray());
   }
 

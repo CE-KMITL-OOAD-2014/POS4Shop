@@ -122,9 +122,8 @@ class ProductController extends BaseController {
     $product = App::make('ceddd\Product');
     $product = $product->getById($id);
     if($product==NULL)
-      return App::abort(404);
-
-    return json_encode($product->json());
+      return Response::json(array(404,'Nope'), 404);
+    return json_encode($product->toArray());
   }
 
     //--- Del

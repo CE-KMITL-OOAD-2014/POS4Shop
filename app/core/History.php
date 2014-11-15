@@ -11,7 +11,6 @@ class History{
      'customer_id'=>'exists:customers,id');
   }
 
-
   function __construct(HistoryRepository $historyRepo){
     $this->self['repository']=$historyRepo;
     $this->self['id']=NULL;
@@ -48,7 +47,7 @@ class History{
   }
 
   public function delete(){
-    return $this->self['repository']->deleteByID($this);
+    return $this->self['repository']->deleteByID($this->get('hid'));
   }
   
   public function getByProductId($pid){
@@ -59,7 +58,7 @@ class History{
     return $this->self['repository']->getLast();
   }
 
-  public function deleteByHID(){
+  public function deleteByHid(){
     return $this->self['repository']->deleteByHID($this);
   }
 
@@ -72,7 +71,7 @@ class History{
     return $this->self['repository']->find($hid);
   }
 
-  public function where($key,$value){
+  public function where($pack, $query, $order=NULL){
     return $this->self['repository']->where($key,$value);
   }
 }

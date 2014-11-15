@@ -61,7 +61,7 @@ class Product {
     return $this->self['repository']->where($key,$value);
   }
   
-  public function json(){
+  public function toArray(){
     $result = $this->self;
     unset($result['repository']);
     unset($result['created_at']);

@@ -1,18 +1,16 @@
 <?php 
 namespace ceddd;
 class ManagerRepository implements Repository{
-  
-  
 
   public function save($manager){
     if($manager->get('id')!=NULL)
       return false;
-    $m = new \ManagerEloquent();
-    $m->name = $manager->get('name');
-    $m->username = $manager->get('username');
-    $m->password = $manager->get('password');
-    if($m->save()){
-      $manager->set('id',$m->id);
+    $managerElo = new \ManagerEloquent();
+    $managerElo->name = $manager->get('name');
+    $managerElo->username = $manager->get('username');
+    $managerElo->password = $manager->get('password');
+    if($managerElo->save()){
+      $manager->set('id',$managerElo->id);
       return true;
     }
     return false;
@@ -20,91 +18,76 @@ class ManagerRepository implements Repository{
 
   public function edit($manager){
     if($manager->get('id')){
-      $m = \ManagerEloquent::find($manager->get('id'));
-      $m->name = $manager->get('name');
-                // Not allow to change username
-      $m->password = $manager->get('password');
+      $managerElo = \ManagerEloquent::find($manager->get('id'));
+      $managerElo->name = $manager->get('name');
+      //$managerElo->username : Not allow to change username
+      $managerElo->password = $manager->get('password');
       
-      return $m->save();
+      return $managerElo->save();
     }
     return false;
   }
 
   public function delete($manager){
     if($manager->get('id')){
-      $m = \ManagerEloquent::find($manager->get('id'));
-      return $m->delete();
+      $managerElo = \ManagerEloquent::find($manager->get('id'));
+      return $managerElo->delete();
     }
     return false;
   }
 
   public function getById($id){
-    $m = \ManagerEloquent::find($id);
-    if($m){
-      $manager = \App::make('ceddd\Manager');
-      $manager->set('id',$m->id);
-      $manager->set('name',$m->name);
-      $manager->set('username',$m->username);
-      $manager->set('password',$m->password);
-      $manager->set('created_at',$m->created_at);
-      $manager->set('updated_at',$m->updated_at);
-      return $manager;
+    $managerEloquent = \ManagerEloquent::find($id);
+    if($managerEloquent){
+      return $this->toObj($managerElo);
     }
     return NULL;
   }
   
   public function getAll(){
-    $all = \ManagerEloquent::all();
-    if(count($all)==0)
+    $arrOfManagerEloquent = \ManagerEloquent::all();
+    if(count($arrOfManagerEloquent)==0)
       return NULL;
     $result=array();
-    foreach($all as $key => $val){
-      $m = new Manager(new ManagerRepository);
-      $m->set('id',$val->id);
-      $m->set('name',$val->name);
-      $m->set('username',$val->username);
-      $m->set('password',$val->password);
-      $m->set('created_at',$val->created_at);
-      $m->set('updated_at',$val->updated_at);
-      $result[$key]=$m;
+    foreach($arrOfManagerEloquent as $key => $managerElo){
+      $result[$key]=$this->toObj($managerElo);
     } 
     return $result;
   }
 
   public function find($name){
-    $all = \ManagerEloquent::where('name', 'like', '%'.$name.'%')->get();
-    if(count($all)==0)
+    $arrOfManagerEloquent = \ManagerEloquent::where('name', 'like', '%'.$name.'%')->get();
+    if(count($arrOfManagerEloquent)==0)
       return NULL;
     $result=array();
-    foreach($all as $key => $val){
-      $m = new Manager(new ManagerRepository);
-      $m->set('id',$val->id);
-      $m->set('name',$val->name);
-      $m->set('username',$val->username);
-      $m->set('password',$val->password);
-      $m->set('created_at',$val->created_at);
-      $m->set('updated_at',$val->updated_at);
-      $result[$key]=$m;
+    foreach($arrOfManagerEloquent as $key => $managerElo){
+      $result[$key]=$this->toObj($managerElo);
     } 
     return $result;
   }
 
-  
   public function where($key,$value){
-    $all = \ManagerEloquent::where($key, 'like', '%'.$value.'%')->get();
-    if(count($all)==0)
+    $arrOfManagerEloquent = \ManagerEloquent::where($key, 'like', '%'.$value.'%')->get();
+    if(count($arrOfManagerEloquent)==0)
       return NULL;
     $result=array();
-    foreach($all as $index => $val){
-      $m = new Manager(new ManagerRepository);
-      $m->set('id',$val->id);
-      $m->set('name',$val->name);
-      $m->set('username',$val->username);
-      $m->set('password',$val->password);
-      $m->set('created_at',$val->created_at);
-      $m->set('updated_at',$val->updated_at);
-      $result[$index]=$m;
+    foreach($arrOfManagerEloquent as $key => $managerElo){
+      $result[$key]=$this->toObj($managerElo);
     }
     return $result;
+  }
+
+  /**
+  * Map ManagerEloquent to Manager
+  */
+  private function toObj($managerElo){
+    $manager = \App::make('ceddd\Manager');
+    $manager->set('id',$managerElo->id);
+    $manager->set('name',$managerElo->name);
+    $manager->set('username',$managerElo->username);
+    $manager->set('password',$managerElo->password);
+    $manager->set('created_at',$managerElo->created_at);
+    $manager->set('updated_at',$managerElo->updated_at);
+    return $manager;
   }
 }
