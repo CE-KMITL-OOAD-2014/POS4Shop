@@ -8,9 +8,10 @@ class SummaryController extends BaseController {
   }
 
   public function actionIndex(){
-    $day=Input::get('day');
-    $month=Input::get('month');
-    $year=Input::get('year');
+    $date=Input::get('date');
+    $day=substr($date,-2);
+    $month=substr($date,-5,2);
+    $year=substr($date,0,4);
     if(Input::get('summary')==12)//monthly
       return Redirect::to("/summary/$year/$month");
     return Redirect::to("/summary/$year/$month/$day");//daily
