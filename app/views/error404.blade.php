@@ -5,7 +5,9 @@
 @stop
 
 @section('body')
-    <div class="well">
-        ERROR 404 TT
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h1>404 Not found !</h1>
+        
     </div>
 @stop

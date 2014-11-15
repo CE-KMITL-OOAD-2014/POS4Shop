@@ -19,6 +19,22 @@ class ManagerController extends BaseController {
   {
     return View::make('manager.add');
   }
+  
+  public function actionAdd(){
+    $data = Input::only(array('name','username','password'));
+    $rules = ceddd\Manager::getRules();
+    $validator = Validator::make($data, $rules);
+    if ($validator->passes()) {
+      $manager = App::make('ceddd\Manager');
+      $manager->set('name',$data['name']);
+      $manager->set('username',$data['username']);
+      $manager->set('password',Hash::make($data['password']));
+      if($manager->save())
+        Redirect::to('/manager/list')->with('msg',"Add ".$data['name']." สำเร็จ");
+    }
+    return Redirect::to('/manager/list')->withErrors($validator);
+  }
+
   // Change password
   public function actionPassword(){
     $manager = App::make('ceddd\Manager');
@@ -35,21 +51,6 @@ class ManagerController extends BaseController {
     return Redirect::to('manager');
   }
 
-  public function actionAdd()
-  {
-    $data = Input::only(array('name','username','password'));
-    $rules = ceddd\ManagerRepository::getRules();
-    $validator = Validator::make($data, $rules);
-    if ($validator->passes()) {
-      $manager = App::make('ceddd\Manager');
-      $manager->set('name',$data['name']);
-      $manager->set('username',$data['username']);
-      $manager->set('password',Hash::make($data['password']));
-      if($manager->save())
-        Redirect::to('/manager/list')->with('msg',"Add ".$data['name']." สำเร็จ");
-    }
-    return Redirect::to('/manager/list')->withErrors($validator);
-  }
   
   public function showView($id){
     $manager = App::make('ceddd\Manager');
@@ -81,7 +82,7 @@ class ManagerController extends BaseController {
     if($customer!=NULL)
       $customerName=$customer->get('name');
 
-    $allPrice = $shop->cal($arrayOfSoldItem,$manager,NULL);
+    $allPrice = $shop->cal($arrayOfSoldItem);
 
     return View::make('manager.pos')->with(array('pos'=>Session::get('pos', array()),'allPrice'=>$allPrice,'customer'=>$customerName));
   }

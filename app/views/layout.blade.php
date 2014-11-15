@@ -1,5 +1,5 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="th">
 <head>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -27,22 +27,24 @@
             <ul class="nav navbar-nav">
                 @if (Auth::check())
                     <!-- class="active" -->
-                    <li ><a href="{{url('manager/shop')}}">คิดเงิน <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                    <li ><a href="{{url('product')}}">สินค้า</a></li>
-                    <li ><a href="{{url('customer')}}">ลูกค้า</a></li>
-                    <li ><a href="{{url('manager')}}">ผู้จัดการ</a></li>
-                    <li ><a href="{{url('history')}}">ประวัติการขาย</a></li>
+                    <li ><a href="/manager/shop">คิดเงิน <span class="glyphicon glyphicon-euro"></span></a></li>
+                    <li ><a href="/product">สินค้า <span class="mdi-action-add-shopping-cart"></span></a></li>
+                    <li ><a href="/customer">ลูกค้า <span class="mdi-action-face-unlock"></span></a></li>
+                    <li ><a href="/history">ประวัติการขาย <span class="mdi-action-event"></span></a></li>
+                    <li ><a href="/summary">รายงานการขาย <span class="mdi-action-assessment"></span></a></li>
+                    <li ><a href="/manager">จัดการ <span class="mdi-action-settings"></span></a></li>
+
                 @endif 
             </ul>
-            <form class="navbar-form navbar-left" action="{{url('/search')}}" method="GET" role="form">
+            <form class="navbar-form navbar-left" action="/search" method="GET" role="form">
                 <input class="form-control col-md-8" placeholder="ค้นหาสินค้า" type="text" name="search">
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     @if (Auth::guest())
-                        <a href="{{URL::to('/login')}}">เข้าสู่ระบบ</a>
+                        <a href="/login">เข้าสู่ระบบ</a>
                     @else
-                        <a href="{{URL::to('/logout')}}">{{Auth::user()->name}} ( ออกจากระบบ )</a>
+                        <a href="/logout">{{Auth::user()->name}} ( ออกจากระบบ )</a>
                     @endif 
                 </li>
             </ul>

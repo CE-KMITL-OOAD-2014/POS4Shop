@@ -2,9 +2,7 @@
 namespace ceddd;
 class CustomerRepository implements Repository{
 
-  public static function getRules(){
-    return array('name' => 'required|min:3|unique:customers');
-  }
+  
 
   public function save($customer){
     if($customer->get('id')!=NULL)
@@ -35,7 +33,20 @@ class CustomerRepository implements Repository{
     return false;
   }
 
-  public static function getAll(){
+  public function getById($id){
+    $ce =\CustomerEloquent::find($id);
+    if($ce){
+      $customer=\App::make('ceddd\Customer');
+      $customer->set('id',$ce->id);
+      $customer->set('name',$ce->name);                
+      $customer->set('created_at',$ce->created_at);
+      $customer->set('updated_at',$ce->updated_at);
+      return $customer;
+    }
+    return NULL;
+  }
+
+  public function getAll(){
     $all = \CustomerEloquent::all();
     if(count($all)==0)
       return NULL;
@@ -51,7 +62,7 @@ class CustomerRepository implements Repository{
     return $result;
   }
 
-  public static function find($name){
+  public function find($name){
     $ce = \CustomerEloquent::where('name', 'like', '%'.$name.'%')->get();
     if(!$ce)
       return NULL;
@@ -67,20 +78,7 @@ class CustomerRepository implements Repository{
     return $result;
   }
 
-  public static function getById($id){
-    $ce =\CustomerEloquent::find($id);
-    if($ce){
-      $customer=\App::make('ceddd\Customer');
-      $customer->set('id',$ce->id);
-      $customer->set('name',$ce->name);                
-      $customer->set('created_at',$ce->created_at);
-      $customer->set('updated_at',$ce->updated_at);
-      return $customer;
-    }
-    return NULL;
-  }
-
-  public static function where($key,$value){
+  public function where($key,$value){
     return find($value);
   }
 }

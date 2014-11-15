@@ -3,6 +3,15 @@ namespace ceddd;
 class Product {
   private $self;
 
+  public static function getRules(){
+    return array('barcode' => 'required|min:4|unique:products',
+     'name'=>'required',
+     'file'=>'image',
+     'cost'=>'required|numeric',
+     'price'=>'required|numeric');
+  }
+
+
   function __construct(ProductRepository $productRepo){
     $this->self['repository']=$productRepo;
     $this->self['id']=NULL;
@@ -59,13 +68,4 @@ class Product {
     unset($result['updated_at']);
     return $result;
   }
-        /*public function findJSON($name){
-            return \Response::json($this->self['repository']->find($name));
-          }*/
-
-
-        /*public function __toString(){
-            return \Response::json($this->self);
-          }*/
-
-        }
+}

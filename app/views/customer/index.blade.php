@@ -26,7 +26,7 @@
         @foreach ($allCustomer as $val)
         <tr>
           <td>{{$val->get('id')}}</td>
-          <td><a href="{{url('/customer').'/'.$val->get('id')}}">{{$val->get('name')}}</a></td>
+          <td><a href="/customer/{{$val->get('id')}}">{{$val->get('name')}}</a></td>
           <td>{{$val->get('created_at')}}</td>
           <td>{{$val->get('updated_at')}}</td>
         </tr>

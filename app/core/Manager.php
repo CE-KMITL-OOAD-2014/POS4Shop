@@ -1,6 +1,12 @@
 <?php
 namespace ceddd;
 class Manager extends User{
+  
+  public static function getRules(){
+    return array('name' => 'required|min:2|unique:users',
+      'username' => 'required|min:4|unique:users',
+      'password' => 'required|min:4');
+  }
 
   function __construct(ManagerRepository $managerrepository){
     $this->self['username']=NULL;

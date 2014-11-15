@@ -2,6 +2,10 @@
 namespace ceddd;
 class Customer extends User{
 
+  public static function getRules(){
+    return array('name' => 'required|min:3|unique:customers');
+  }
+
   function __construct(CustomerRepository $customerRepo){
     $this->self['repository']=$customerRepo;
     $this->self['history']=NULL;

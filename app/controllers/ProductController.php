@@ -18,7 +18,7 @@ class ProductController extends BaseController {
   {
     $data = Input::only(array('barcode','name','detail','cost','price'));
 
-    $rules = ceddd\ProductRepository::getRules();
+    $rules = ceddd\Product::getRules();
 
     $file = Input::file('file');
     $data['file']=$file;
@@ -75,7 +75,7 @@ class ProductController extends BaseController {
   {
     $data = Input::only(array('barcode','name','detail','cost','price'));
 
-    $rules = ceddd\ProductRepository::getRules();
+    $rules = ceddd\Product::getRules();
     $rules['id']='exists:products';
     $rules['barcode']='required|min:4';
 
