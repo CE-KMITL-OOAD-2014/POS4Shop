@@ -12,7 +12,7 @@
   
   <h2>ระบุวันที่</h2>
   <form action="/summary" method="POST" role="form">
-
+  <!--{{$isChrome}} -->
   @if ($isChrome)
     <input type="hidden" name="isChrome" value=1>
     <div class="form-group">
