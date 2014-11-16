@@ -105,15 +105,7 @@ class Summary{
     $statment['value']=$dateEnd;
     $query[1]=$statment;
 
-    $arrayOfHistory = $this->self['repository']->where(false,$query);
-    if($arrayOfHistory==NULL)
-      return NULL;
-    $result=array();
-    foreach ($arrayOfHistory as $key => $history) {
-      $result[$key] = $history;
-    }
-    $this->self['summary']=$result;
-    return $result;
+    return $this->self['repository']->where(false,$query);
   }
 
   public function getMonthly($year,$month){
@@ -131,16 +123,7 @@ class Summary{
     $statment['operator']='<=';
     $statment['value']=$dateEnd;
     $query[1]=$statment;
-
-    $arrayOfHistory = $this->self['repository']->where(false,$query);
-    if($arrayOfHistory==NULL)
-      return NULL;
-    $result=array();
-    foreach ($arrayOfHistory as $key => $history) {
-      $result[$key] = $history;
-    }
-    $this->self['summary']=$result;
-    return $result;
+    return $this->self['repository']->where(false,$query);
   }
 
   public function report(){
