@@ -2,7 +2,7 @@
 
 class SummaryTest extends TestCase {
 
-    public function testCountProductSoldQuantity()
+    public function testProductSoldQuantity()
     {            
         // Asset
         
@@ -41,5 +41,4 @@ class SummaryTest extends TestCase {
         $this->assertEquals($expectedQuantity, $result);
         
     }
-
 }
